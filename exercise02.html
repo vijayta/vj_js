@@ -8,38 +8,35 @@
 <body>
 	<div class="wrapper">
 		<script type="text/javascript">
-          function uncheckAll(checkItem){
-           for (i = 0; i < checkItem.length; i++)
-           {
-              if(checkItem[i].checked == true)
-            	{
-                checkItem[i].checked = false;
-              	}
-           } 
+      function uncheckAll(checkItem){
+       for (i = 0; i < checkItem.length; i++)
+        {
+          if(checkItem[i].checked)
+        	{
+            checkItem[i].checked = false;
           }
-          function checkAll(checkItem)
-          {
-            for (i = 0; i < checkItem.length; i++)
-            {
-              if(checkItem[i].checked == false)
-            	{
-                checkItem[i].checked = true;
-              	}
-            }
+        } 
+      }
+      var checkflag = "false";
+      function checkAll(checkItem) {
+        if (checkflag == "false") {
+          for (i = 0; i < field.length; i++) {
+            checkItem[i].checked = true;
           }
-        </script>
-        <form method="post" action="" class="login" name="signup" >
-        <!--<input type="checkbox"name="checkall"> Check all-->
-		<a name="checkall"  onClick="checkAll(document.signup.list)" id="checkall"> Check all </a>  &nbsp;&nbsp;&nbsp;&nbsp;
+          checkflag = "true";
+        }
+      }
+    </script>
+    <form method="post" action="" class="login" name="signup" >
+		  <a name="checkall"  onClick="checkAll(document.signup.list)" id="checkall"> Check all </a>&nbsp;&nbsp;&nbsp;&nbsp;
     	<a onClick="uncheckAll(document.signup.list)" name="uncheckall"  id="uncheckall" > none</a>
         <ol>
-          <li><input type="checkbox" value="red" name="list"> Red</li>
-          <li><input type="checkbox" value="green" name="list"> Green</li>
-          <li><input type="checkbox" value="orange" name="list"> Orange</li>
-          <li><input type="checkbox" value="white" name="list"> White</li>
-          <li><input type="checkbox" value="black" name="list"> Black</li>
+          <li><input type="checkbox" value="red" name="list" id="red"> <label for="red">Red</label></li>
+          <li><input type="checkbox" value="green" name="list" id="green"> <label for="green">Green</lable></li>
+          <li><input type="checkbox" value="orange" name="list" id="orange"> <label for="orange">Orange</label></li>
+          <li><input type="checkbox" value="white" name="list" id="white"> <label for="white">White</label></li>
+          <li><input type="checkbox" value="black" name="list" id="black"> <label for="black">Black</label></li>
         </ol>  
-        
       </form>  
 	</div>
 </body>	
