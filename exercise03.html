@@ -16,7 +16,7 @@
 		    }
 			}
   
-  		function checkLimit(){
+  		function checkLimit(j){
   			var total = 0;
   			var max = document.signup.elements['list'].length;
   			var txt ="";
@@ -25,13 +25,15 @@
       		total += 1;
       		if(total > 3)
       		{ 
-	   				document.signup.elements['list'][x].checked=false;
+	   				document.signup.list[j].checked=false;
 	   				total--;
        			alert("you cant select more then 3 item at once you have already selected " + total + " : " + txt);
+            return false;
+
       		}
-      		else {
-				    txt += document.signup.elements['list'][x].value + ' '; 
-			 	  }
+      	   else {
+            txt += document.signup.list[x].value + ' '; 
+          }	
      		}
   		}
   		for(var z=0; z < max; z++)
@@ -44,13 +46,13 @@
 </script>
 <form method="post" action="" class="login" name="signup" >
   <ol>
-    <li><input type="checkbox" value="Sunday" name="list" onclick="checkLimit()"> Sunday</li>
-    <li><input type="checkbox" value="Monday" name="list" onclick="checkLimit()"> Monday</li>
-    <li><input type="checkbox" value="Tuesday" name="list" onclick="checkLimit()"> Tuesday</li>
-    <li><input type="checkbox" value="Wednessday" name="list" onclick="checkLimit()"> Wednessday</li>
-    <li><input type="checkbox" value="Thursday" name="list" onclick="checkLimit()"> Thursday</li>
-    <li><input type="checkbox" value="Friday" name="list" onclick="checkLimit()"> Friday</li>
-    <li><input type="checkbox" value="Saturday" name="list" onclick="checkLimit()"> Saturday</li>
+    <li><input type="checkbox" value="Sunday" name="list" onclick="checkLimit(0)"> Sunday</li>
+    <li><input type="checkbox" value="Monday" name="list" onclick="checkLimit(1)"> Monday</li>
+    <li><input type="checkbox" value="Tuesday" name="list" onclick="checkLimit(2)"> Tuesday</li>
+    <li><input type="checkbox" value="Wednessday" name="list" onclick="checkLimit(3)"> Wednessday</li>
+    <li><input type="checkbox" value="Thursday" name="list" onclick="checkLimit(4)"> Thursday</li>
+    <li><input type="checkbox" value="Friday" name="list" onclick="checkLimit(5)"> Friday</li>
+    <li><input type="checkbox" value="Saturday" name="list" onclick="checkLimit(6)"> Saturday</li>
   </ol>  
   <input type="checkbox" onClick="unCheckAll(document.signup.list)" name="uncheckall"> none
 </form> 
