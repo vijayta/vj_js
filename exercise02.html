@@ -10,5 +10,41 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+	<div class="wrapper">
+		<script type="text/javascript">
+          function uncheckAll(checkItem){
+           for (i = 0; i < checkItem.length; i++)
+           {
+              if(checkItem[i].checked == true)
+            	{
+                checkItem[i].checked = false;
+              	}
+           } 
+          }
+          function checkAll(checkItem)
+          {
+            for (i = 0; i < checkItem.length; i++)
+            {
+              if(checkItem[i].checked == false)
+            	{
+                checkItem[i].checked = true;
+              	}
+            }
+          }
+        </script>
+        <form method="post" action="" class="login" name="signup" >
+        <!--<input type="checkbox"name="checkall"> Check all-->
+		<a name="checkall"  onClick="checkAll(document.signup.list)" id="checkall"> Check all </a>  &nbsp;&nbsp;&nbsp;&nbsp;
+    	<a onClick="uncheckAll(document.signup.list)" name="uncheckall"  id="uncheckall" > none</a>
+        <ol>
+          <li><input type="checkbox" value="red" name="list"> Red</li>
+          <li><input type="checkbox" value="green" name="list"> Green</li>
+          <li><input type="checkbox" value="orange" name="list"> Orange</li>
+          <li><input type="checkbox" value="white" name="list"> White</li>
+          <li><input type="checkbox" value="black" name="list"> Black</li>
+        </ol>  
+        
+      </form>  
+	</div>
 </body>	
 </html>
