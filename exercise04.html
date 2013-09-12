@@ -10,5 +10,96 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+	<div class="wrapper">
+		<script type="text/javascript">
+		 function addProfile()
+		  {
+		    var tbl = document.getElementById('contact');
+		    var lastRow = tbl.rows.length;
+		    var iteration = lastRow;
+		    var row = tbl.insertRow(lastRow);
+		    
+		    var td4 = row.insertCell(0);
+		    td4.setAttribute('id','editField'+iteration);
+		    td4.setAttribute('style','display: none');
+		    td4.innerHTML = "<span onClick='edit(this)'>Edit</span> /<span onclick='removeProfile01(' + b + ')'>Remove</span> ";    
+		    
+		    var td3 = row.insertCell(0);
+		    td3.setAttribute('id','saveField'+iteration);
+		    var el3 = document.createElement('input');    
+		    el3.type = 'button';
+		    el3.name = 'save' + iteration;
+		    el3.id = 'save' + iteration;
+		    el3.value = 'save';
+		    el3.setAttribute('onclick', 'submitForm(this)');
+		    td3.appendChild(el3);  
+		    
+		     
+		    var td2 = row.insertCell(0);
+		    td2.setAttribute('id','emailField'+iteration);
+		    var el2 = document.createElement('input');
+		    el2.type = 'text';
+		    el2.name = 'emailRow' + iteration;
+		    el2.id = 'emailRow' + iteration;
+		    el2.value = 'Enter Your Email Address';
+		    td2.appendChild(el2);  
+		      
+		    var td1 = row.insertCell(0);
+		    td1.setAttribute('id','nameField'+iteration);
+		    var el = document.createElement('input');
+		    el.type = 'text';
+		    el.name = 'txtRow' + iteration;
+		    el.id = 'txtRow' + iteration;
+		    el.value = 'Enter Your Name';
+		    td1.appendChild(el);       
+		  }
+		  function removeProfile()
+		  {
+		    var tbl = document.getElementById('contact');
+		    var lastRow = tbl.rows.length;
+		    if (lastRow > 2) tbl.deleteRow(lastRow - 1);
+		  }
+		  function removeProfile01(e)
+		  {
+		    e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
+		  }
+		  
+		  function submitForm(e)
+		  { 
+		    var ect = e.parentNode.parentNode.getElementsByTagName("td");
+		    ect[0].innerHTML=ect[0].firstChild.value;
+		    ect[1].innerHTML=ect[1].firstChild.value;
+		    ect[2].setAttribute("style", "display:none;");
+		    ect[3].setAttribute("style", "display:block;");
+		  }
+		  
+		  function edit(e){
+		   var ect = e.parentNode.parentNode.getElementsByTagName("td");
+		    ect[0].innerHTML='<input type="text" value="'+ect[0].innerHTML+'">';
+		    ect[1].innerHTML='<input type="text" value="'+ect[1].innerHTML+'">';
+		    ect[2].setAttribute("style", "display:block;");
+		    ect[3].setAttribute("style", "display:none;");
+		  }
+		</script>
+
+
+  <form method="post" action="" name="profile01">
+    <table id="contact" name="contact"  width="80%">
+	    <tr>
+	      <th>Name</th>
+	      <th>Email</th>
+	      <th>Actions</th>
+	    </tr>  
+	    <tr>
+	      <td id="nameField1"><input type="text" placeholder="Enter Your Name" id="txtRow1" name="txtRow1"/></td>
+	      <td id="emailField1" ><input type="text" placeholder="Enter Your Email Address" id="emailRow1" name="emailRow1" /></td>
+	      <td id="saveField1" ><input type="button" id="save1"name="save1" value="Save" onclick="submitForm(this)"/></td>  
+	      <td id="editField1" style="display: none;"><span onClick="edit(this)">Edit</span>/ <span onclick="removeProfile01(this)">Remove</span></td>  
+	    </tr>  
+	  </table>
+  <input type="button" value="Add new Row" onClick="addProfile()" />
+  <input type="button" value="Remove last Row" onClick="removeProfile()" />
+  </form>
+	</div>
 </body>	
 </html>
