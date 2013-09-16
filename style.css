@@ -85,3 +85,5 @@ input[type=checkbox] { margin-top: 5px; }
 .reg .formField label{ width: 150px; float: left;font-weight: bold; }
 .reg textarea{ width: 500px; resize: none;}
 .reg .check label{ float: none; width: auto; }
+
+.swapCountries select{  width: 300px; }
