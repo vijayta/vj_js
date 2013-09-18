@@ -8,21 +8,12 @@
 <body>
   <div class="wrapper">
     <script type="text/javascript">
-      function user1 (name) {
-        this.name = "Mary";
-        this.age = "10";
-        return this.age
-      }
-      function user2 (name) {
-        this.name = "John";
-        this.age = "50";
-        return this.age
-      }
-
-      if(user1(this.age) > user2(this.age))
-        alert(user1(this.name) + " is elder then " + user2(this.name))
-        else
-        alert(user2(this.name) + " is elder then " + user1(this.name))
+     var user1 ={"name":"Mary", "age":"60"};
+     var user2 ={"name":"John", "age":"50"};
+     if(user1.age > user2.age){
+      alert(user1.name + " is elder then " + user2.name)}
+      else{
+      alert(user2.name + " is elder then " + user1.name)}
     </script>
   </div>
 </body>	

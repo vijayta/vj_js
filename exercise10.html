@@ -6,5 +6,28 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+	<div class="wrapper">
+		<script type="text/javascript">
+			function validateEmail(j) { 
+				var email = document.reg.email.value;
+			  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			  var result = re.test(email);
+			  return result; 
+			} 
+		</script>
+		<form id="reg" name="reg" class="reg" action="test_submit.html" method="post">
+		  <div class="formField">
+			  <label>Email:</label>
+			  <input id="email" type="text" class="required email" name="email" value="" title="Enter Your Email Address" onblur="validateEmail('vijayta@panchal')"/>
+			</div>
+			<div class="formField">
+			  <label>URL:</label>
+			  <input id="input-email" type="text" class="text-input required urlField default" name="urlField" value="" title="Enter URL" />
+			</div>
+			<div class="formField button">
+			  <input class="btn-submit" type="submit" value="submit" name="submit" />
+			</div>
+	  </form>
+	</div>
 </body>	
 </html>
