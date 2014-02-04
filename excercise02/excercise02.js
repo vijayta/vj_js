@@ -14,4 +14,3 @@ window.onload = function() {
   document.getElementById('checkall').onclick = function() { changeCheckBoxState(true, 'signup') };
   document.getElementById('uncheckall').onclick = function() { changeCheckBoxState(false, 'signup') };
 }
-  
