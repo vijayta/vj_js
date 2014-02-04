@@ -1,21 +1,16 @@
-var checkflag = "false";
-
-var checkbox = document.getElementById("checkall");
-checkbox.onclick = function () {
+function changeCheckBoxState(toggle, form) {
   checkboxes = document.getElementsByName('list');
-  if (checkflag == "false") {
-    for(var i=0, n=checkboxes.length;i<n;i++) {
-      checkboxes[i].checked = true;
+  for( var i=0; i < checkboxes.length; i++ ) { 
+    if(toggle) {
+        checkboxes[i].checked = true;
+    } 
+    else {
+         checkboxes[i].checked = false;
     }
   }
 }
 
-var uncheck = document.getElementById("uncheckall");
-uncheck.onclick = function () {
-  checkboxes = document.getElementsByName('list');
-  if (checkflag == "false") {
-    for(var i=0, n=checkboxes.length;i<n;i++) {
-      checkboxes[i].checked = false;
-    }
-  }  
+window.onload = function() {
+  document.getElementById('checkall').onclick = function() { changeCheckBoxState(true, 'signup') };
+  document.getElementById('uncheckall').onclick = function() { changeCheckBoxState(false, 'signup') };
 }
