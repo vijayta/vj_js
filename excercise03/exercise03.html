@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Javascript Excercises</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript" src="excercise03.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+    <form method="post" action="" class="login" name="signup" >
+      <ol>
+        <li><input type="checkbox" value="Sunday" name="list" onclick="checkLimit(0)"> Sunday</li>
+        <li><input type="checkbox" value="Monday" name="list" onclick="checkLimit(1)"> Monday</li>
+        <li><input type="checkbox" value="Tuesday" name="list" onclick="checkLimit(2)"> Tuesday</li>
+        <li><input type="checkbox" value="Wednessday" name="list" onclick="checkLimit(3)"> Wednessday</li>
+        <li><input type="checkbox" value="Thursday" name="list" onclick="checkLimit(4)"> Thursday</li>
+        <li><input type="checkbox" value="Friday" name="list" onclick="checkLimit(5)"> Friday</li>
+        <li><input type="checkbox" value="Saturday" name="list" onclick="checkLimit(6)"> Saturday</li>
+      </ol>  
+      <input type="checkbox" onClick="unCheckAll(document.signup.list)" id="uncheckall"> none
+    </form> 
+	</div>
+</body>	
+</html>
