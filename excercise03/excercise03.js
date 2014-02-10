@@ -12,8 +12,6 @@ function checkLimit(j){
       list[j].checked=false;
       total--;
       alert("you cant select more then 3 item at once you have already selected " + total + " : " + txt);
-      return false;
-
     }
      else {
       txt += list[x].value + ' '; 
@@ -21,11 +19,13 @@ function checkLimit(j){
   }
 }
   for(var z=0; z < max; z++){
-      if("list[" + z + "].checked"){
+      if("list[" + z + "].  "){
       document.signup.uncheckall.checked=false; 
     }
   }
 }
+
+
 function unCheckAll(checkItem){
   for (i = 0; i < checkItem.length; i++){
     checkItem[i].checked = false ;

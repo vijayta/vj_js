@@ -1,16 +1,26 @@
-function changeCheckBoxState(toggle, form) {
+function changeCheckBoxState() {
   var checkboxes = document.getElementsByName('list');
-  for( var i = 0; i < checkboxes.length; i++ ) { 
-    if(toggle) {
+  for( var i = 0; i < checkboxes.length; i++ ) {
+    if(this.toggle) {
         checkboxes[i].checked = true;
-    } 
+    }
     else {
          checkboxes[i].checked = false;
     }
   }
 }
 
-window.onload = function() {
-  document.getElementById('checkall').onclick = function() { changeCheckBoxState(true, 'signup') };
-  document.getElementById('uncheckall').onclick = function() { changeCheckBoxState(false, 'signup') };
+function checkBoxOperation(toggle){
+  this.toggle = toggle ;
+  this.changeCheckBoxState = changeCheckBoxState;
+}
+
+window.onload = function() {  
+  document.getElementById('button1').onclick = function(){ 
+    var checkall = new checkBoxOperation(true); checkall.changeCheckBoxState()
+  };
+  document.getElementById('button2').onclick = function(){
+    var uncheckall = new checkBoxOperation(false).changeCheckBoxState()
+  };
+
 }
