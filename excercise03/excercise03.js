@@ -1,38 +1,40 @@
-
-function checkLimit(j){
-  var total = 0;
-  list = document.signup.elements['list']; // Global Variable list
-  var max = list.length;
-  var txt ="";
-  for (var x = 0; x < max; x++) {
-  if (list[x].checked) {
-    total += 1;
-    if(total > 3)
-    { 
-      list[j].checked=false;
-      total--;
-      alert("you cant select more then 3 item at once you have already selected " + total + " : " + txt);
-    }
-     else {
-      txt += list[x].value + ' '; 
-    } 
-  }
-}
-  for(var z=0; z < max; z++){
-      if("list[" + z + "].  "){
-      document.signup.uncheckall.checked=false; 
+function onCheck(id){
+  this.id=id;
+  var i, len, inputs;
+  var count = 0;
+  var array = [];
+  var inputs = document.weekdays.getElementsByTagName("input");
+  document.getElementById("none").checked = false;
+  for (i = 0, len = inputs.length; i < len; i++) {
+    if (inputs[i].type == "checkbox" && inputs[i].checked){
+      count = count+1;
+      if(count < 4){
+        array[i] = inputs[i].id;
+      }
+      else{
+        document.getElementById(inputs[i].id).checked=false;
+        alert("Only 3 days can be selected. You have already selected : "+array);
+        return false;
+      }
     }
   }
 }
 
-
-function unCheckAll(checkItem){
-  for (i = 0; i < checkItem.length; i++){
-    checkItem[i].checked = false ;
-  }
+function onClickNone(){
+  var inputs =  document.weekdays.getElementsByTagName("input");
+  for (i = 0, len = inputs.length; i < len; i++) {
+    if(inputs[i].id!="none"){
+      document.getElementById(inputs[i].id).checked=false;
+    }
+  }  
 }
 
-
-window.onload = function() {
-  document.getElementById('uncheckall').onclick = function() { unCheckAll(list); };
+window.onunload=function(){ 
+  onClickNone(); 
+  var inputs = document.weekdays.getElementsByTagName("input");
+  for(var i = 0; i < inputs.length; i++){
+    inputs[i].addEventListener('click', function() {
+      onCheck(this) 
+    });
+  }
 }
