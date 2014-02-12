@@ -16,10 +16,10 @@ function checkBoxOperation(toggle){
 }
 
 window.onload = function() {  
-  document.getElementById('button1').onclick = function(){ 
+  document.getElementById('checkAll').onclick = function(){ 
     var checkall = new checkBoxOperation(true); checkall.changeCheckBoxState()
   };
-  document.getElementById('button2').onclick = function(){
+  document.getElementById('uncheckAll').onclick = function(){
     var uncheckall = new checkBoxOperation(false).changeCheckBoxState()
   };
 
