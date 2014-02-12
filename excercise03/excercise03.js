@@ -23,18 +23,21 @@ function onCheck(id){
 function onClickNone(){
   var inputs =  document.weekdays.getElementsByTagName("input");
   for (i = 0, len = inputs.length; i < len; i++) {
-    if(inputs[i].id!="none"){
+    if(inputs[i].id != "none"){
       document.getElementById(inputs[i].id).checked=false;
     }
   }  
 }
 
-window.onunload=function(){ 
-  onClickNone(); 
+window.onload=function(){ 
+  var none = document.getElementById('none');
+  none.addEventListener('click', function() {
+    onClickNone()
+  });
   var inputs = document.weekdays.getElementsByTagName("input");
   for(var i = 0; i < inputs.length; i++){
     inputs[i].addEventListener('click', function() {
-      onCheck(this) 
+      onCheck(this.id) 
     });
   }
 }
