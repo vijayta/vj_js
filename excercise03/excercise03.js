@@ -34,6 +34,7 @@ window.onload=function(){
   none.addEventListener('click', function() {
     onClickNone()
   });
+
   var inputs = document.weekdays.getElementsByTagName("input");
   for(var i = 0; i < inputs.length; i++){
     inputs[i].addEventListener('click', function() {
