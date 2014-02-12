@@ -1,19 +1,22 @@
-var msg = document.getElementById('message');
+function user_name(val) {
+  this.val = val;
+}
 
-var NameInput = function(fname, lname) {
-  this.fname = fname;
-  this.lname = lname;
-  if(fname == "" || fname == null || lname == "" || lname == null){
-    alert("you cant left the Field empty"); 
+user_name.prototype.NameInput = function() {
+  var name = prompt("Enter " + this.val + " Name");
+  if(name == "" || name == null){
+    alert("you cant left " + this.val + " name empty"); 
   }
   else{
-    alert("Hello " + this.fname + " " + this.lname);
-    msg.innerHTML += "<p> Hello " + this.fname + " " + this.lname + ".</p>";  
+    alert("Hello " + name);
+    var msg = document.getElementById('message');
+    msg.innerHTML += "<p> Your " + this.val + " name is :" + name + ".</p>";  
   }
 }
 
 window.onload = function(){ 
-  var first_name = prompt("Enter first Name");
-  var last_name = prompt("Enter Last Name"); 
-  NameInput(first_name, last_name); 
+  var first = new user_name("First");
+  var last = new user_name("Last");
+  first.NameInput();
+  last.NameInput();
 }
