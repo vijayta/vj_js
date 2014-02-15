@@ -1,26 +1,21 @@
-function ValidURL(str) {
-  var pattern = new RegExp('^(https?:\/\/)?'+ // protocol
-    '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
-    '((\d{1,3}\.){3}\d{1,3}))'+ // OR ip (v4) address
-    '(\:\d+)?(\/[-a-z\d%_.~+]*)*'+ // port and path
-    '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
-    '(\#[-a-z\d_]*)?$','i'); // fragment locater
-  if(!pattern.test(str)) {
-    alert("Please enter a valid URL.");
-    return false;
-  } else {
-    return true;
-  }
+function set_url(){
+  this.webAdd = validateUrl(prompt("Enter URL: "));
+  return this.webAdd;
 }
-/*function Web_Url(){
-  var webAdd = prompt("Please enter Web URL");
-  if(webAdd=="" || webAdd==null) 
-  {
-   alert("The URL you enter is Empty");
+function validateUrl(check_url){
+  this.check_url = check_url;
+  if(check_url == "" || check_url == null){
+    alert("The URL you enter is Empty");
+    return set_url();
   }
-  else 
-  {
-    window.open("http://" + webAdd, "", "height=450 , width=400, scrollbars=no ")
-  }
-} */ 
-window.onload=function(){ ValidURL('vijayta.com') }
+  return this.check_url;
+}
+
+set_url.prototype.dispURL = function(){
+  window.open("http://" + this.webAdd, "", "height=450 , width=400, scrollbars=no ");
+}
+
+window.onload = function(){ 
+  var u = new set_url();
+  u.dispURL(); 
+}
