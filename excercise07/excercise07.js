@@ -1,22 +1,29 @@
-function user_name(val) {
-  this.val = val;
+function set_name(name_part){
+  this.name_part = name_part;
+  this.name_part = validate(prompt("Enter " + name_part + " Name:"));
+  return this.name_part;
 }
-
-user_name.prototype.NameInput = function() {
-  var name = prompt("Enter " + this.val + " Name");
+function validate(name){
+  this.name = name;
   if(name == "" || name == null){
-    alert("you cant left " + this.val + " name empty"); 
+    alert("you cant leave name empty"); 
+    return set_name(this.name_part);
   }
-  else{
-    alert("Hello " + name);
-    var msg = document.getElementById('message');
-    msg.innerHTML += "<p> Your " + this.val + " name is :" + name + ".</p>";  
-  }
+  return this.name;
 }
-
+function user(){
+   var u = new Object();
+   u.fname = set_name('first');
+   u.lname = set_name('last');
+   u.dispName = dispName;
+   return u;
+}
+function dispName(){
+  alert("Hello "+this.fname+" "+this.lname);
+  var msg = document.getElementById('message');
+  msg.innerHTML += "<p>Hello " + this.fname + " " + this.lname + ".</p>";  
+}
 window.onload = function(){ 
-  var first = new user_name("First");
-  var last = new user_name("Last");
-  first.NameInput();
-  last.NameInput();
+  var user1 = new user();
+  user1.dispName(); 
 }
