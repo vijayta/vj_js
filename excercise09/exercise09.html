@@ -13,8 +13,7 @@
 </script>
 <form class="swapCountries" name="swapCountries">
   <div class="list">
-    <!--<select size="5" id="first" MULTIPLE id="contry_list_left">-->
-    <select size="5" MULTIPLE id="contry_list_left" name="CNL01">
+    <select size="5" MULTIPLE id="contry_list_left">
       <option>India</option>
       <option>China</option>
       <option>Pakistan</option>
@@ -23,12 +22,11 @@
     </select>
   </div>
   <div class="buttons">
-    <input type="button" value="add >>" id="add" onclick="SelectMoveRows(document.swapCountries.CNL01, document.swapCountries.CNL02)"/>
-    <input type="button" value="<< Remove" id="remove" onclick="SelectMoveRows(document.swapCountries.CNL02, document.swapCountries.CNL01)"/>
+    <input type="button" value="add >>" id="add" />
+    <input type="button" value="<< Remove" id="remove"/>
   </div>
   <div class="list">
-    <!--<select size="5" id ="second" MULTIPLE name="CNL02" id="contry_list_right">-->
-    <select size="5" MULTIPLE name="CNL02" id="contry_list_right">
+    <select size="5" MULTIPLE id="contry_list_right">
       <option>America</option>
       <option>England</option>
       <option>Austria</option>
