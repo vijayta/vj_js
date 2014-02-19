@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Javascript Excercises</title>
+  <script src="excercise09.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+  <div class="wrapper">
+  <script type="text/javascript">
+  
+</script>
+<form class="swapCountries" name="swapCountries">
+  <div class="list">
+    <!--<select size="5" id="first" MULTIPLE id="contry_list_left">-->
+    <select size="5" MULTIPLE id="contry_list_left" name="CNL01">
+      <option>India</option>
+      <option>China</option>
+      <option>Pakistan</option>
+      <option>Nepal</option>
+      <option>Sri Lanka</option>
+    </select>
+  </div>
+  <div class="buttons">
+    <input type="button" value="add >>" id="add" onclick="SelectMoveRows(document.swapCountries.CNL01, document.swapCountries.CNL02)"/>
+    <input type="button" value="<< Remove" id="remove" onclick="SelectMoveRows(document.swapCountries.CNL02, document.swapCountries.CNL01)"/>
+  </div>
+  <div class="list">
+    <!--<select size="5" id ="second" MULTIPLE name="CNL02" id="contry_list_right">-->
+    <select size="5" MULTIPLE name="CNL02" id="contry_list_right">
+      <option>America</option>
+      <option>England</option>
+      <option>Austria</option>
+      <option>Canada</option>
+      <option>Denmark</option>
+    </select>
+    
+  </div>  
+</form>
+  </div>  
+</body> 
+</html>

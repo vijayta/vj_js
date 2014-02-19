@@ -5,7 +5,7 @@ function onCheck(id){
 onCheck.prototype.checkLimit = function(val){  
   document.getElementById("none").checked = false;
   var array = [];
-  inputs = document.weekdays.getElementsByTagName("input");
+  inputs = document.weekdays. ("input");
   for (var i = 0, len = inputs.length, count = 0; i < len; i++) {
     if (inputs[i].type == "checkbox" && inputs[i].checked){
       count = count + 1;

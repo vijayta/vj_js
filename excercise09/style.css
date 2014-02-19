@@ -1,0 +1,5 @@
+.swapCountries{ overflow: hidden; }
+.swapCountries .list{ float: left; width: 200px; }
+.swapCountries select{ width: 200px; }
+.buttons{ float: left; width: 150px; text-align: center; }
+input[type=button]{ background: orange; border-radius: 5px; border: 0; color: #fff; font-size: 14px; font-weight: bold; font-family: arial; padding: 5px 15px; font-weight: normal; margin: 5px 0; }
