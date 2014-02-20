@@ -1,12 +1,12 @@
-function Url(){
-  this.getUrl(); 
+function Url(webAdd){
+  this.webAdd = webAdd; 
+  this.getUrl;
 }
 Url.prototype.getUrl = function(){
-  this.webAdd = this.serUrl(prompt("Enter URL: "));
+  this.webAdd = Url(prompt("Enter URL: "));
   return this.webAdd;
 }
-Url.prototype.serUrl = function(webAdd){
-  this.webAdd = webAdd;
+Url.prototype.serUrl = function(){
   if(this.webAdd != "" || this.webAdd != null){
     return this.webAdd;
   }
@@ -17,9 +17,10 @@ Url.prototype.serUrl = function(webAdd){
 
 }
 Url.prototype.dispURL = function(){
-  window.open("http://" + this.webAdd, "", "height=450 , width=400, scrollbars=no ");
+  window.open("http://" + webAdd, "", "height=450 , width=400, scrollbars=no ");
 }
 window.onload = function(){ 
   var u = new Url();
+  u.getUrl();
   u.dispURL(); 
 }
