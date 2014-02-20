@@ -1,23 +1,25 @@
-function getUrl(){
-  this.webAdd = serUrl(prompt("Enter URL: "));
+function Url(){
+  this.getUrl(); 
+}
+Url.prototype.getUrl = function(){
+  this.webAdd = this.serUrl(prompt("Enter URL: "));
   return this.webAdd;
 }
-function serUrl(url){
-  this.url =  url;
-  if(url != "" || url != null){
-    return this.url;
+Url.prototype.serUrl = function(webAdd){
+  this.webAdd = webAdd;
+  if(this.webAdd != "" || this.webAdd != null){
+    return this.webAdd;
   }
   else{
     alert("The URL you enter is Empty");
-    return getUrl();
+    return this.getUrl;
   }
-}
 
-getUrl.prototype.dispURL = function(){
+}
+Url.prototype.dispURL = function(){
   window.open("http://" + this.webAdd, "", "height=450 , width=400, scrollbars=no ");
 }
-
 window.onload = function(){ 
-  var u = new getUrl();
+  var u = new Url();
   u.dispURL(); 
 }
