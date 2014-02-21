@@ -1,7 +1,6 @@
 function User(){
    this.fname = this.setName('first');
    this.lname = this.setName('last');
-   this.dispName = this.dispName;
 }
 User.prototype.setName = function(name_part){
   this.name_part = name_part;
