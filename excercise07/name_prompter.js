@@ -12,12 +12,13 @@ User.prototype.setName = function(name_part){
 }
 User.prototype.validate = function(name){
   this.name = name;
-  var name = name.trim();
-  if(name == "" || name == null){
+  if(name){
+    return this.name;
+  }
+  else{
     alert("you cant leave " + this.name_part + " name empty"); 
     return this.setName(this.name_part);
   }
-  return this.name;
 }
 
 User.prototype.dispName = function(){
