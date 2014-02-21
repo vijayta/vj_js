@@ -12,7 +12,6 @@ user.prototype.setName = function(name_part){
 }
 user.prototype.validate = function(name){
   this.name = name;
-  
   if(name == "" || name == null || (name.indexOf(' ') >= 0)){
     alert("you cant leave name empty"); 
     return this.setName(this.name_part);
@@ -21,7 +20,7 @@ user.prototype.validate = function(name){
 }
 
 user.prototype.dispName = function(){
-  alert("Hello "+this.fname+" "+this.lname);
+  alert("Hello " + this.fname + " " + this.lname);
   var msg = document.getElementById('message');
   msg.innerHTML += "<p>Hello " + this.fname + " " + this.lname + ".</p>";  
 }
