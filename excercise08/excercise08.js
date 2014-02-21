@@ -3,12 +3,13 @@ function Url(webAdd){
 }
 Url.prototype.getUrl = function(){
   this.webAdd = Url(prompt("Enter URL: "));
-  alert(this.webAdd);
+  this.validateUrl(webAdd);
+  return webAdd;
 }
 
 Url.prototype.validateUrl = function(value){
   this.value=value;
-  if(this.value != "" || this.value != null){
+  if(value == "" || value == null || value.trim()==""){
     alert("The URL you enter is Empty");
     return this.getUrl();
   }
