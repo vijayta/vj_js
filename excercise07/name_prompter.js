@@ -13,7 +13,7 @@ user.prototype.setName = function(name_part){
 user.prototype.validate = function(name){
   this.name = name;
   if(name == "" || name == null || (name.indexOf(' ') >= 0)){
-    alert("you cant leave name empty"); 
+    alert("you cant leave " + this.name_part + " name empty"); 
     return this.setName(this.name_part);
   }
   return this.name;
