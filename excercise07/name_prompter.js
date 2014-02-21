@@ -7,14 +7,15 @@ function user(){
 }
 user.prototype.setName = function(name_part){
   this.name_part = name_part;
-  this.name_part = validate(prompt("Enter " + name_part + " Name:"));
+  this.name_part = this.validate(prompt("Enter " + name_part + " Name:"));
   return this.name_part;
 }
-function validate(name){
+user.prototype.validate = function(name){
   this.name = name;
-  if(name == "" || name == null){
+  
+  if(name == "" || name == null || (name.indexOf(' ') >= 0)){
     alert("you cant leave name empty"); 
-    return set_name(this.name_part);
+    return this.setName(this.name_part);
   }
   return this.name;
 }
