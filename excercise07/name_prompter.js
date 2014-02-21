@@ -8,6 +8,7 @@ function User(){
 User.prototype.setName = function(name_part){
   this.name_part = name_part;
   this.name_part = this.validate(prompt("Enter " + name_part + " Name:"));
+  return this.name_part
 }
 User.prototype.validate = function(name){
   this.name = name;
