@@ -7,18 +7,11 @@ function User(){
 }
 User.prototype.setName = function(name_part){
   this.name_part = name_part;
-  var name = prompt("Enter " + this.name_part + " Name:");
-  if(name != null){
-    this.validate(name);
-  }
-  else{ 
-    alert('you escape ur code') 
-  }  
+  this.name_part = this.validate(prompt("Enter " + name_part + " Name:"));
 }
 User.prototype.validate = function(name){
   this.name = name;
-  var name = name.trim();
-  if(name == "" || name == null){
+  if(name == "" || name == null || name.trim()==""){
     alert("you cant leave " + this.name_part + " name empty"); 
     return this.setName(this.name_part);
   }
@@ -32,5 +25,5 @@ User.prototype.dispName = function(){
 }
 window.onload = function(){ 
   var user1 = new User();
-  user1.setName; 
+  user1.dispName(); 
 }
