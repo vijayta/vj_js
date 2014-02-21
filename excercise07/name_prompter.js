@@ -1,9 +1,7 @@
 function User(){
-   var u = new Object();
-   u.fname = this.setName('first');
-   u.lname = this.setName('last');
-   u.dispName = this.dispName;
-   return u;
+   this.fname = this.setName('first');
+   this.lname = this.setName('last');
+   this.dispName = this.dispName;
 }
 User.prototype.setName = function(name_part){
   this.name_part = name_part;
@@ -18,7 +16,6 @@ User.prototype.validate = function(name){
   }
   return this.name;
 }
-
 User.prototype.dispName = function(){
   alert("Hello " + this.fname + " " + this.lname);
   var msg = document.getElementById('message');
