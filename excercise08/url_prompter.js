@@ -1,23 +1,27 @@
 function Url(webAdd){
   this.webAdd = webAdd;
-  this.getUrl = function(){
-    return this.webAdd;
-  }
+  this.getUrl = getUrl;
+  this.validateUrl = validateUrl;
+}
+function getUrl(){
+  this.webAdd = prompt("Enter URL: ");
+  return 
 }
 
-Url.prototype.validateUrl = function(value){
-  this.value=value;
-  if(value == null || value.trim()==""){
+function validateUrl(){
+ // this.validateUrl = value;
+  if(this.webAdd.trim()=="" || this.webAdd  == null){
     alert("The URL you enter is Empty");
     return this.getUrl();
   }
 }
 
 Url.prototype.dispURL = function(){
-  window.open(this.webAdd , "", "height=450 , width=400, scrollbars=no ");
+  window.open("http://" + this.webAdd, "", "height=450 , width=400, scrollbars=no ");
 }
-window.onload = function(){ 
-  var u = new Url(prompt("Enter URL: "));
+window.onload = function(){
+  var u = new Url();
   u.getUrl();
+  u.validateUrl();
   u.dispURL();
 }

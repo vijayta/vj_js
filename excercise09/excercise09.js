@@ -1,17 +1,19 @@
 function SelectMoveRows(firstSel,secondSel)
 {
-  var SelID='';
-  var SelText='';
   for (i=firstSel.options.length - 1; i >= 0; i--){
     if (firstSel.options[i].selected == true)
     {
-      SelID = firstSel.options[i].value;
-      SelText = firstSel.options[i].text;
+      var SelID = firstSel.options[i].value;
+      var SelText = firstSel.options[i].text;
       var newRow = new Option(SelText,SelID);
       secondSel.options[secondSel.length] = newRow;
       firstSel.options[i] = null;
     }
   }
+}
+
+function manageMove(){
+   this.SelectMoveRows = SelectMoveRows;
 }
 
 window.onload = function(){ 
@@ -20,10 +22,12 @@ window.onload = function(){
   var left = document.getElementById('contry_list_left');
   var right = document.getElementById('contry_list_right')
   
+  var mover = new manageMove();
+
   add.addEventListener('click', function() {
-    SelectMoveRows(left ,right);
+    mover.SelectMoveRows(left ,right);
   });
   remove.addEventListener('click', function() {
-    SelectMoveRows(right ,left);
+    mover.SelectMoveRows(right ,left);
   });
 }  

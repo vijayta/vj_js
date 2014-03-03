@@ -22,7 +22,7 @@ onCheck.prototype.checkLimit = function(val){
 }
 
 function onClickNone(){
-  var inputs =  document.weekdays.getElementsByTagName("input");
+  var inputs =  document.weekdays.getElementsName("list");
   for (i = 0, len = inputs.length; i < len; i++) {
     if(inputs[i].id != "none"){
       document.getElementById(inputs[i].id).checked=false;
@@ -36,7 +36,7 @@ window.onload=function(){
     onClickNone()
   });
   
-  var inputs = document.weekdays.getElementsByTagName("input");
+  var inputs = document.weekdays.getElementsByName("list");
   for(var i = 0; i < inputs.length; i++){
     inputs[i].addEventListener('click', function() {
       var check_limit = new onCheck(this.id);
