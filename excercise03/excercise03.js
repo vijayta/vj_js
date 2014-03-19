@@ -2,7 +2,7 @@ function onCheck(id){
   this.id=id;
 }
 
-onCheck.prototype.checkLimit = function(val){  
+onCheck.prototype.checkLimit = function(val){
   document.getElementById("none").checked = false;
   var array = [];
   inputs = document.weekdays.("input");
@@ -22,15 +22,15 @@ onCheck.prototype.checkLimit = function(val){
 }
 
 function onClickNone(){
-  var inputs =  document.weekdays.getElementsName("list");
+  var inputs = document.weekdays.getElementsName("list");
   for (i = 0, len = inputs.length; i < len; i++) {
     if(inputs[i].id != "none"){
       document.getElementById(inputs[i].id).checked=false;
     }
-  }  
+  }
 }
 
-window.onload=function(){ 
+window.onload=function(){
   var none = document.getElementById('none');
   none.addEventListener('click', function() {
     onClickNone()
