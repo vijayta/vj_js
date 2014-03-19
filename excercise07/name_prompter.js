@@ -4,12 +4,12 @@ function User(){
 }
 User.prototype.setName = function(name_part){
   this.name_part = name_part;
-  this.name_part = this.validate(prompt("Enter " + this.name_part + " Name:"));
-  return this.name_part
+  var name_partial = this.validate(prompt("Enter " + this.name_part + " Name:"));
+  return name_partial;
 }
 User.prototype.validate = function(name){
   this.name = name;
-  if(this.name.trim()=="" || this.name == null){
+  if(this.name=="" || this.name == null || this.name.trim()==""){
     alert("you cant leave " + this.name_part + " name empty"); 
     return this.setName(this.name_part);
   }
