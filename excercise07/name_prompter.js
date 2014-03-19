@@ -8,12 +8,11 @@ User.prototype.setName = function(name_part){
   return name_partial;
 }
 User.prototype.validate = function(name){
-  this.name = name;
-  if(this.name=="" || this.name == null || this.name.trim()==""){
+  if(name=="" || name == null || name.trim()==""){
     alert("you cant leave " + this.name_part + " name empty"); 
     return this.setName(this.name_part);
   }
-  return this.name;
+  return name;
 }
 User.prototype.dispName = function(){
   alert("Hello " + this.fname + " " + this.lname);
