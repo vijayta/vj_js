@@ -1,7 +1,11 @@
-function SelectMoveRows(firstSel,secondSel)
+function SelectMoveRows()
 {
-  for (i=firstSel.options.length - 1; i >= 0; i--){
-    if (firstSel.options[i].selected == true)
+}
+
+SelectMoveRows.prototype.manageMove = function(firstSel,secondSel){
+  var len = firstSel.options.length;
+   for (i = len - 1; i >= 0; i--){
+    if (firstSel.options[i].selected)
     {
       var SelID = firstSel.options[i].value;
       var SelText = firstSel.options[i].text;
@@ -12,22 +16,19 @@ function SelectMoveRows(firstSel,secondSel)
   }
 }
 
-function manageMove(){
-   this.SelectMoveRows = SelectMoveRows;
-}
-
 window.onload = function(){ 
   var add = document.getElementById('add');
   var remove = document.getElementById('remove');
   var left = document.getElementById('contry_list_left');
   var right = document.getElementById('contry_list_right')
   
-  var mover = new manageMove();
+  var move = new SelectMoveRows();
 
   add.addEventListener('click', function() {
-    mover.SelectMoveRows(left ,right);
+    move.manageMove(left ,right);
+
   });
   remove.addEventListener('click', function() {
-    mover.SelectMoveRows(right ,left);
+    move.manageMove(right ,left);
   });
-}  
+}
