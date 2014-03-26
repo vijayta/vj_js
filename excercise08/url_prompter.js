@@ -8,7 +8,7 @@ Url.prototype.getUrl = function(){
 }
 
 Url.prototype.validateUrl = function(){
-  result = (this.webAdd  != null && this.webAdd.trim() != "" && url_regex.test(this.webAdd))
+  result = (this.webAdd.trim() != "" && url_regex.test(this.webAdd))
   if(!result) {
     alert('Please enter a valid url');
   }
