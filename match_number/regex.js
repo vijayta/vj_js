@@ -1,20 +1,17 @@
-var number_regex = /^\d+(?:\.\d{1,2})?$/;
-
+var number_regex = /^[-+]?[0-9]*\.?[0-9]*$/;
 function UserInput(){
   this.input = document.getElementById('user_input').value;
 }
 
-UserInput.prototype.isValidNumber = function(value){
+UserInput.prototype.isValidNumber = function(value) {
   return number_regex.test(value);
 }
 
-UserInput.prototype.validateInfo = function() {
+UserInput.prototype.validateInfo = function(event) {
   this.user_value = this.isValidNumber(this.input);
-  if((!this.user_value) || (!this.user_value < 0)){
+  if((!this.user_value)){
     alert("Please Enter Numeric Value");
-  }
-  else{
-    alert("Form Submitted");
+    event.preventDefault();
   }
 }
 
@@ -23,12 +20,11 @@ UserInput.prototype.dispInfo = function() {
   result.value = this.user_value;
 }
 
-window.onload = function(){ 
+window.onload = function() { 
   var numeric_form = document.getElementById('numeric_input');
-  numeric_form.addEventListener('submit', function]=[] {
-    numeric_form.preventDefault();
+  numeric_form.addEventListener('submit', function(event) {
     var u = new UserInput();
-    u.validateInfo();
+    u.validateInfo(event);
     u.dispInfo();
   });
 }
