@@ -7,19 +7,19 @@
   </head>
   <body>
     <div class="wrapper">
-      <form>
+      <form id="user_info" name="form">
         <h3>Registration Form</h3>
         <div class="field">
           <label for="user_ID">Login Id</label>
-          <input type="text" id="user_ID" class="check"/>
+          <input type="text" id="user_ID" class = "check" name = " loginId"/>
         </div>        
         <div class="field">
           <label for="user_email">Email</label>
-          <input type="text" id="user_email" class="check"/>
+          <input type="text" id="user_email" class = "check" name = "Email"/>
         </div>        
         <div class="field">
           <label for="user_name">Name</label>
-          <input type="text" id="user_name" class="check"/>
+          <input type="text" id="user_name" class = "check" name="Name"/>
         </div>        
         <div class="field">
           <label for="time_zone">Time Zone</label>
@@ -29,14 +29,14 @@
         </div>       
         <div class="field">
           <label for="home_page">Home Page</label>
-          <input type="text" id="home_page" class="check"/>
+          <input type="text" id="home_page" class = "check" name="URL"/>
         </div>        
         <div class="field">
-          <label for="abuot">About Me</label>
-          <textarea cols="50" rows="5" class="check"></textarea>
+          <label for="about">About Me</label>
+          <textarea cols="50" rows="5" class = "check" name="user_desc" id="user_desc"></textarea>
         </div>  
         <div class="confirm_field">
-          <input type="checkbox" id="notify_me"/>
+          <input type="checkbox" id="notify_me"  class = "check" name="notify"/>
           <label for="notify_me">Receive notification of comments</label>
         </div> 
         <div class="field button">

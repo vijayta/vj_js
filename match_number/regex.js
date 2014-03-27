@@ -1,4 +1,4 @@
-var number_regex = /^[-+]?[\d]*(\.\d)*$/;
+var number_regex = /^[-+]?[\d]*([\.][\d]*)?$/;
 
 function UserInput(){
   this.input = document.getElementById('user_input').value;

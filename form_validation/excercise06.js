@@ -1,30 +1,30 @@
-var user_input = document.getElementsByClassName("check");  
+var user_input = document.getElementsByClassName('check');
 
-function userElement(id){
-  this.id=id;
+function UserInput(){
+  this.user_input = user_input;
 }
-userElement.prototype.validate = function() {
-  var element = document.getElementsByClassName("check").value;
-  if(element == "" || element == null){
-    alert('Field cant be left '+ this.id +' blank');
+UserInput.prototype.validateInfo = function(event) {
+  for(var i = 0; i < this.user_input.length; i++) {
+    this.value = this.user_input[i].value;
+    if(this.value == null || this.value == "") {
+      alert("You Cant left \"" + this.user_input[i].name + "\" Field Blank.");
+    }  
   }
-  else{
-    return element;
+  event.preventDefault();
+}
+UserInput.prototype.desc = function(){
+  var user_desc01 = document.getElementById('user_desc').value;
+  if(user_desc01.length < 50){
+    alert("User Information('About me') Cant be less then 50 char.")
   }
-}  
-function validateEmpty(validate) {
-    var error = "";
-    var element = document.getElementsByClassName("check").value;
-    if (validate.value.length == 0) {
-        error = "The required field has not been filled in.\n"
-    } else {
-        fld.style.background = 'White';
-    }
-    return error;  
 }
 
 window.onload = function(){  
-  document.getElementById('submit').onclick = function(){ 
+  var on_submit = document.getElementById('user_info')
+  on_submit.addEventListener('submit', function(event) {
+    var u = new UserInput();
 
-   }
+    //u.validateInfo(event);
+    u.desc();
+  });
 }
