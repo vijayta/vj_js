@@ -1,4 +1,5 @@
-var number_regex = /^[-+]?[0-9]*\.?[0-9]*$/;
+var number_regex = /^[-+]?[\d]*(\.\d)*$/;
+
 function UserInput(){
   this.input = document.getElementById('user_input').value;
 }
@@ -9,7 +10,7 @@ UserInput.prototype.isValidNumber = function(value) {
 
 UserInput.prototype.validateInfo = function(event) {
   this.user_value = this.isValidNumber(this.input);
-  if((!this.user_value)){
+  if (!this.user_value) {
     alert("Please Enter Numeric Value");
     event.preventDefault();
   }
