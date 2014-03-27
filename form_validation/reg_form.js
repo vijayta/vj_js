@@ -18,13 +18,18 @@ UserInput.prototype.desc = function(){
     alert("User Information('About me') Cant be less then 50 char.")
   }
 }
-
+UserInput.prototype.notify = function(){
+  var notify = document.getElementById('notify_me');
+  if(!notify.checked){
+    alert("Please check Receve Notification")
+  }
+}
 window.onload = function(){  
   var on_submit = document.getElementById('user_info')
   on_submit.addEventListener('submit', function(event) {
     var u = new UserInput();
-
-    //u.validateInfo(event);
+    u.validateInfo(event);
     u.desc();
+    u.notify();
   });
 }
