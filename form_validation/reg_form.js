@@ -7,10 +7,10 @@ UserInput.prototype.validateInfo = function(event) {
   for(var i = 0; i < this.user_input.length; i++) {
     this.value = this.user_input[i].value;
     if(this.value == null || this.value == "") {
-      alert("You Cant left \"" + this.user_input[i].name + "\" Field Blank.");
+      alert("You Cant left " + this.user_input[i].name + " Field Blank.");
+      event.preventDefault();
     }  
   }
-  event.preventDefault();
 }
 UserInput.prototype.desc = function(){
   var user_desc01 = document.getElementById('user_desc').value;
@@ -21,7 +21,7 @@ UserInput.prototype.desc = function(){
 UserInput.prototype.notify = function(){
   var notify = document.getElementById('notify_me');
   if(!notify.checked){
-    alert("Please check Receve Notification")
+    alert("Please check Receive Notification")
   }
 }
 window.onload = function(){  

@@ -1,7 +1,12 @@
-function onClickSelect(){  
-  document.getElementById("none").checked = false;
+var none = document.getElementById("none").checked;
+var inputs = document.weekdays.getElementsByTagName("input");
+
+function CheckSelect(){
+}
+
+CheckSelect.prototype.clickSelect = function() {  
+  none.checked = false;
   var array = [];
-  inputs = document.weekdays.getElementsByTagName("input");
   for (var i = 0, len = inputs.length; i < len-1; i++) {
     if (inputs[i].type == "checkbox" && inputs[i].checked){
       onClickSelect.count = onClickSelect.count + 1;
@@ -17,9 +22,9 @@ function onClickSelect(){
   }
 }
 
-function onClickNone(){
+CheckSelect.prototype.ClickNone = function(){
   var inputs =  document.weekdays.getElementsByName('list');
-  document.getElementById("none").checked = true;
+  none.checked = true;
   for (i = 0, len = inputs.length; i < len && inputs[i].id != "none"; i++) {
       document.getElementById(inputs[i]).checked=false;
   }  
@@ -29,17 +34,16 @@ function checkDays(){
   this.onClickSelect = onClickSelect;
   onClickSelect.count = 0;
   this.onClickNone = onClickNone;
-  document.getElementById("none").checked = true;
+  none.checked = true;
 }
 
-window.onload=function(){ 
-  var none = document.getElementById('none');
+window.onload = function() { 
   none.addEventListener('click', function() {
     var uncheckoperation = new checkDays();
     uncheckoperation.onClickNone();
   });
   
-  var inputs = document.weekdays.getElementsByTagName("input");
+  
   for(var i = 0; i < inputs.length; i++){
     inputs[i].addEventListener('click', function() {
       var check_limit = new checkDays();
