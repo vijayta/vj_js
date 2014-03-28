@@ -1,31 +1,31 @@
 var numberRegex = /^[-+]?[\d]*([\.][\d]*)?$/;
 
-function UserInput(){
-  this.input = document.getElementById('user_input').value;
+function NumberTest(){
+  this.inputValue = document.getElementById('user_input').value;
+  this.resultBox = document.getElementById('result');
 }
 
-UserInput.prototype.isValidNumber = function(value) {
-  return numberRegex.test(value);
+NumberTest.prototype.isValid = function() {
+  return numberRegex.test(this.inputValue);
 }
 
-UserInput.prototype.validateInfo = function(event) {
-  this.userValue = this.isValidNumber(this.input);
-  if (!this.userValue) {
+NumberTest.prototype.validate = function(event) {
+  this.result = this.isValid();
+  if (!this.result) {
     alert("Please Enter Numeric Value");
     event.preventDefault();
   }
 }
 
-UserInput.prototype.dispInfo = function() {
-  var result = document.getElementById('result');
-  result.value = this.userValue;
+NumberTest.prototype.displayResult = function() {
+  this.resultBox.value = this.result;
 }
 
 window.onload = function() { 
   var numericForm = document.getElementById('numeric_input');
   numericForm.addEventListener('submit', function(event) {
-    var u = new UserInput();
-    u.validateInfo(event);
-    u.dispInfo();
+    var numberTest = new NumberTest();
+    numberTest.validate(event);
+    numberTest.displayResult();
   });
 }
