@@ -4,6 +4,7 @@ function addRow(contact){
 
   var rowCount = table.rows.length;
   var row = table.insertRow(rowCount);
+  var iteration = row; 
 
   var cell1 = row.insertCell(0);
   cell1.innerHTML = rowCount + 0;
@@ -24,13 +25,13 @@ function addRow(contact){
   var element1 = document.createElement("input");
   element1.type = "button";
   element1.value = "Save";
-  element1.name = "btn[]";
+  element1.name = "btn" + iteration;
   cell4.appendChild(element1);
   var element2 = document.createElement("input");
   element2.type = "button";
   element2.value = "remove";
-  element2.name = "btn_remove";
-  element2.id = "btn_remove[]";
+  //element2.name = "btn_remove";
+  element2.id = "btn_remove" + iteration;
   cell4.appendChild(element2);
 }
 

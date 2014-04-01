@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Javascript Excercises</title>
+<style type="text/css">
+ul{ margin: 0; padding: 0; }
+ul li{ padding: 3px 10px; font-family: arial; font-size: 14px; list-style-type: none; position: relative; text-transform: capitalize;}
+ul ul li{ border-bottom: 1px solid #ccc;}
+.sub{ display: none; position: absolute; left: 100px; border: 1px solid #ccc; top: 0; width: 120px; }
+.outer{ height: 100px; overflow-y: scroll; width: 300px; }
+.notActive ul{display: none; }
+.active ul{display: block; }
+</style>
+</head>
+<body>
+<form method="post" name="list" id="list">
+  <ul class="outer">
+    <li id="first">
+      <input type="checkbox" name="mainList" id = "item1"> <label for = "colors">color</label>
+      <ul class="sub" id="color">
+        <li><input type="checkbox" name="list" id="red"> <label for="red">red</label></li>
+        <li><input type="checkbox" name="list" id="green"><label for="green">green</label></li>
+        <li><input type="checkbox" name="list" id="yellow"><label for="yellow">yellow</lable></li>
+        <li><input type="checkbox" name="list" id="blue"><label for="blue">blue</lable></li>
+      </ul>  
+    </li>
+   <li id="second"><input type="checkbox" name="mainList" id = "item2"> <label for="movies">movies</label>
+      <ul class="sub" id="movie">
+        <li><input type="checkbox" name="list" id="darr"><label for="darr">Darr</label></li>
+        <li><input type="checkbox" name="list" id="sir"><label for="sir">Sir</lable></li>
+      </ul>  
+    </li>
+   <li id="third">
+     <input type="checkbox" id = "item3" name="mainList"> <label for="drinks">drinks</label>
+      <ul class="sub" id="drinks">
+        <li><input type="checkbox" id="coke" name="list"><label for="coke">coke</label></li>
+        <li><input type="checkbox" id="pepsi" name="list"><label for="pepsi">pepsi</label></li>
+        <li><input type="checkbox" id="dew" name="list"><label for="dew">dew</label></li>
+      </ul>  
+    </li>
+    <li id="fourth"><input type="checkbox" id = "item4" name="mainList"> <label for="bikes">bikes 
+      <ul class="sub" id="bikes">
+        <li><input type="checkbox" id="vrod" name="list"><label for="vrod">V-rod</label></li>
+        <li><input type="checkbox" id="pulser" name="list"><label for="pulser">pulser</label></li>
+        <li><input type="checkbox" id="cbz" name="list"><label for="cbz">cbz</label></li>
+      </ul>  
+    </li>
+  </ul>  
+  </form>
+<script src="checkboxes.js" type="text/javascript"></script>	
+</body>
+</html>
