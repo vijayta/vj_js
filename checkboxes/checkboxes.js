@@ -3,9 +3,8 @@ function Choice() {
 }
 
 Choice.prototype.userInput = function(ID) {
-  this.id = ID;
   for(var count = 0; count <= this.selectedOption.length; count++){
-    if (document.getElementById('item' + count).id != this.id) {
+    if (document.getElementById('item' + count).id != ID) {
       document.getElementById('item' + count).checked = false;
       this.selectedOption[count].parentNode.setAttribute('class', 'notActive')
     }
