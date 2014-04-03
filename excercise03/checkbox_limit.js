@@ -1,6 +1,8 @@
 function checkOperation() {
   this.checkboxes = document.getElementsByName('list');
   this.none = document.getElementById('uncheckAll');
+  this.selectionLimit = 3;
+  this.init();
 }
 
 checkOperation.prototype.uncheckAll = function() {
@@ -16,32 +18,32 @@ checkOperation.prototype.uncheckNone = function(checkbox) {
   }  
 }
 
-checkOperation.prototype.validateCheckLimit = function(checkbox) {
-  this.array = [];
+checkOperation.prototype.createCheckboxList = function(checkbox) {
+  this.checkboxList = [];
   for (var i = 0, len = this.checkboxes.length; i < len; i++) {
     if (this.checkboxes[i].checked && this.checkboxes[i].id != checkbox.id) {
-      this.array.push(this.checkboxes[i].id);
+      this.checkboxList.push(this.checkboxes[i].id);
     }
   }
 }
 
 checkOperation.prototype.checkOverLimit = function(checkbox) {
-  if (this.array.length >= 3) {
+  if (this.checkboxList.length >= this.selectionLimit) {
     document.getElementById(checkbox.id).checked = false;
-    alert("Only 3 days can be selected. You have already selected : " + this.array + " ");
+    alert("Only 3 days can be selected. You have already selected : " + this.checkboxList + " ");
   }
 }
 
-checkOperation.prototype.display = function() {
+checkOperation.prototype.init = function() {
   var that = this;
   this.none.addEventListener('click', function() {
     that.uncheckAll();
   });
 
-  for (var i = 0; i < this.checkboxes.length; i++) {
+  for (var i = 0, len = this.checkboxes.length; i < len; i++) {
     this.checkboxes[i].addEventListener('click', function() {
       that.uncheckNone(this);
-      that.validateCheckLimit(this);
+      that.createCheckboxList(this);
       that.checkOverLimit(this);
     });
   }  
@@ -49,5 +51,4 @@ checkOperation.prototype.display = function() {
 
 window.onload = function() {  
   var check = new checkOperation();
-  check.display();
 }
