@@ -1,7 +1,6 @@
 function Table(){
   this.table = document.getElementById('contact');
   this.rowCount = this.table.rows.length;
-  
   this.count = this.rowCount;
 }
 
@@ -26,7 +25,9 @@ Table.prototype.addRow = function(contact) {
   element1.id = 'save' + this.count;
   element1.href = '#'
   element1.text = 'Save';
+  element1.setAttribute('data-button', 'row' + this.count)
   cell3.appendChild(element1);
+  element1.setAttribute('onclick', 'saveRow(this)');
 
   var element2 = document.createElement('a');
   element2.id = 'edit' + this.count;
@@ -36,29 +37,52 @@ Table.prototype.addRow = function(contact) {
   cell3.appendChild(element2);  
   cell3.appendChild(document.createTextNode(' / '));
 
-  var element3 = document.createElement('a');
-  element3.id = 'remove' + this.count;
-  element3.name = 'remove';
+  var element3 = document.createElement('a');  
   element3.href = '#';
-  element3.text = 'Remove';
+  element3.text = 'Delete';
+  element3.setAttribute('data-button', 'row' + this.count)
   cell3.appendChild(element3);
-  element3.setAttribute('onclick' , 'removeRow("this")');
+  element3.setAttribute('onclick' , 'removeRow(this)');
 }
 
 Table.prototype.removeProfile = function(e){
-  //console.log(e.parentNode);
-  //console.log(e.parentNode.parentNode);
-  console.log('hello')
-  //e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
-  // var remove = document.getElementsByName('remove');
-  // for(var i = 0; i < remove.length ; i++){
-  //  document.getElementById(remove[i].id).parentNode.parentNode;
-  //  console.log('Hello');
-  // } 
+  var removeButton = e.getAttribute('data-button');
+  var rows = document.getElementsByTagName('tr');
+  for(var i = 0; i < rows.length; i++){
+    rows[i].addEventListener('click', function() {      
+      if(removeButton == this.id){
+        document.getElementById('tbody').removeChild(this);
+      }
+    });
+  }
 }
+
+Table.prototype.saveProfile = function(e){
+var saveButton = e.getAttribute('data-button');
+var rows = document.getElementsByTagName('tr');
+  for(var i = 0; i < rows.length; i++){
+    rows[i].addEventListener('click', function() {      
+      if(saveButton == this.id){
+        alert('Saved');
+      }
+    });
+  }
+
+  // var element = e.parentNode.parentNode.getElementsByTagName("td");
+  //   ect[0].innerHTML=ect[0].firstChild.value;
+  //   ect[1].innerHTML=ect[1].firstChild.value;
+  //   ect[2].setAttribute("style", "display:none;");
+  //   ect[3].setAttribute("style", "display:block;");
+}
+
+
 function removeRow(row){
   var table = new Table();
-      table.removeProfile(row);
+  table.removeProfile(row);
+}
+function saveRow(row){
+  var table = new Table();
+  table.saveProfile(row);
 }
 
 Table.prototype.output = function() {
@@ -68,14 +92,7 @@ Table.prototype.output = function() {
     var table = new Table();
     table.addRow('contact');
   });
-   
-  var remove = document.getElementsByName('remove');
-
-  for(var i = 0; i < remove.length ; i++){
-    remove[i].addEventListener('click', removeRow(this));
-  }
 }
-
 
 window.onload = function() {  
     var table = new Table();
