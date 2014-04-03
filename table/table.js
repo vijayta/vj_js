@@ -4,48 +4,37 @@ function Table(){
   this.count = this.rowCount;
 }
 
-Table.prototype.addRow = function(contact) {
-  var tableRow = this.table.insertRow(this.rowCount);
-  tableRow.setAttribute('id', 'row' + this.count);
-
-  var cell1 = tableRow.insertCell(0);
-  var element1 = document.createElement("input");
-  element1.type = 'text';
-  element1.name='name' + this.count;
-  cell1.appendChild(element1);
-
-  var cell2 = tableRow.insertCell(1);
-  var element1 = document.createElement("input");
-  element1.type = 'text';
-  element1.name = 'email' + this.count;
-  cell2.appendChild(element1);
-
-  var cell3 = tableRow.insertCell(2);
-  var element1 = document.createElement('a');
-  element1.id = 'save' + this.count;
-  element1.href = '#'
-  element1.text = 'Save';
-  element1.setAttribute('data-button', 'row' + this.count)
-  cell3.appendChild(element1);
-  element1.setAttribute('onclick', 'saveRow(this)');
-
-  var element2 = document.createElement('a');
-  element2.id = 'edit' + this.count;
-  element2.href = '#'
-  element2.text = 'Edit';
-  element2.style = 'display: none';
-  cell3.appendChild(element2);  
-  cell3.appendChild(document.createTextNode(' / '));
-
-  var element3 = document.createElement('a');  
-  element3.href = '#';
-  element3.text = 'Delete';
-  element3.setAttribute('data-button', 'row' + this.count)
-  cell3.appendChild(element3);
-  element3.setAttribute('onclick' , 'removeRow(this)');
+Table.prototype.addCell = function (cellCount, value) {
+  this.cell = this.tableRow.insertCell(cellCount);
+  this.element = document.createElement("input");
+  this.element.type = 'text';
+  this.element.name = value + this.count;
+  this.cell.appendChild(this.element);
 }
 
-Table.prototype.removeProfile = function(e){
+Table.prototype.actionCell = function (cellCount, value, action) {
+  this.cell = this.tableRow.insertCell(cellCount);
+  this.element = document.createElement('a');
+  this.element.id = value + this.count;
+  this.element.href = '#'
+  this.element.text =  value;
+  this.element.setAttribute('data-button', 'row' + this.count)
+  this.cell.appendChild(this.element);
+  this.element.addEventListener('click' , function() {
+    action(this);
+  })
+}
+
+Table.prototype.addRow = function(contact) {
+  this.tableRow = this.table.insertRow(this.rowCount);
+  this.tableRow.setAttribute('id', 'row' + this.count); 
+  var call0 = this.addCell(0, 'name');
+  var call1 = this.addCell(1, 'email');
+  var cell2 = this.actionCell(2, 'save', this.saveRow);
+  var cell3 = this.actionCell(3, 'delete', this.deleteRow);
+}
+
+Table.prototype.deleteRow = function(e){
   var removeButton = e.getAttribute('data-button');
   var rows = document.getElementsByTagName('tr');
   for(var i = 0; i < rows.length; i++){
@@ -57,13 +46,13 @@ Table.prototype.removeProfile = function(e){
   }
 }
 
-Table.prototype.saveProfile = function(e){
+Table.prototype.saveRow = function(e){
 var saveButton = e.getAttribute('data-button');
 var rows = document.getElementsByTagName('tr');
   for(var i = 0; i < rows.length; i++){
     rows[i].addEventListener('click', function() {      
       if(saveButton == this.id){
-        alert('Saved');
+        console.log(this.count);
       }
     });
   }
@@ -75,18 +64,13 @@ var rows = document.getElementsByTagName('tr');
   //   ect[3].setAttribute("style", "display:block;");
 }
 
-
-function removeRow(row){
-  var table = new Table();
-  table.removeProfile(row);
+Table.prototype.isValidate = function() {
+  var textField = document.getElementsByTagName('input');
+  if ( textField.value == null || textField.value.trim() ) {
+    alert('Text field is empty');
+  }
 }
-function saveRow(row){
-  var table = new Table();
-  table.saveProfile(row);
-}
-
 Table.prototype.output = function() {
-  that = this;
   var addRow = document.getElementById('addRow');
   addRow.addEventListener('click', function() {
     var table = new Table();

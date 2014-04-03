@@ -1,21 +1,25 @@
 function Choice() {
   this.selectedOption = document.getElementsByName('mainList');
+  this.init();
 }
 
-Choice.prototype.userInput = function(ID) {
-  for(var count = 0; count <= this.selectedOption.length; count++){
-    if (document.getElementById('item' + count).id != ID) {
-      document.getElementById('item' + count).checked = false;
-      this.selectedOption[count].parentNode.setAttribute('class', 'notActive')
+Choice.prototype.userInput = function(currentId) {
+  for (var count = 0; count <= this.selectedOption.length; count++) {
+    this.selectedItem = document.getElementById('item' + count);
+
+    if (this.selectedItem.id != currentId) {
+      this.selectedItem.checked = false;
+      this.selectedOption[count].parentNode.setAttribute('class', 'notActive');
     }
-    else{
-      document.getElementById('item' + count).checked = true;
+    else {
+      this.selectedItem.checked = true;
       this.selectedOption[count].parentNode.setAttribute('class', 'active')
+      this.selectedItem.scrollIntoView(true);
     }
   }
 }
 
-Choice.prototype.output = function() {
+Choice.prototype.init = function() {
   var that = this;
   var userInput = document.getElementsByTagName('input');
   for(var i = 0; i < userInput.length; i++) {
@@ -27,5 +31,4 @@ Choice.prototype.output = function() {
 
 window.onload = function(){
   var userChoice = new Choice();
-   userChoice.output();
 }
