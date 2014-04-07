@@ -3,28 +3,27 @@ function Choice() {
   this.init();
 }
 
-Choice.prototype.userInput = function(currentId) {
-  for (var count = 0; count <= this.selectedOption.length; count++) {
-    this.selectedItem = document.getElementById('item' + count);
-
-    if (this.selectedItem.id != currentId) {
-      this.selectedItem.checked = false;
-      this.selectedOption[count].parentNode.setAttribute('class', 'notActive');
+Choice.prototype.userInput = function(element) {
+  for (var i = 0; i <= this.selectedOption.length; i++) {
+    
+    this.element = document.getElementById(element);
+    if (this.element.checked == false) {
+      this.element.parentNode.setAttribute('class', 'notActive');
     }
     else {
-      this.selectedItem.checked = true;
-      this.selectedOption[count].parentNode.setAttribute('class', 'active')
-      this.selectedItem.scrollIntoView(true);
+      this.element.parentNode.setAttribute('class', 'active')
+      this.element.scrollIntoView(true);
     }
   }
 }
 
 Choice.prototype.init = function() {
   var that = this;
-  var userInput = document.getElementsByTagName('input');
+  var userInput = document.getElementsByName('mainList');
   for(var i = 0; i < userInput.length; i++) {
     userInput[i].addEventListener('click', function(){
-      that.userInput(this.id);
+      var element = this.id;
+      that.userInput(element);
     }
   )};  
 }
