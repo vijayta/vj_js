@@ -1,14 +1,20 @@
 function Choice() {
+  this.selectOptions = document.getElementsByName('mainList');
   this.init();
 }
 
 Choice.prototype.userInput = function(element) { 
   this.element = document.getElementById(element);
-  if (this.element.checked == false) {
-    this.element.parentNode.setAttribute('class', 'notActive');
-  }
-  else {
-    this.element.parentNode.setAttribute('class', 'active')
+  if (this.element.checked) {
+    for(var i = 0; i < 4; i++){
+      if(this.selectOptions[i].checked){
+        this.selectOptions[i].checked = false;
+        this.selectOptions[i].parentNode.setAttribute('class', 'notActive');
+
+        this.element.checked = true; 
+        this.element.parentNode.setAttribute('class', 'active')
+      }
+    }
     this.element.scrollIntoView(true);
   }
 }
