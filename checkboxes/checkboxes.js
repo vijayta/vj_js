@@ -1,19 +1,15 @@
 function Choice() {
-  this.selectedOption = document.getElementsByName('mainList');
   this.init();
 }
 
-Choice.prototype.userInput = function(element) {
-  for (var i = 0; i <= this.selectedOption.length; i++) {
-    
-    this.element = document.getElementById(element);
-    if (this.element.checked == false) {
-      this.element.parentNode.setAttribute('class', 'notActive');
-    }
-    else {
-      this.element.parentNode.setAttribute('class', 'active')
-      this.element.scrollIntoView(true);
-    }
+Choice.prototype.userInput = function(element) { 
+  this.element = document.getElementById(element);
+  if (this.element.checked == false) {
+    this.element.parentNode.setAttribute('class', 'notActive');
+  }
+  else {
+    this.element.parentNode.setAttribute('class', 'active')
+    this.element.scrollIntoView(true);
   }
 }
 
