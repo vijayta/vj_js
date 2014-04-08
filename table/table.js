@@ -5,10 +5,12 @@ function Table(){
 }
 
 Table.prototype.addCell = function (cellCount, value) {
+  this.val = value;
   this.cell = this.tableRow.insertCell(cellCount);
   this.element = document.createElement("input");
   this.element.type = 'text';
-  this.element.name = value + this.count;
+  this.element.id = this.val + this.count;
+  this.element.name = this.val + this.count;
   this.cell.appendChild(this.element);
 }
 
@@ -31,7 +33,8 @@ Table.prototype.addRow = function(contact) {
   var call0 = this.addCell(0, 'name');
   var call1 = this.addCell(1, 'email');
   var cell2 = this.actionCell(2, 'save', this.saveRow);
-  var cell3 = this.actionCell(3, 'delete', this.deleteRow);
+  var cell3 = this.actionCell(3, 'edit', this.editRow);
+  var cell4 = this.actionCell(4, 'delete', this.deleteRow);
 }
 
 Table.prototype.deleteRow = function(e){
@@ -52,25 +55,42 @@ var rows = document.getElementsByTagName('tr');
   for(var i = 0; i < rows.length; i++){
     rows[i].addEventListener('click', function() {      
       if(saveButton == this.id){
-        console.log(this.count);
+        this.firstCell = document.getElementById(this.id).childNodes[0];
+        this.secondCell = document.getElementById(this.id).childNodes[1];
+        this.fname = this.firstCell.firstChild.value;
+        this.email = this.secondCell.firstChild.value;
+        this.firstCell.innerHTML = this.fname;
+        this.secondCell.innerHTML = this.email;
+        e.parentNode.parentNode.childNodes[2].childNodes[0].setAttribute("style", "display:none;");
+        e.parentNode.parentNode.childNodes[3].childNodes[0].setAttribute("style", "display:block;");
       }
     });
   }
-
-  // var element = e.parentNode.parentNode.getElementsByTagName("td");
-  //   ect[0].innerHTML=ect[0].firstChild.value;
-  //   ect[1].innerHTML=ect[1].firstChild.value;
-  //   ect[2].setAttribute("style", "display:none;");
-  //   ect[3].setAttribute("style", "display:block;");
 }
 
-Table.prototype.isValidate = function() {
-  var textField = document.getElementsByTagName('input');
-  if ( textField.value == null || textField.value.trim() ) {
-    alert('Text field is empty');
+Table.prototype.editRow = function(e){
+var editButton = e.getAttribute('data-button');
+var rows = document.getElementsByTagName('tr');
+  for(var i = 0; i < rows.length; i++){
+    rows[i].addEventListener('click', function() {
+      if(editButton == this.id){
+        var fname = document.createElement("input");
+        fname.type = "text";
+        fname.value = this.fname;
+        var email = document.createElement("input");
+        email.type = "text";
+        email.value = this.fname;
+        this.firstCell.appendChild(fname);
+        this.secondCell.appendChild(email);
+
+        e.parentNode.parentNode.childNodes[3].childNodes[0].setAttribute("style", "display:none;");
+        e.parentNode.parentNode.childNodes[2].childNodes[0].setAttribute("style", "display:block;");
+      }
+    });
   }
 }
-Table.prototype.output = function() {
+
+Table.prototype.init = function() {
   var addRow = document.getElementById('addRow');
   addRow.addEventListener('click', function() {
     var table = new Table();
@@ -80,5 +100,5 @@ Table.prototype.output = function() {
 
 window.onload = function() {  
     var table = new Table();
-    table.output();
+    table.init();
 }
