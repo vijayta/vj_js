@@ -55,12 +55,12 @@ var rows = document.getElementsByTagName('tr');
   for(var i = 0; i < rows.length; i++){
     rows[i].addEventListener('click', function() {      
       if(saveButton == this.id){
-        this.firstCell = document.getElementById(this.id).childNodes[0];
-        this.secondCell = document.getElementById(this.id).childNodes[1];
-        this.fname = this.firstCell.firstChild.value;
-        this.email = this.secondCell.firstChild.value;
-        this.firstCell.innerHTML = this.fname;
-        this.secondCell.innerHTML = this.email;
+        var firstCell = document.getElementById(this.id).childNodes[0];
+        var secondCell = document.getElementById(this.id).childNodes[1];
+        var fname = firstCell.firstChild.value;
+        var email = secondCell.firstChild.value;
+        firstCell.innerHTML = fname;
+        secondCell.innerHTML = email;
         e.parentNode.parentNode.childNodes[2].childNodes[0].setAttribute("style", "display:none;");
         e.parentNode.parentNode.childNodes[3].childNodes[0].setAttribute("style", "display:block;");
       }
@@ -74,14 +74,22 @@ var rows = document.getElementsByTagName('tr');
   for(var i = 0; i < rows.length; i++){
     rows[i].addEventListener('click', function() {
       if(editButton == this.id){
-        var fname = document.createElement("input");
-        fname.type = "text";
-        fname.value = this.fname;
-        var email = document.createElement("input");
-        email.type = "text";
-        email.value = this.fname;
-        this.firstCell.appendChild(fname);
-        this.secondCell.appendChild(email);
+        var firstCell = document.getElementById(this.id).childNodes[0];
+        var secondCell = document.getElementById(this.id).childNodes[1];
+        this.fname = firstCell.value;
+        var email = secondCell.value;
+
+
+        var nameField = document.createElement("input");
+        nameField.type = "text";
+        nameField.setAttribute('value',this.fname);
+        var emailField = document.createElement("input");
+        emailField.type = "text";
+        emailField.value = emailField;
+        firstCell.appendChild(nameField);
+        // secondCell.appendChild(emailField);
+        
+  
 
         e.parentNode.parentNode.childNodes[3].childNodes[0].setAttribute("style", "display:none;");
         e.parentNode.parentNode.childNodes[2].childNodes[0].setAttribute("style", "display:block;");
