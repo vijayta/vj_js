@@ -11,9 +11,9 @@ Choice.prototype.userInput = function(element) {
         // this.selectOptions[i].parentNode.setAttribute('class', 'notActive');
         this.element.checked = true; 
         this.element.parentNode.setAttribute('class', 'active')
+        this.element.scrollIntoView(true);
       }
     }
-    this.element.scrollIntoView(true);
   }
   else {
     this.element.parentNode.setAttribute('class', 'notActive')
