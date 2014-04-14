@@ -5,13 +5,13 @@
 <title>Javascript Excercises</title>
 <style type="text/css">
 ul{ margin: 0; padding: 0; }
-ul li{ padding: 2px 10px; font-family: arial; font-size: 14px; list-style-type: none; position: relative; text-transform: capitalize;}
+ul li{ padding: 2px 10px; font-family: arial; font-size: 14px; list-style-type: none; position: relative; text-transform: capitalize; z-index: 0; }
 ul ul li{ border-bottom: 1px solid #ccc;}
-.sub{ display: none; position: absolute; left: 100px; border: 1px solid #ccc; top: 0; width: 120px; }
+.sub{ display: none; position: absolute; left: 100px; border: 1px solid #ccc; top: 0; width: 120px; z-index: 999; }
 .outer{ overflow-y: scroll; width: 222px; position: relative;}
 .notActive ul{display: none; }
 .active ul{display: block; background: #ddd;}
-.active{ background: #ddd; }
+.active{ background: #ddd; z-index: 9;}
 </style>
 </head>
 <body>
