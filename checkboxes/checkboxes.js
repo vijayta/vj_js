@@ -8,7 +8,7 @@ Choice.prototype.userInput = function(element) {
   if (this.element.checked) {
     for (var i = 0; i < 4; i++) {
       if (this.selectOptions[i].checked) {
-        this.selectOptions[i].parentNode.setAttribute('class', 'notActive');
+        // this.selectOptions[i].parentNode.setAttribute('class', 'notActive');
         this.element.checked = true; 
         this.element.parentNode.setAttribute('class', 'active')
       }
