@@ -76,6 +76,7 @@ var rows = document.getElementsByTagName('tr');
       if(editButton == this.id){
         var firstCell = document.getElementById(this.id).childNodes[0];
         var secondCell = document.getElementById(this.id).childNodes[1];
+        alert("first cell value = " + firstCell.text)
         this.fname = firstCell.value;
         var email = secondCell.value;
 
