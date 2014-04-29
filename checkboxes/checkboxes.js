@@ -10,9 +10,16 @@ Choice.prototype.userInput = function(element) {
       if (this.selectOptions[i].checked) {
         this.element.checked = true; 
         this.element.parentNode.setAttribute('class', 'active');
-        var list = document.getElementsByName('list');
-        for(var x = 0; x < list.length; x++){
-          list[x].checked = true;  
+        var parentElmnt = (this.element.parentNode.getAttribute('class'));
+        var subList = this.element.parentNode.getElementsByTagName('ul')[0].getElementsByTagName('input');
+
+        if(parentElmnt == 'active'){
+          for(var x = 0; x < subList.length; x++){
+            subList[x].checked = true;
+          }  
+        }
+        else{
+          subList[x].checked = false;
         }
       }
     }

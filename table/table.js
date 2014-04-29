@@ -55,12 +55,12 @@ var rows = document.getElementsByTagName('tr');
   for(var i = 0; i < rows.length; i++){
     rows[i].addEventListener('click', function() {      
       if(saveButton == this.id){
-        var firstCell = document.getElementById(this.id).childNodes[0];
-        var secondCell = document.getElementById(this.id).childNodes[1];
-        var fname = firstCell.firstChild.value;
-        var email = secondCell.firstChild.value;
-        firstCell.innerHTML = fname;
-        secondCell.innerHTML = email;
+        this.firstCell = document.getElementById(this.id).childNodes[0];
+        this.secondCell = document.getElementById(this.id).childNodes[1];
+        var fname = this.firstCell.firstChild.value;
+        var email = this.secondCell.firstChild.value;
+        this.firstCell.innerHTML = fname;
+        this.secondCell.innerHTML = email;
         e.parentNode.parentNode.childNodes[2].childNodes[0].setAttribute("style", "display:none;");
         e.parentNode.parentNode.childNodes[3].childNodes[0].setAttribute("style", "display:block;");
       }
@@ -76,10 +76,11 @@ var rows = document.getElementsByTagName('tr');
       if(editButton == this.id){
         var firstCell = document.getElementById(this.id).childNodes[0];
         var secondCell = document.getElementById(this.id).childNodes[1];
-        alert("first cell value = " + firstCell.text)
+        // alert(document.getElementById(this.id).id);
+        alert("first cell value = " + firstCell.id)
+        alert("second cell value = " + secondCell.id)
         this.fname = firstCell.value;
         var email = secondCell.value;
-
 
         var nameField = document.createElement("input");
         nameField.type = "text";
