@@ -12,20 +12,22 @@ Choice.prototype.userInput = function(element) {
         this.element.parentNode.setAttribute('class', 'active');
         var parentElmnt = (this.element.parentNode.getAttribute('class'));
         var subList = this.element.parentNode.getElementsByTagName('ul')[0].getElementsByTagName('input');
-
         if(parentElmnt == 'active'){
           for(var x = 0; x < subList.length; x++){
             subList[x].checked = true;
           }  
+          this.element.parentNode.getElementsByTagName('ul')[0].style.display = "block";
         }
         else{
           subList[x].checked = false;
+          this.element.parentNode.getElementsByTagName('ul')[0].style.display = "none";
         }
       }
     }
   }
   else {
     this.element.parentNode.setAttribute('class', 'notActive');
+    this.element.parentNode.getElementsByTagName('ul')[0].style.display = "none";
   }
 }
 
