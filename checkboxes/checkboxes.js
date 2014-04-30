@@ -20,7 +20,6 @@ Choice.prototype.userInput = function(element) {
         }
         else{
           subList[x].checked = false;
-          this.element.parentNode.getElementsByTagName('ul')[0].style.display = "none";
         }
       }
     }
