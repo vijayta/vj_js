@@ -7,15 +7,20 @@ function Table(){
 Table.prototype.addCell = function (cellCount, value) {
   this.val = value;
   this.cell = this.tableRow.insertCell(cellCount);
+  this.cell.setAttribute('cell-name', 'cell' + cellCount);
   this.element = document.createElement("input");
   this.element.type = 'text';
   this.element.id = this.val + this.count;
   this.element.name = this.val + this.count;
+  this.span = document.createElement('span');
+  this.span.setAttribute('span-data',this.val + this.count)
   this.cell.appendChild(this.element);
+  this.cell.appendChild(this.span);
 }
 
 Table.prototype.actionCell = function (cellCount, value, action) {
   this.cell = this.tableRow.insertCell(cellCount);
+  this.cell.setAttribute('class', value);
   this.element = document.createElement('a');
   this.element.id = value + this.count;
   this.element.href = '#'
@@ -33,7 +38,7 @@ Table.prototype.addRow = function(contact) {
   var call0 = this.addCell(0, 'name');
   var call1 = this.addCell(1, 'email');
   var cell2 = this.actionCell(2, 'save', this.saveRow);
-  var cell3 = this.actionCell(3, 'edit', this.editRow);
+  var cell2 = this.actionCell(2, 'edit', this.editRow);
   var cell4 = this.actionCell(4, 'delete', this.deleteRow);
 }
 
@@ -55,14 +60,20 @@ var rows = document.getElementsByTagName('tr');
   for(var i = 0; i < rows.length; i++){
     rows[i].addEventListener('click', function() {      
       if(saveButton == this.id){
-        this.firstCell = document.getElementById(this.id).childNodes[0];
-        this.secondCell = document.getElementById(this.id).childNodes[1];
-        var fname = this.firstCell.firstChild.value;
-        var email = this.secondCell.firstChild.value;
-        this.firstCell.innerHTML = fname;
-        this.secondCell.innerHTML = email;
-        e.parentNode.parentNode.childNodes[2].childNodes[0].setAttribute("style", "display:none;");
-        e.parentNode.parentNode.childNodes[3].childNodes[0].setAttribute("style", "display:block;");
+
+        this.firstCell = document.getElementById(this.id).getElementsByTagName('td')[0];
+        this.secondCell = document.getElementById(this.id).getElementsByTagName('td')[1];
+        // this.secondCell = document.getElementById(this.id).childNodes[1];
+        // var fname = this.firstCell.firstChild.value;
+        // var email = this.secondCell.firstChild.value;
+        console.log('first cell = ' + this.firstCell.value + ' second Cell = '  +  this.secondCell.value)
+        // this.firstCell.innerHTML = fname;
+        // this.secondCell.innerHTML = email;
+        
+
+        // e.parentNode.setAttribute('class', 'hide');
+        
+        // e.parentNode.parentNode.setAttribute("class", "show");
       }
     });
   }
@@ -74,25 +85,14 @@ var rows = document.getElementsByTagName('tr');
   for(var i = 0; i < rows.length; i++){
     rows[i].addEventListener('click', function() {
       if(editButton == this.id){
+        console.log(editButton);
         var firstCell = document.getElementById(this.id).childNodes[0];
         var secondCell = document.getElementById(this.id).childNodes[1];
-        // alert(document.getElementById(this.id).id);
-        alert("first cell value = " + firstCell.id)
-        alert("second cell value = " + secondCell.id)
-        this.fname = firstCell.value;
-        var email = secondCell.value;
 
-        var nameField = document.createElement("input");
-        nameField.type = "text";
-        nameField.setAttribute('value',this.fname);
-        var emailField = document.createElement("input");
-        emailField.type = "text";
-        emailField.value = emailField;
-        firstCell.appendChild(nameField);
-        // secondCell.appendChild(emailField);
+        this.fname = firstCell.innerText;
+       
         
   
-
         e.parentNode.parentNode.childNodes[3].childNodes[0].setAttribute("style", "display:none;");
         e.parentNode.parentNode.childNodes[2].childNodes[0].setAttribute("style", "display:block;");
       }

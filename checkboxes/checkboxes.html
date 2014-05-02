@@ -11,7 +11,7 @@ ul ul li{ border-bottom: 1px solid #ccc;}
 .sub{ display: none; border: 1px solid #ccc; z-index: 999; }
 .outer{ overflow-y: scroll; width: 250px; position: relative;}
 /*.notActive ul{display: none; }*/
-.active ul{ background: #ddd;}
+.active ul{ background: #ddd; display: block;}
 .active{ background: #ddd; z-index: 9;}
 ul li:nth-child(2) ul{ background: #ccc; }
 ul li:nth-child(3) ul{ background: #bbb; }
@@ -19,36 +19,36 @@ ul li:nth-child(4) ul{ background: #eee; }
 </style>
 </head>
 <body>
-<form method="post" name="list" id="list">
+<form method="post"  id="list">
   <ul class="outer" id = "user_choice">
     <li id="first">
-      <input type="checkbox" name="mainList" id = "item0"> <label for = "item0">color</label>
-      <ul class="sub" id="color">
-        <li><input type="checkbox" name="list" id="red"> <label for="red">red</label></li>
-        <li><input type="checkbox" name="list" id="green"><label for="green">green</label></li>
-        <li><input type="checkbox" name="list" id="yellow"><label for="yellow">yellow</lable></li>
-        <li><input type="checkbox" name="list" id="blue"><label for="blue">blue</lable></li>
+      <input type="checkbox" name="mainList" id = "color" data-type="color"> <label for = "color">color</label>
+      <ul class="sub">
+        <li><input type="checkbox"  id="red"  data-type="color"> <label for="red">red</label></li>
+        <li><input type="checkbox"  id="green"  data-type="color"><label for="green">green</label></li>
+        <li><input type="checkbox"  id="yellow"  data-type="color"><label for="yellow">yellow</lable></li>
+        <li><input type="checkbox"  id="blue"  data-type="color"><label for="blue">blue</lable></li>
       </ul>  
     </li>
-   <li id="second"><input type="checkbox" name="mainList" id = "item1"> <label for="item1">movies</label>
-      <ul class="sub" id="movie">
-        <li><input type="checkbox" name="list" id="darr"><label for="darr">Darr</label></li>
-        <li><input type="checkbox" name="list" id="sir"><label for="sir">Sir</lable></li>
+   <li id="second"><input type="checkbox" name="mainList" id = "movie"  data-type="movie"> <label for="movie">movies</label>
+      <ul class="sub">
+        <li><input type="checkbox"  id="darr"  data-type="movie"><label for="darr">Darr</label></li>
+        <li><input type="checkbox"  id="sir" data-type="movie"><label for="sir">Sir</lable></li>
       </ul>  
     </li>
    <li id="third">
-     <input type="checkbox" id = "item2" name="mainList"> <label for="item2">drinks</label>
-      <ul class="sub" id="drinks">
-        <li><input type="checkbox" id="coke" name="list"><label for="coke">coke</label></li>
-        <li><input type="checkbox" id="pepsi" name="list"><label for="pepsi">pepsi</label></li>
-        <li><input type="checkbox" id="dew" name="list"><label for="dew">dew</label></li>
+     <input type="checkbox" id = "drink" name="mainList" data-type="drink"> <label for="drink">drinks</label>
+      <ul class="sub">
+        <li><input type="checkbox" id="coke"  data-type="drink"><label for="coke">coke</label></li>
+        <li><input type="checkbox" id="pepsi"  data-type="drink"><label for="pepsi">pepsi</label></li>
+        <li><input type="checkbox" id="dew"  data-type="drink"><label for="dew">dew</label></li>
       </ul>  
     </li>
-    <li id="fourth"><input type="checkbox" id = "item3" name="mainList"> <label for="item3">bikes </label>
-      <ul class="sub" id="bikes">
-        <li><input type="checkbox" id="vrod" name="list"><label for="vrod">V-rod</label></li>
-        <li><input type="checkbox" id="pulser" name="list"><label for="pulser">pulser</label></li>
-        <li><input type="checkbox" id="cbz" name="list"><label for="cbz">cbz</label></li>
+    <li id="fourth"><input type="checkbox" id = "bike" name="mainList" data-type="bike"> <label for="movie">bikes </label>
+      <ul class="sub">
+        <li><input type="checkbox" id="vrod"  data-type="bike"><label for="vrod">V-rod</label></li>
+        <li><input type="checkbox" id="pulser"  data-type="bike"><label for="pulser">pulser</label></li>
+        <li><input type="checkbox" id="cbz"  data-type="bike"><label for="cbz">cbz</label></li>
       </ul>  
     </li>
   </ul>  

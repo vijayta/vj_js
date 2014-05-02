@@ -1,32 +1,24 @@
 function Choice() {
-  this.selectOptions = document.getElementsByName('mainList');
+  this.list = document.getElementsByTagName('input');
   this.init();
 }
 
 Choice.prototype.userInput = function(element) { 
   this.element = document.getElementById(element);
-  if (this.element.checked) {
-    for (var i = 0; i < 4; i++) {
-      if (this.selectOptions[i].checked) {
-        this.element.checked = true; 
-        this.element.parentNode.setAttribute('class', 'active');
-        var parentElmnt = (this.element.parentNode.getAttribute('class'));
-        var subList = this.element.parentNode.getElementsByTagName('ul')[0].getElementsByTagName('input');
-        if(parentElmnt == 'active'){
-          for(var x = 0; x < subList.length; x++){
-            subList[x].checked = true;
-          }  
-          this.element.parentNode.getElementsByTagName('ul')[0].style.display = "block";
-        }
-        else{
-          subList[x].checked = false;
-        }
+  for(var i = 0; i < this.list.length; i++){
+    var checkItem = this.list[i].getAttribute('data-type');
+    if(this.element.checked){
+      this.element.parentNode.setAttribute('class', 'active');
+      if (checkItem == this.element.getAttribute('data-type')) {
+        this.list[i].checked = true;
+      }
+      else{
+        this.list[i].checked = false
       }
     }
-  }
-  else {
-    this.element.parentNode.setAttribute('class', 'notActive');
-    this.element.parentNode.getElementsByTagName('ul')[0].style.display = "none";
+    else{
+      this.element.parentNode.setAttribute('class', 'notActive');
+    }
   }
 }
 
