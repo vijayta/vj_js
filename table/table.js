@@ -11,9 +11,9 @@ Table.prototype.addCell = function (cellCount, value) {
   this.element = document.createElement("input");
   this.element.type = 'text';
   this.element.id = this.val + this.count;
-  this.element.name = this.val + this.count;
+  this.element.name = this.val;
   this.span = document.createElement('span');
-  this.span.setAttribute('span-data',this.val + this.count)
+  this.span.setAttribute('name',this.val)
   this.cell.appendChild(this.element);
   this.cell.appendChild(this.span);
 }
@@ -56,24 +56,22 @@ Table.prototype.deleteRow = function(e){
 
 Table.prototype.saveRow = function(e){
 var saveButton = e.getAttribute('data-button');
-var rows = document.getElementsByTagName('tr');
-  for(var i = 0; i < rows.length; i++){
+this.rows = document.getElementsByTagName('tr');
+  for(var i = 0; i < this.rows.length; i++){
     rows[i].addEventListener('click', function() {      
       if(saveButton == this.id){
+        document.getElementById(this.id).getElementsByClassName('edit')[0].style.display = 'table-cell';
+        document.getElementById(this.id).getElementsByClassName('save')[0].style.display = 'none';
+        this.name = document.getElementById(this.id).getElementsByTagName('input');
+        this.text = document.getElementById(this.id).getElementsByTagName('span');
+        this.text[0].innerHTML = this.name[0].value;
+        this.name[0].style.display = "none";
+        this.text[0].style.display = "block"; 
+        this.text[1].innerHTML = this.name[1].value;
+        this.name[1].style.display = "none";
+        this.text[1].style.display = "block"; 
 
-        this.firstCell = document.getElementById(this.id).getElementsByTagName('td')[0];
-        this.secondCell = document.getElementById(this.id).getElementsByTagName('td')[1];
-        // this.secondCell = document.getElementById(this.id).childNodes[1];
-        // var fname = this.firstCell.firstChild.value;
-        // var email = this.secondCell.firstChild.value;
-        console.log('first cell = ' + this.firstCell.value + ' second Cell = '  +  this.secondCell.value)
-        // this.firstCell.innerHTML = fname;
-        // this.secondCell.innerHTML = email;
-        
 
-        // e.parentNode.setAttribute('class', 'hide');
-        
-        // e.parentNode.parentNode.setAttribute("class", "show");
       }
     });
   }
@@ -81,20 +79,17 @@ var rows = document.getElementsByTagName('tr');
 
 Table.prototype.editRow = function(e){
 var editButton = e.getAttribute('data-button');
-var rows = document.getElementsByTagName('tr');
-  for(var i = 0; i < rows.length; i++){
-    rows[i].addEventListener('click', function() {
+  for(var i = 0; i < this.rows.length; i++){
+    rows[i].addEventListener('click', function() {      
       if(editButton == this.id){
-        console.log(editButton);
-        var firstCell = document.getElementById(this.id).childNodes[0];
-        var secondCell = document.getElementById(this.id).childNodes[1];
-
-        this.fname = firstCell.innerText;
-       
-        
-  
-        e.parentNode.parentNode.childNodes[3].childNodes[0].setAttribute("style", "display:none;");
-        e.parentNode.parentNode.childNodes[2].childNodes[0].setAttribute("style", "display:block;");
+        this.text[0].innerHTML = this.name[0].value;
+        this.name[0].style.display = "block";
+        this.text[0].style.display = "none"; 
+        this.text[1].innerHTML = this.name[1].value;
+        this.name[1].style.display = "block";
+        this.text[1].style.display = "none"; 
+        document.getElementById(this.id).getElementsByClassName('edit')[0].style.display = 'none';    
+        document.getElementById(this.id).getElementsByClassName('save')[0].style.display = 'table-cell';
       }
     });
   }
