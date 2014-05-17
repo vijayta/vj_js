@@ -1,7 +1,9 @@
+var rowCounter = 1; 
 function Table(){
   this.table = document.getElementById('contact');
   this.rowCount = this.table.rows.length;
-  this.count = this.rowCount;
+  // this.count = this.rowCount;
+  this.count = rowCounter; 
 }
 
 Table.prototype.addCell = function (cellCount, value) {
@@ -40,6 +42,7 @@ Table.prototype.addRow = function(contact) {
   var cell2 = this.actionCell(2, 'save', this.saveRow);
   var cell2 = this.actionCell(2, 'edit', this.editRow);
   var cell4 = this.actionCell(4, 'delete', this.deleteRow);
+  rowCounter++; 
 }
 
 Table.prototype.deleteRow = function(e){
