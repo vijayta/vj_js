@@ -19,40 +19,40 @@ ul li:nth-child(4) ul{ background: #eee; }
 </style>
 </head>
 <body>
-<form method="post"  id="list">
+<form method="post" name="list" id="list">
   <ul class="outer" id = "user_choice">
     <li id="first">
-      <input type="checkbox" id = "color" data-type="color"> <label for = "color">color</label>
+      <input type="checkbox" name="mainList" id = "color" data-type="color"> <label for = "color">color</label>
       <ul class="sub">
-        <li><input type="checkbox"  id="red"  data-type="color"> <label for="red">red</label></li>
-        <li><input type="checkbox"  id="green"  data-type="color"><label for="green">green</label></li>
-        <li><input type="checkbox"  id="yellow"  data-type="color"><label for="yellow">yellow</lable></li>
-        <li><input type="checkbox"  id="blue"  data-type="color"><label for="blue">blue</lable></li>
+        <li><input type="checkbox" name="list" id="red"  data-type="color"> <label for="red">red</label></li>
+        <li><input type="checkbox" name="list" id="green"  data-type="color"><label for="green">green</label></li>
+        <li><input type="checkbox" name="list" id="yellow"  data-type="color"><label for="yellow">yellow</lable></li>
+        <li><input type="checkbox" name="list" id="blue"  data-type="color"><label for="blue">blue</lable></li>
       </ul>  
     </li>
-   <li id="second"><input type="checkbox" id = "movie"  data-type="movie"> <label for="movie">movies</label>
+   <li id="second"><input type="checkbox" name="mainList" id = "movie"  data-type="movie"> <label for="movie">movies</label>
       <ul class="sub">
-        <li><input type="checkbox"  id="darr"  data-type="movie"><label for="darr">Darr</label></li>
-        <li><input type="checkbox"  id="sir" data-type="movie"><label for="sir">Sir</lable></li>
+        <li><input type="checkbox" name="list" id="darr"  data-type="movie"><label for="darr">Darr</label></li>
+        <li><input type="checkbox" name="list" id="sir" data-type="movie"><label for="sir">Sir</lable></li>
       </ul>  
     </li>
    <li id="third">
-     <input type="checkbox" id = "drink" data-type="drink"> <label for="drink">drinks</label>
+     <input type="checkbox" id = "drink" name="mainList" data-type="drink"> <label for="drink">drinks</label>
       <ul class="sub">
-        <li><input type="checkbox" id="coke"  data-type="drink"><label for="coke">coke</label></li>
-        <li><input type="checkbox" id="pepsi"  data-type="drink"><label for="pepsi">pepsi</label></li>
-        <li><input type="checkbox" id="dew"  data-type="drink"><label for="dew">dew</label></li>
+        <li><input type="checkbox" id="coke" name="list" data-type="drink"><label for="coke">coke</label></li>
+        <li><input type="checkbox" id="pepsi" name="list" data-type="drink"><label for="pepsi">pepsi</label></li>
+        <li><input type="checkbox" id="dew" name="list" data-type="drink"><label for="dew">dew</label></li>
       </ul>  
     </li>
-    <li id="fourth"><input type="checkbox" id = "bike" data-type="bike"> <label for="movie">bikes </label>
+    <li id="fourth"><input type="checkbox" id = "bike" name="mainList" data-type="bike"> <label for="bike">bikes </label>
       <ul class="sub">
-        <li><input type="checkbox" id="vrod"  data-type="bike"><label for="vrod">V-rod</label></li>
-        <li><input type="checkbox" id="pulser"  data-type="bike"><label for="pulser">pulser</label></li>
-        <li><input type="checkbox" id="cbz"  data-type="bike"><label for="cbz">cbz</label></li>
+        <li><input type="checkbox" id="vrod" name="list" data-type="bike"><label for="vrod">V-rod</label></li>
+        <li><input type="checkbox" id="pulser" name="list" data-type="bike"><label for="pulser">pulser</label></li>
+        <li><input type="checkbox" id="cbz" name="list" data-type="bike"><label for="cbz">cbz</label></li>
       </ul>  
     </li>
   </ul>  
   </form>
-<script src="checkboxes.js" type="text/javascript"></script>	
+<script src="checkboxes.js" type="text/javascript"></script>  
 </body>
 </html>
