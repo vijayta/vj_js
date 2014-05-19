@@ -9,19 +9,21 @@ Choice.prototype.userInput = function(element) {
     var checkItem = this.list[i].getAttribute('data-type');
     if(this.element.checked){
       this.element.parentNode.setAttribute('class', 'active');
-      if (checkItem == this.element.getAttribute('data-type')) {
-        this.list[i].checked = true;
+      if (checkItem == this.element) {
+        // console.log(checkItem);
+        checkItem.checked = true;
       }
       else{
-        this.list[i].checked = false
+        checkItem.checked = false
+        console.log(checkItem == this.element);
       }
     }
     else{
       this.element.parentNode.setAttribute('class', 'notActive');
-      this.list[i].checked = false
     }
   }
 }
+
 
 Choice.prototype.init = function() {
   var that = this;

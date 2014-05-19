@@ -3,7 +3,20 @@
 <head>
 <meta charset="utf-8">
 <title>Javascript Excercises</title>
-<link rel="stylesheet" type="text/css" href="style.css" />
+<style type="text/css">
+ul{ margin: 0; padding: 0; }
+#user_choice{ height: 130px; }
+ul li{ padding: 2px 10px; font-family: arial; font-size: 14px; list-style-type: none; position: relative; text-transform: capitalize; z-index: 0; }
+ul ul li{ border-bottom: 1px solid #ccc;}
+.sub{ display: none; border: 1px solid #ccc; z-index: 999; }
+.outer{ overflow-y: scroll; width: 250px; position: relative;}
+/*.notActive ul{display: none; }*/
+.active ul{ background: #ddd; display: block;}
+.active{ background: #ddd; z-index: 9;}
+ul li:nth-child(2) ul{ background: #ccc; }
+ul li:nth-child(3) ul{ background: #bbb; }
+ul li:nth-child(4) ul{ background: #eee; }
+</style>
 </head>
 <body>
 <form method="post" name="list" id="list">
@@ -40,6 +53,6 @@
     </li>
   </ul>  
   </form>
-<script src="checkboxes.js" type="text/javascript"></script>  
+<script src="checkboxes.js" type="text/javascript"></script>	
 </body>
 </html>
