@@ -18,6 +18,7 @@ Choice.prototype.userInput = function(element) {
     }
     else{
       this.element.parentNode.setAttribute('class', 'notActive');
+       this.list[i].checked = false
     }
   }
 }

@@ -1,8 +1,8 @@
 var rowCounter = 1; 
+var that = this;
 function Table(){
   this.table = document.getElementById('contact');
   this.rowCount = this.table.rows.length;
-  // this.count = this.rowCount;
   this.count = rowCounter; 
 }
 
@@ -21,12 +21,14 @@ Table.prototype.addCell = function (cellCount, value) {
 }
 
 Table.prototype.actionCell = function (cellCount, value, action) {
+  this.value = value;
   this.cell = this.tableRow.insertCell(cellCount);
   this.cell.setAttribute('class', value);
   this.element = document.createElement('a');
-  this.element.id = value + this.count;
+  this.element.id = this.value + this.count;
   this.element.href = '#'
-  this.element.text =  value;
+  this.element.text =  this.value;
+  this.element.name =  this.value;
   this.element.setAttribute('data-button', 'row' + this.count)
   this.cell.appendChild(this.element);
   this.element.addEventListener('click' , function() {
@@ -58,41 +60,40 @@ Table.prototype.deleteRow = function(e){
 }
 
 Table.prototype.saveRow = function(e){
-var saveButton = e.getAttribute('data-button');
+that.button = e.getAttribute('data-button');
 this.rows = document.getElementsByTagName('tr');
   for(var i = 0; i < this.rows.length; i++){
-    rows[i].addEventListener('click', function() {      
-      if(saveButton == this.id){
-        document.getElementById(this.id).getElementsByClassName('edit')[0].style.display = 'table-cell';
-        document.getElementById(this.id).getElementsByClassName('save')[0].style.display = 'none';
-        this.name = document.getElementById(this.id).getElementsByTagName('input');
-        this.text = document.getElementById(this.id).getElementsByTagName('span');
+    this.rows[i].addEventListener('click', function() {      
+      this.edit = document.getElementById(this.id).getElementsByClassName('edit')[0];
+      this.save = document.getElementById(this.id).getElementsByClassName('save')[0]; 
+      this.name = document.getElementById(this.id).getElementsByTagName('input');
+      this.text = document.getElementById(this.id).getElementsByTagName('span');     
+      if(that.button == this.id){
+        this.edit.style.display = 'table-cell';
+        this.save.style.display = 'none';
         this.text[0].innerHTML = this.name[0].value;
         this.name[0].style.display = "none";
         this.text[0].style.display = "block"; 
         this.text[1].innerHTML = this.name[1].value;
         this.name[1].style.display = "none";
         this.text[1].style.display = "block"; 
-
-
       }
     });
   }
 }
 
 Table.prototype.editRow = function(e){
-var editButton = e.getAttribute('data-button');
   for(var i = 0; i < this.rows.length; i++){
-    rows[i].addEventListener('click', function() {      
-      if(editButton == this.id){
+    this.rows[i].addEventListener('click', function() {      
+      if(that.button == this.id){
         this.text[0].innerHTML = this.name[0].value;
         this.name[0].style.display = "block";
         this.text[0].style.display = "none"; 
         this.text[1].innerHTML = this.name[1].value;
         this.name[1].style.display = "block";
         this.text[1].style.display = "none"; 
-        document.getElementById(this.id).getElementsByClassName('edit')[0].style.display = 'none';    
-        document.getElementById(this.id).getElementsByClassName('save')[0].style.display = 'table-cell';
+        this.edit.style.display = 'none';    
+        this.save.style.display = 'table-cell';
       }
     });
   }
