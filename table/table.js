@@ -1,12 +1,12 @@
 var rowCounter = 1; 
 var that = this;
-function Table(){
+function TableRow(){
   this.table = document.getElementById('contact');
   this.rowCount = this.table.rows.length;
   this.count = rowCounter; 
 }
 
-Table.prototype.addCell = function (cellCount, value) {
+TableRow.prototype.addCell = function (cellCount, value) {
   this.val = value;
   this.cell = this.tableRow.insertCell(cellCount);
   this.cell.setAttribute('cell-name', 'cell' + cellCount);
@@ -20,7 +20,7 @@ Table.prototype.addCell = function (cellCount, value) {
   this.cell.appendChild(this.span);
 }
 
-Table.prototype.actionCell = function (cellCount, value, action) {
+TableRow.prototype.actionCell = function (cellCount, value, action) {
   this.value = value;
   this.cell = this.tableRow.insertCell(cellCount);
   this.cell.setAttribute('class', value);
@@ -36,7 +36,7 @@ Table.prototype.actionCell = function (cellCount, value, action) {
   })
 }
 
-Table.prototype.addRow = function(contact) {
+TableRow.prototype.addRow = function(contact) {
   this.tableRow = this.table.insertRow(this.rowCount);
   this.tableRow.setAttribute('id', 'row' + this.count); 
   var call0 = this.addCell(0, 'name');
@@ -47,7 +47,7 @@ Table.prototype.addRow = function(contact) {
   rowCounter++; 
 }
 
-Table.prototype.deleteRow = function(e){
+TableRow.prototype.deleteRow = function(e){
   var removeButton = e.getAttribute('data-button');
   var rows = document.getElementsByTagName('tr');
   for(var i = 0; i < rows.length; i++){
@@ -59,7 +59,7 @@ Table.prototype.deleteRow = function(e){
   }
 }
 
-Table.prototype.saveRow = function(e){
+TableRow.prototype.saveRow = function(e){
 that.button = e.getAttribute('data-button');
 this.rows = document.getElementsByTagName('tr');
   for(var i = 0; i < this.rows.length; i++){
@@ -82,7 +82,7 @@ this.rows = document.getElementsByTagName('tr');
   }
 }
 
-Table.prototype.editRow = function(e){
+TableRow.prototype.editRow = function(e){
   for(var i = 0; i < this.rows.length; i++){
     this.rows[i].addEventListener('click', function() {      
       if(that.button == this.id){
@@ -99,15 +99,15 @@ Table.prototype.editRow = function(e){
   }
 }
 
-Table.prototype.init = function() {
+TableRow.prototype.init = function() {
   var addRow = document.getElementById('addRow');
   addRow.addEventListener('click', function() {
-    var table = new Table();
+    var table = new TableRow();
     table.addRow('contact');
   });
 }
 
 window.onload = function() {  
-    var table = new Table();
-    table.init();
+    var row = new TableRow();
+    row.init();
 }
