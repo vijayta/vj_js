@@ -13,12 +13,12 @@ Choice.prototype.userInput = function(element) {
         this.list[i].checked = true;
       }
       else{
-        this.list[i].checked = false
+        this.list[i].checked = false;
       }
     }
     else{
       this.element.parentNode.setAttribute('class', 'notActive');
-       this.list[i].checked = false
+       this.list[i].checked = false;
     }
   }
 }
