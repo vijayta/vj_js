@@ -1,77 +1,103 @@
-function AutoComplete(){
-  this.jsonData = { "name" : 
-    [
-      "Luigi Damiano",
-      "Zenith Coboro",
-      "Zig Ziglar",
-      "Steve Costner",
-      "Bill Grazer",
-      "Timothy Frazer",
-      "Boris Becker",
-      "Glenn Gladwich",
-      "Jim Jackson",
-      "Aaron Kabin",
-      "Roy Goldwin",
-      "Jason Goldberg",
-      "Tim Ferris",
-      "Buck Singham",
-      "Malcom Gladwell",
-      "Joy Rabura",
-      "Vid Luther",
-      "Tom Glicken",
-      "Ray Baxter",
-      "Ari Kama",
-      "Kenichi Suzuki",
-      "Rick Olson"
-    ]
-  };
-  this.init();
+var clickCount = 1;
+function Quiz(){
+  this.submit = document.getElementById('submit'); 
+  this.getQue = document.getElementById('get_que');
+  this.Question = Question;
 }
-
-AutoComplete.prototype.complete = function(obj, keyevent) {
-  var element = (obj.setSelectionRange) ? keyevent.which : keyevent.keyCode;
-  var userText = obj.value.replace(/;/gi, ",");
-  element = userText.split(",");
-  userText = element.pop();
-  userText = userText.replace(/^\s*/, "");
-
-  if (obj.createTextRange) {
-    var range = document.selection.createRange();
-    if (range.parentElement() == obj) {
-        element = range.text;
-        var ini = obj.value.lastIndexOf(element);
-    }
-  } 
-  else if (obj.setSelectionRange) {
-    var ini = obj.selectionStart;
-  }
-
-  for (var i = 0; i < this.jsonData.name.length; i++) {
-    element = this.jsonData.name[i].toString();
-    if (element.toLowerCase().indexOf(userText.toLowerCase()) == 0) {
-      obj.value += element.substring(userText.length, element.length);
+function Question(){
+  this.firstField = document.getElementById('value01');
+  this.secondField = document.getElementById('value02');
+  this.optField = document.getElementById('operator');
+  this.reply = document.getElementById('reply');  
+  this.expectedAnswer = document.getElementById('expected_answer');
+  this.score = document.getElementById('score');
+  this.marks = 0;
+}
+Question.prototype.setValue = function(){
+  this.firstField.value = Math.floor((Math.random() * 20) + 1);
+  this.secondField.value = Math.floor((Math.random() * 20) + 1);
+}
+Question.prototype.setOperator = function() {
+  var operators = ['+','-','*','/'];
+  setOpt = operators[Math.floor(Math.random()*4)];
+  this.optField.value = setOpt;
+}
+Question.prototype.calculation = function() {
+  var first = this.firstField.value;
+  var sec = this.secondField.value
+  switch(this.optField.value){
+    case('+'): 
+      this.ans = parseFloat(first) + parseFloat(sec);
+      return this.ans;
       break;
+    
+    case('-'):
+      this.ans = parseFloat(first) - parseFloat(sec);
+      return this.ans;
+      break;
+    
+    case('/'):
+      this.ans = parseFloat(first) / parseFloat(sec);
+      return this.ans;
+      break;
+    
+    default:
+      this.ans = parseFloat(first) * parseFloat(sec);
+      return this.ans;
     }
-  }
-  if (obj.createTextRange) {
-    range = obj.createTextRange();
-    range.moveStart("character", ini);
-    range.moveEnd("character", obj.value.length);
-    range.select();
-  }
-  else if (obj.setSelectionRange) {
-    obj.setSelectionRange(ini, obj.value.length);
-  }
+}
+Question.prototype.getAllValues = function() {
+  this.firstField = this.firstField.value;
+  this.opt = this.optField.value;
+  this.secondField = this.secondField.value;
+  alert(this.firstField + " " + this.opt + " " + this.secondField + " = " + this.reply.value );
+  this.expectedAnswer.value = this.ans;
 }
 
-AutoComplete.prototype.init = function() {
-  var name = document.getElementById('name');
-  name.addEventListener('keyup', function() {
-    var autoComplete = new AutoComplete();
-    autoComplete.complete(this, 'keydown');
+Question.prototype.result = function(){
+  if(this.ans == this.reply.value){
+    alert('Correct Answer');
+    this.marks = this.marks + 10;
+    alert(this.marks);
+    this.score.innerHTML = this.marks;
+  }
+  else{
+    alert('Sorry Wrong answer');
+    this.marks = this.marks;
+    this.score.innerHTML = this.marks;
+  }
+}
+Quiz.prototype.init = function() {
+  var question = new Question();
+  var this_obj = this;
+  this.submit.addEventListener('click', function(event) {
+    event.preventDefault();
+    document.getElementById('question_count').innerHTML = clickCount;
+    question.result();
+  });  
+
+  this.getQue.addEventListener('click', function(event) {
+    event.preventDefault();
+    question.setValue();
+    question.setOperator();
+    question.calculation();
+    if(clickCount == 21){
+      alert('Quiz Complated')
+      this.disabled=true;
+    }
+    else{
+      // question.calculation();
+      question.setValue();
+      question.setOperator();
+      question.calculation();
+      // question.getAllValues();
+      this.disabled = false;
+    }
+    clickCount++;
   });  
 }
 
 window.onload = function() {
-  var autoComplete = new AutoComplete();
+  var quiz = new Quiz();
+  quiz.init();
 }
