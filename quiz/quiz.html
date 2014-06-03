@@ -10,24 +10,29 @@
     <h1>Welcome to mathermetical quiz</h1>
     <div class="content">
       <div class="leftbar">
-        <h3>Answere the following Qustions</h3>
-        <form>
+        <form id="form">
+          <h3>Answere the following Qustions</h3>
           <div>
             <input type = "text" id = "value01" disabled/> 
             <input type = "text" id = "operator" disabled /> 
             <input type = "text" id = "value02" disabled />
             <span> = </span> 
-            <input type = "text" id = "expected_answer" />
-            <input type = "hidden" id = "reply" />
+            <input type = "hidden" id = "expected_answer" />
+            <input type = "text" id = "reply" />
+            <input type = "text" id = "test_result" disabled />
             <input type = "submit" value="Go" id = "submit"/>
           </div>
           <input type="submit" value = "Get you Question" id="get_que" />
         </form>
+        <ul id="list">
+          <h3>Your Answers</h3>
+        </ul> 
       </div>
       <div class="rightbar">
         <h3>Total Qustion: 20</span></h3>
         <h3>current Qustion: <span id = "question_count" value="dont know"></span></h3>
         <h3>Total marks: <span id="score"></span></h3>
+        <p class="note">every correct answer you will get 10 marks.</p>
       </div>
     </div>
 

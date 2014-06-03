@@ -1,4 +1,5 @@
 var clickCount = 1;
+var numberRegex = /^[-+]?[\d]*([\.][\d]*)?$/;
 function Quiz(){
   this.submit = document.getElementById('submit'); 
   this.getQue = document.getElementById('get_que');
@@ -10,8 +11,11 @@ function Question(){
   this.optField = document.getElementById('operator');
   this.reply = document.getElementById('reply');  
   this.expectedAnswer = document.getElementById('expected_answer');
+  this.testResult = document.getElementById('test_result');
   this.score = document.getElementById('score');
+  this.qusList = [];
   this.marks = 0;
+  this.quizForm =  document.getElementById('form');
 }
 Question.prototype.setValue = function(){
   this.firstField.value = Math.floor((Math.random() * 20) + 1);
@@ -56,15 +60,47 @@ Question.prototype.getAllValues = function() {
 
 Question.prototype.result = function(){
   if(this.ans == this.reply.value){
-    alert('Correct Answer');
+    // alert('Correct Answer');
     this.marks = this.marks + 10;
-    alert(this.marks);
     this.score.innerHTML = this.marks;
+    this.testResult.value = "Correct";
+    this.testResult.style.backgroundColor = '#00ff00';
   }
   else{
-    alert('Sorry Wrong answer');
+    // alert('Sorry Wrong answer');
     this.marks = this.marks;
     this.score.innerHTML = this.marks;
+    this.testResult.value = "wrong";
+    this.testResult.style.backgroundColor = '#ff0000';
+  }
+}
+Question.prototype.storeEntry = function(){
+  this.qusList.push({ "firstfield": this.firstField.value , "opt" : this.optField.value, "secondfield": this.secondField.value , "reply": this.reply.value , "testResult": this.testResult.value});
+}
+Question.prototype.addQuestionEntry = function() {
+  var fullList = document.getElementById("list");
+  for(var i=0; i < this.qusList.length; i++){
+     var item = this.qusList[i];
+     var elem = document.createElement("li");
+     elem.value = i;
+     elem.innerHTML=item["firstfield"] + " " + item["opt"] +  " " +  item["secondfield"]  + " = " +  item["reply"] + " <span name=" + item["testResult"]+ ">(" + item["testResult"] + ")</span>";
+     var getClass = document.getElementsByName('wrong');
+    //  for(var y = 0; y < getClass.length; y++){
+    //   console.log(getClass[y]);
+    //   if(getClass[y] == "wrong"){
+    //     getClass[y].parentNode.setAttribute('class', 'wrong');
+    //   } 
+    // }
+  }
+  fullList.appendChild(elem);
+}
+Question.prototype.validate = function(event) {
+  if (this.reply.value == "" || this.reply.value == null || !numberRegex.test(this.reply.value)) {
+    alert("Please Enter Numeric Value");
+    event.preventDefault();
+  }
+  else{
+    this.result();
   }
 }
 Quiz.prototype.init = function() {
@@ -72,28 +108,31 @@ Quiz.prototype.init = function() {
   var this_obj = this;
   this.submit.addEventListener('click', function(event) {
     event.preventDefault();
-    document.getElementById('question_count').innerHTML = clickCount;
-    question.result();
+    question.validate(event);
+    question.storeEntry();
+    question.addQuestionEntry();
+    this.disabled = true;
   });  
-
   this.getQue.addEventListener('click', function(event) {
     event.preventDefault();
     question.setValue();
     question.setOperator();
     question.calculation();
     if(clickCount == 21){
-      alert('Quiz Complated')
-      this.disabled=true;
+      alert('Quiz Completed')
+      this.disabled = true;
+      document.getElementById('form').style.display = 'none';
+      document.getElementById("list").style.display = 'block';
     }
     else{
-      // question.calculation();
+      this_obj.submit.disabled = false; 
+      document.getElementById('question_count').innerHTML = clickCount;
       question.setValue();
       question.setOperator();
       question.calculation();
-      // question.getAllValues();
       this.disabled = false;
+      clickCount++;
     }
-    clickCount++;
   });  
 }
 
