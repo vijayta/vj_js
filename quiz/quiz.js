@@ -115,7 +115,7 @@ Quiz.prototype.init = function() {
     question.storeEntry();
     question.QuestionFaced();
     question.addQuestionEntry();
-    if(clickCount == 5){
+    if(clickCount == 21){
       alert('Quiz Completed')
       this.disabled = true;
       document.getElementById('form').style.display = 'none';
