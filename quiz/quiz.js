@@ -16,6 +16,7 @@ function Question(){
   this.qusList = [];
   this.marks = 0;
   this.quizForm =  document.getElementById('form');
+  this.allQue = document.getElementById('all_que');
 }
 Question.prototype.setValue = function(){
   this.firstField.value = Math.floor((Math.random() * 20) + 1);
@@ -50,13 +51,6 @@ Question.prototype.calculation = function() {
       return this.ans;
     }
 }
-Question.prototype.getAllValues = function() {
-  this.firstField = this.firstField.value;
-  this.opt = this.optField.value;
-  this.secondField = this.secondField.value;
-  alert(this.firstField + " " + this.opt + " " + this.secondField + " = " + this.reply.value );
-  this.expectedAnswer.value = this.ans;
-}
 
 Question.prototype.result = function(){
   if(this.ans == this.reply.value){
@@ -75,29 +69,31 @@ Question.prototype.result = function(){
   }
 }
 Question.prototype.storeEntry = function(){
-  this.qusList.push({ "firstfield": this.firstField.value , "opt" : this.optField.value, "secondfield": this.secondField.value , "reply": this.reply.value , "testResult": this.testResult.value});
+  this.expectedAnswer.value = this.ans;
+  this.qusList.push({ "firstfield": this.firstField.value , "opt" : this.optField.value, "secondfield": this.secondField.value , "reply": this.reply.value , "testResult": this.testResult.value, "correctAnswer" : this.expectedAnswer.value});
 }
 Question.prototype.addQuestionEntry = function() {
-  var fullList = document.getElementById("list");
+   var getClass = document.getElementsByClassName('Correct');
+   for(var i = 0; i< getClass.length; i++){
+      getClass[i].parentNode.setAttribute('class', 'correct_item');
+   } 
+   var elem = this.elem;
+  this.allQue.appendChild(elem);
+}
+Question.prototype.QuestionFaced = function() { 
+  this.allQue = document.getElementById("all_que");
   for(var i=0; i < this.qusList.length; i++){
-     var item = this.qusList[i];
-     var elem = document.createElement("li");
-     elem.value = i;
-     elem.innerHTML=item["firstfield"] + " " + item["opt"] +  " " +  item["secondfield"]  + " = " +  item["reply"] + " <span name=" + item["testResult"]+ ">(" + item["testResult"] + ")</span>";
-     var getClass = document.getElementsByName('wrong');
-    //  for(var y = 0; y < getClass.length; y++){
-    //   console.log(getClass[y]);
-    //   if(getClass[y] == "wrong"){
-    //     getClass[y].parentNode.setAttribute('class', 'wrong');
-    //   } 
-    // }
-  }
-  fullList.appendChild(elem);
+    this.item = this.qusList[i];
+    this.elem = document.createElement("li");
+    this.elem.value = i;
+    this.elem.innerHTML=this.item["firstfield"] + " " + this.item["opt"] +  " " +  this.item["secondfield"]  + " = " +  this.item["reply"] + " <span class=" + this.item["testResult"]+ ">(" + this.item["testResult"] + ")</span>  <span class='correct_ans'>Ans: <span>" + this.item["correctAnswer"] + "</span></span>";
+  }   
 }
 Question.prototype.validate = function(event) {
-  if (this.reply.value == "" || this.reply.value == null || !numberRegex.test(this.reply.value)) {
+  if (!numberRegex.test(this.reply.value)) {
     alert("Please Enter Numeric Value");
     event.preventDefault();
+    this.submit.disabled = false;
   }
   else{
     this.result();
@@ -109,8 +105,6 @@ Quiz.prototype.init = function() {
   this.submit.addEventListener('click', function(event) {
     event.preventDefault();
     question.validate(event);
-    question.storeEntry();
-    question.addQuestionEntry();
     this.disabled = true;
   });  
   this.getQue.addEventListener('click', function(event) {
@@ -118,11 +112,14 @@ Quiz.prototype.init = function() {
     question.setValue();
     question.setOperator();
     question.calculation();
-    if(clickCount == 21){
+    question.storeEntry();
+    question.QuestionFaced();
+    question.addQuestionEntry();
+    if(clickCount == 5){
       alert('Quiz Completed')
       this.disabled = true;
       document.getElementById('form').style.display = 'none';
-      document.getElementById("list").style.display = 'block';
+      document.getElementById("all_que").style.display = 'block';
     }
     else{
       this_obj.submit.disabled = false; 

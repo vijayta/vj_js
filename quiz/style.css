@@ -10,4 +10,11 @@ h3{ font-size: 16px; margin: 10px 0 ; padding: 0; }
 .wrapper .content .rightbar { width: 30%; float: right; box-shadow: 0 0 5px rgba(33, 33, 33, 0.3) inset; padding: 10px 20px; border-radius: 5px; background: #f0f0f0; }
 .note{ font-size: 12px; }
 ul { margin: 0; padding: 0; display: none; }
-ul li{ padding: 0; margin: 0; font-size: 14px; color: #333; }
+ul li{ padding: 10px 0; margin: 0; font-size: 14px; color: #333; list-style: none; }
+.correct_ans { float: right; }
+.correct_ans span{ display: inline-block; font-weight: bold; width: 120px; }
+.Correct, .wrong{ font-size: 11px; }
+.Correct{ color: #008309; }
+.wrong{color: #ca120d; }
+#all_que{ border: 1px solid #ccc; background: #f0f0f0; margin-top: 100px; padding: 20px; }
+#list .correct_item{ display: none; }
