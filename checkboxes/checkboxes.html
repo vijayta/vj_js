@@ -6,36 +6,37 @@
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-<form method="post" name="list" id="list">
-  <ul class="outer" id = "user_choice">
-    <li id="first">
-      <input type="checkbox" name="mainList" id = "color" data-type="color"> <label for = "color">color</label>
-      <ul class="sub">
-        <li><input type="checkbox" name="list" id="red"  data-type="color"> <label for="red">red</label></li>
-        <li><input type="checkbox" name="list" id="green"  data-type="color"><label for="green">green</label></li>
-        <li><input type="checkbox" name="list" id="yellow"  data-type="color"><label for="yellow">yellow</lable></li>
-        <li><input type="checkbox" name="list" id="blue"  data-type="color"><label for="blue">blue</lable></li>
+<form method="post">
+  <ul id="user_choice">
+    <li>
+      <input type="checkbox" name="mainList" id = "color"> <label for = "color">color</label>
+      <ul class="list" style="display: none;" name = "color">
+        <li><input type="checkbox" id="red" class = "color"> <label for="red">red</label></li>
+        <li><input type="checkbox" id="green" class = "color"><label for="green">green</label></li>
+        <li><input type="checkbox" id="yellow"  class = "color"><label for="yellow">yellow</lable></li>
+        <li><input type="checkbox" id="blue"  class="color"><label for="blue">blue</lable></li>
       </ul>  
     </li>
-   <li id="second"><input type="checkbox" name="mainList" id = "movie"  data-type="movie"> <label for="movie">movies</label>
-      <ul class="sub">
-        <li><input type="checkbox" name="list" id="darr"  data-type="movie"><label for="darr">Darr</label></li>
-        <li><input type="checkbox" name="list" id="sir" data-type="movie"><label for="sir">Sir</lable></li>
+   <li><input type="checkbox" name="mainList" id = "movie"> <label for="movie">movies</label>
+      <ul class="list" style="display: none;" name="movie">
+        <li><input type="checkbox" id="darr"  class="movie"><label for="darr">Darr</label></li>
+        <li><input type="checkbox" id="sir" class="movie"><label for="sir">Sir</lable></li>
       </ul>  
     </li>
-   <li id="third">
-     <input type="checkbox" id = "drink" name="mainList" data-type="drink"> <label for="drink">drinks</label>
-      <ul class="sub">
-        <li><input type="checkbox" id="coke" name="list" data-type="drink"><label for="coke">coke</label></li>
-        <li><input type="checkbox" id="pepsi" name="list" data-type="drink"><label for="pepsi">pepsi</label></li>
-        <li><input type="checkbox" id="dew" name="list" data-type="drink"><label for="dew">dew</label></li>
+   <li>
+     <input type="checkbox" id = "drink" name="mainList"> <label for="drink">drinks</label>
+      <ul class="list" style="display: none;" name = "drink">
+        <li><input type="checkbox" id="coke" class="drink"><label for="coke">coke</label></li>
+        <li><input type="checkbox" id="pepsi" class="drink"><label for="pepsi">pepsi</label></li>
+        <li><input type="checkbox" id="dew"  class="drink"><label for="dew">dew</label></li>
       </ul>  
     </li>
-    <li id="fourth"><input type="checkbox" id = "bike" name="mainList" data-type="bike"> <label for="bike">bikes </label>
-      <ul class="sub">
-        <li><input type="checkbox" id="vrod" name="list" data-type="bike"><label for="vrod">V-rod</label></li>
-        <li><input type="checkbox" id="pulser" name="list" data-type="bike"><label for="pulser">pulser</label></li>
-        <li><input type="checkbox" id="cbz" name="list" data-type="bike"><label for="cbz">cbz</label></li>
+    <li>
+      <input type="checkbox" id = "bike" name="mainList"> <label for="bike">bikes </label>
+      <ul class="list" style="display: none;" name = "bike">
+        <li><input type="checkbox" id="vrod" class="bike"><label for="vrod">V-rod</label></li>
+        <li><input type="checkbox" id="pulser" class="bike"><label for="pulser">pulser</label></li>
+        <li><input type="checkbox" id="cbz" class="bike"><label for="cbz">cbz</label></li>
       </ul>  
     </li>
   </ul>  

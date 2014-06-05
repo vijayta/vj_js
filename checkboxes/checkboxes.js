@@ -1,37 +1,36 @@
 function Choice() {
   this.list = document.getElementsByTagName('input');
-  this.init();
+  this.init(); 
 }
 
 Choice.prototype.userInput = function(element) { 
-  this.element = document.getElementById(element);
-  for(var i = 0; i < this.list.length; i++){
-    var checkItem = this.list[i].getAttribute('data-type');
-    if(this.element.checked){
-      this.element.parentNode.setAttribute('class', 'active');
-      if (checkItem == this.element.getAttribute('data-type')) {
-        this.list[i].checked = true;
-      }
-      else{
-        this.list[i].checked = false;
-      }
-    }
-    else{
-      this.element.parentNode.setAttribute('class', 'notActive');
-       this.list[i].checked = false;
-    }
+  var currentItem = element.getAttribute("id");
+  var list = document.getElementsByName(currentItem);
+  var children = document.getElementsByClassName(currentItem);
+  element.scrollIntoView(true);
+  for(var i = 0; i < list.length; i++){
+    list[i].style.display = (list[i].style.display == "none") ? "block" : "none";
   }
-}
+  for(var i = 0; i < children.length; i++) {
+    console.log(children[i]);
+    children[i].checked = element.checked;
+  }
+} 
 
 Choice.prototype.init = function() {
-  var that = this;
-  var userInput = document.getElementsByName('mainList');
-  for(var i = 0; i < userInput.length; i++) {
-    userInput[i].addEventListener('click', function() {
+  var this_obj = this;
+  var checkbox = document.getElementsByName('mainList');
+  for(var i = 0; i < checkbox.length; i++) {
+    checkbox[i].addEventListener('click', function() {
       var element = this.id;
-      that.userInput(element);
+      this_obj.userInput(this);
     }
   )};  
+  var chekboxes = document.getElementsByTagName('input');
+
+  for(var i = 0; i < chekboxes.length; i++){
+    chekboxes[i].checked = false;
+  }  
 }
 
 window.onload = function(){
