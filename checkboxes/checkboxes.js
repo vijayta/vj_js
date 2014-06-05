@@ -26,8 +26,8 @@ Choice.prototype.init = function() {
       this_obj.userInput(this);
     }
   )};  
+  
   var chekboxes = document.getElementsByTagName('input');
-
   for(var i = 0; i < chekboxes.length; i++){
     chekboxes[i].checked = false;
   }  
