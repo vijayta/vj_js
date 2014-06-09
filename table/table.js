@@ -1,5 +1,5 @@
 var rowCounter = 1; 
-var that = this;
+var this_obj = this;
 function TableRow(){
   this.table = document.getElementById('contact');
   this.rowCount = this.table.rows.length;
@@ -60,7 +60,7 @@ TableRow.prototype.deleteRow = function(e){
 }
 
 TableRow.prototype.saveRow = function(e){
-that.button = e.getAttribute('data-button');
+this_obj.button = e.getAttribute('data-button');
 this.rows = document.getElementsByTagName('tr');
   for(var i = 0; i < this.rows.length; i++){
     this.rows[i].addEventListener('click', function() {      
@@ -68,7 +68,7 @@ this.rows = document.getElementsByTagName('tr');
       this.save = document.getElementById(this.id).getElementsByClassName('save')[0]; 
       this.name = document.getElementById(this.id).getElementsByTagName('input');
       this.text = document.getElementById(this.id).getElementsByTagName('span');     
-      if(that.button == this.id){
+      if(this_obj.button == this.id){
         this.edit.style.display = 'table-cell';
         this.save.style.display = 'none';
         this.text[0].innerHTML = this.name[0].value;
@@ -85,7 +85,7 @@ this.rows = document.getElementsByTagName('tr');
 TableRow.prototype.editRow = function(e){
   for(var i = 0; i < this.rows.length; i++){
     this.rows[i].addEventListener('click', function() {      
-      if(that.button == this.id){
+      if(this_obj.button == this.id){
         this.text[0].innerHTML = this.name[0].value;
         this.name[0].style.display = "block";
         this.text[0].style.display = "none"; 

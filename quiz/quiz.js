@@ -79,6 +79,8 @@ Question.prototype.addQuestionEntry = function() {
    } 
    var elem = this.elem;
   this.allQue.appendChild(elem);
+  this.selected_que = document.getElementById('selected_que');
+  this.selected_que.appendChild(elem);
 }
 Question.prototype.QuestionFaced = function() { 
   this.allQue = document.getElementById("all_que");
