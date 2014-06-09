@@ -6,7 +6,9 @@ Choice.prototype.SelectList = function(element) {
   var currentItem = element.getAttribute("id");
   var list = document.getElementsByName(currentItem);
   var children = document.getElementsByClassName(currentItem);
+  
   list[0].style.display = (list[0].style.display == "none") ? "block" : "none";
+  
   for(var i = 0, children_length = children.length; i < children_length; i++) {
     children[i].checked = element.checked;
   }
