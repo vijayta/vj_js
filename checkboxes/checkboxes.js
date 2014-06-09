@@ -6,10 +6,8 @@ Choice.prototype.SelectList = function(element) {
   var currentItem = element.getAttribute("id");
   var list = document.getElementsByName(currentItem);
   var children = document.getElementsByClassName(currentItem);
-  for(var i = 0; i < list.length; i++){
-    list[i].style.display = (list[i].style.display == "none") ? "block" : "none";
-  }
-  for(var i = 0; i < children.length; i++) {
+  list[0].style.display = (list[0].style.display == "none") ? "block" : "none";
+  for(var i = 0, children_length = children.length; i < children_length; i++) {
     children[i].checked = element.checked;
   }
   element.scrollIntoView(true);
@@ -18,14 +16,14 @@ Choice.prototype.SelectList = function(element) {
 Choice.prototype.init = function() {
   var this_obj = this;
   var checkbox = document.getElementsByName('mainList');
-  for(var i = 0; i < checkbox.length; i++) {
+  for(var i = 0, checkbox_length = checkbox.length; i < checkbox_length; i++) {
     checkbox[i].addEventListener('click', function() {
       this_obj.SelectList(this);
     }
   )};  
   
   var chekboxes = document.getElementsByTagName('input');
-  for(var i = 0; i < chekboxes.length; i++){
+  for(var i = 0, check_length = chekboxes.length; i < check_length; i++){
     chekboxes[i].checked = false;
   }  
 }
