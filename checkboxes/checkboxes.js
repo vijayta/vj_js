@@ -19,17 +19,17 @@ Choice.prototype.init = function() {
   var this_obj = this;
   var checkbox = document.getElementsByName('mainList');
   for(var i = 0, checkbox_length = checkbox.length; i < checkbox_length; i++) {
-    checkbox[i].addEventListener('click', function() {
-      this_obj.SelectList(this);
-    }
+   checkbox[i].addEventListener('click', function() {
+     this_obj.SelectList(this);
+   }
   )};  
   
   var chekboxes = document.getElementsByTagName('input');
-  for(var i = 0, check_length = chekboxes.length; i < check_length; i++){
+  for(var i = 0, check_length = chekboxes.length; i < check_length; i++) {
     chekboxes[i].checked = false;
   }  
 }
 
-window.onload = function(){
+window.onload = function() {
   var userChoice = new Choice();
 }
