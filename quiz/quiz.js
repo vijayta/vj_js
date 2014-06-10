@@ -78,7 +78,7 @@ Question.prototype.storeEntry = function(){
 
 Question.prototype.QuestionFaced = function() { 
   this.allQue = document.getElementById("all_que");
-  for(var i=0; i < this.qusList.length; i++){
+  for(var i = 1; i < this.qusList.length; i++){
     this.item = this.qusList[i];
     this.elem = document.createElement("li");
     this.elem.value = i;
@@ -107,13 +107,14 @@ Quiz.prototype.init = function() {
       document.getElementById("all_que").style.display = 'block';
     }
     else{
+      clickCount++;
       this_obj.submit.disabled = false; 
       document.getElementById('question_count').innerHTML = clickCount;
       question.setValue();
       question.setOperator();
       question.calculation();
       this.disabled = false;
-      clickCount++;
+      
     }
     document.getElementById('reply').value = "";
   });  
