@@ -43,7 +43,7 @@ Question.prototype.calculation = function() {
     
     case('/'):
       this.ans = parseFloat(first) / parseFloat(sec);
-      return this.ans;
+      return Math.round(this.ans);
       break;
     
     default:
@@ -60,6 +60,9 @@ Question.prototype.result = function(){
     this.testResult.value = "Correct";
     this.testResult.style.backgroundColor = '#00ff00';
   }
+  else if(this.ans == "" || this.ans == null){
+    this.testResult.value = "notAttempted";
+  }
   else{
     // alert('Sorry Wrong answer');
     this.marks = this.marks;
@@ -72,16 +75,7 @@ Question.prototype.storeEntry = function(){
   this.expectedAnswer.value = this.ans;
   this.qusList.push({ "firstfield": this.firstField.value , "opt" : this.optField.value, "secondfield": this.secondField.value , "reply": this.reply.value , "testResult": this.testResult.value, "correctAnswer" : this.expectedAnswer.value});
 }
-Question.prototype.addQuestionEntry = function() {
-   var getClass = document.getElementsByClassName('Correct');
-   for(var i = 0; i< getClass.length; i++){
-      getClass[i].parentNode.setAttribute('class', 'correct_item');
-   } 
-   var elem = this.elem;
-  this.allQue.appendChild(elem);
-  this.selected_que = document.getElementById('selected_que');
-  this.selected_que.appendChild(elem);
-}
+
 Question.prototype.QuestionFaced = function() { 
   this.allQue = document.getElementById("all_que");
   for(var i=0; i < this.qusList.length; i++){
@@ -90,34 +84,23 @@ Question.prototype.QuestionFaced = function() {
     this.elem.value = i;
     this.elem.innerHTML=this.item["firstfield"] + " " + this.item["opt"] +  " " +  this.item["secondfield"]  + " = " +  this.item["reply"] + " <span class=" + this.item["testResult"]+ ">(" + this.item["testResult"] + ")</span>  <span class='correct_ans'>Ans: <span>" + this.item["correctAnswer"] + "</span></span>";
   }   
+  var elem = this.elem;
+  this.allQue.appendChild(elem);
 }
-Question.prototype.validate = function(event) {
-  if (!numberRegex.test(this.reply.value)) {
-    alert("Please Enter Numeric Value");
-    event.preventDefault();
-    this.submit.disabled = false;
-  }
-  else{
-    this.result();
-  }
-}
+
 Quiz.prototype.init = function() {
   var question = new Question();
   var this_obj = this;
+  question.setValue();
+  question.setOperator();
+  question.calculation();
   this.submit.addEventListener('click', function(event) {
     event.preventDefault();
-    question.validate(event);
-    this.disabled = true;
-  });  
-  this.getQue.addEventListener('click', function(event) {
-    event.preventDefault();
-    question.setValue();
-    question.setOperator();
-    question.calculation();
+    question.result();
     question.storeEntry();
     question.QuestionFaced();
-    question.addQuestionEntry();
-    if(clickCount == 21){
+  
+    if(clickCount == 20){
       alert('Quiz Completed')
       this.disabled = true;
       document.getElementById('form').style.display = 'none';
@@ -132,6 +115,7 @@ Quiz.prototype.init = function() {
       this.disabled = false;
       clickCount++;
     }
+    document.getElementById('reply').value = "";
   });  
 }
 
