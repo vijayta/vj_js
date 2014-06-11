@@ -1,46 +1,37 @@
-function UserInfo(){
-  this.userUrl = document.getElementById('user_input').value;
+function DomainSubdomain(){
+  this.url = document.getElementById('user_input').value;
   this.regex = /^((https?|ftp):\/\/)?(www\.)?(([A-z0-9]+\.)*)([A-z0-9]+\.[A-z]{2,4})(\/(.)*)?$/;
 }
 
-UserInfo.prototype.validateUrl = function(){
-  var result = (this.userUrl != null && this.userUrl.trim && this.regex.test(this.userUrl));
+DomainSubdomain.prototype.validateUrl = function(){
+  var result = this.url != null && this.url.trim && this.regex.test(this.url);
   if(!result) {
     alert('Please enter a valid url');
   }
   return result;
 }
 
-UserInfo.prototype.extractDomain = function(){  
-  this.userUrl = this.userUrl.replace(new RegExp(/^\s+/),""); 
-  
-  this.userUrl = this.userUrl.replace(new RegExp(/\s+$/),""); 
-   
-  this.userUrl = this.userUrl.replace(new RegExp(/\\/g),"/");
-   
-  this.userUrl = this.userUrl.replace(new RegExp(/^http\:\/\/|^https\:\/\/|^ftp\:\/\//i),"");
-   
-  this.userUrl = this.userUrl.replace(new RegExp(/^www\./i),"");
-
-  this.userUrl = this.userUrl.replace(new RegExp(/\/(.*)/),"");
-
-  var domain = this.userUrl.replace(new RegExp(/\/(.*)/),"");
-  domain = this.userUrl.replace(new RegExp(/^[a-zA-Z0-9]{2,4}./i),"")
-
-  var subDomain = this.userUrl.match(new RegExp.$4.replace(/\.$/, ''));
-
-
-   
-  alert("Domain is = " + domain + "      Sub Domain is : " + subDomain); 
+DomainSubdomain.prototype.extractDomain = function(){  
+  this.domain = RegExp.$6;
+  this.subDomain =  RegExp.$4.replace(/\.$/, '');
+}
+DomainSubdomain.prototype.showDomainSubdomain = function(){
+  if(this.subDomain.length != 0) {
+    alert("Domain is = " + this.domain + " Sub Domain is : " + this.subDomain); 
+  }
+  else{
+    alert("Domain is = " + this.domain);  
+  }
 }
 
 window.onload = function(){ 
   var submit = document.getElementById('submit');
   var url = document.getElementById('user_input').value;
   submit.addEventListener('click', function() {
-    var u = new UserInfo();
+    var u = new DomainSubdomain();
     u.validateUrl();
     u.extractDomain();
+    u.showDomainSubdomain();
   });
 }
 
