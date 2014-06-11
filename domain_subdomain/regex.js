@@ -16,11 +16,11 @@ DomainSubdomain.prototype.extractDomain = function(){
   this.subDomain =  RegExp.$4.replace(/\.$/, '');
 }
 DomainSubdomain.prototype.showDomainSubdomain = function(){
-  if(this.subDomain.length != 0) {
-    alert("Domain is = " + this.domain + " Sub Domain is : " + this.subDomain); 
+  if(this.subDomain.length == 0) {
+    alert("Domain is = " + this.domain);  
   }
   else{
-    alert("Domain is = " + this.domain);  
+    alert("Domain is = " + this.domain + " Sub Domain is : " + this.subDomain); 
   }
 }
 
