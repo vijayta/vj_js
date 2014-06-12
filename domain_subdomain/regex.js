@@ -7,7 +7,7 @@ function DomainSubdomain(){
 }
 
 DomainSubdomain.prototype.validateUrl = function(event) {
-  var result = this.url != null && this.url.trim && this.url.match(Regex.URL);  
+  var result = this.url.trim && this.url.match(Regex.URL);  
   if(!result) {
     alert('Please enter a valid url');
     event.preventDefault();
