@@ -117,7 +117,7 @@ Quiz.prototype.bindEvent = function() {
     if(clickCount == 20){
       alert('Quiz Completed')
       document.getElementById('form').style.display = 'none';
-      document.getElementById("all_que").style.display = 'block';
+      obj.allQue.style.display = 'block';
     }
     else{
       obj.setValue();
