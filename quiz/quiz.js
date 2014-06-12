@@ -79,6 +79,14 @@ Quiz.prototype.QuestionFaced = function() {
   this.allQue.appendChild(this.elem);
 }
 
+Quiz.prototype.loadAllQustion = function() {
+  for(var i = 0; i < 20; i++){
+    this.setOperator();
+    this.calculation();
+    this.storeEntry();
+  }
+}
+
 Quiz.prototype.init = function() {
   this.firstField = document.getElementById('value01');
   this.secondField = document.getElementById('value02');
@@ -91,14 +99,12 @@ Quiz.prototype.init = function() {
   this.submit = document.getElementById('submit'); 
   this.count = document.getElementById('question_count');
   this.form = document.getElementById('form');
+  this.queBank = document.getElementById('question_bank');
   
   this.qusList = [];
   this.marks = 0;
 
-  this.setValue();
-  this.setOperator();
-  this.calculation();
-  this.storeEntry();
+  this.loadAllQustion();
   this.count.innerHTML = clickCount;
   this.bindEvent();
 }
