@@ -13,13 +13,14 @@ DomainSubdomain.prototype.validateUrl = function(event) {
     event.preventDefault();
   }
   else{
-    return (this.extractDomain(), this.showDomainSubdomain());
+    this.extractDomain();
   }
 }
 
 DomainSubdomain.prototype.extractDomain = function(){  
   this.domain = RegExp.$6;
   this.subDomain =  RegExp.$4.replace(/\.$/, '');  
+  this.showDomainSubdomain();
 }
 
 DomainSubdomain.prototype.showDomainSubdomain = function(){
@@ -39,7 +40,7 @@ DomainSubdomain.prototype.init = function() {
 DomainSubdomain.prototype.bindEvent = function(){
   var obj = this; 
   this.submit.addEventListener('click', function(event) {
-    return obj.validateUrl(event);
+    obj.validateUrl(event);
   });
 }
 
