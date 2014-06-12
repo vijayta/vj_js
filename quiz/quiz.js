@@ -3,15 +3,17 @@ function Quiz(){
   this.init();
 }
 
-Quiz.prototype.setValue = function(){
+Quiz.prototype.setValue = function() {
   this.firstField.value = Math.floor((Math.random() * 20) + 1);
   this.secondField.value = Math.floor((Math.random() * 20) + 1);
 }
+
 Quiz.prototype.setOperator = function() {
   var operators = ['+','-','*','/'];
   setOpt = operators[Math.floor(Math.random()*4)];
   this.optField.value = setOpt;
 }
+
 Quiz.prototype.calculation = function() {
   var first = this.firstField.value;
   var sec = this.secondField.value
@@ -37,7 +39,7 @@ Quiz.prototype.calculation = function() {
     }
 }
 
-Quiz.prototype.result = function(){
+Quiz.prototype.result = function() {
   this.ans = Math.round(this.ans * 100) / 100;
   if(this.ans == this.reply.value){ //Correct Answer;
     this.marks = this.marks + 10;
@@ -53,7 +55,7 @@ Quiz.prototype.result = function(){
     this.testResult.value = "wrong";
   }
 }
-Quiz.prototype.storeEntry = function(){
+Quiz.prototype.storeEntry = function() {
   this.expectedAnswer.value = this.ans;
   this.qusList.push({ "firstfield": this.firstField.value , 
                       "opt" : this.optField.value, 
