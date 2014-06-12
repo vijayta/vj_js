@@ -81,9 +81,9 @@ Quiz.prototype.QuestionFaced = function() {
 
 Quiz.prototype.loadAllQustion = function() {
   for(var i = 0; i < 20; i++){
+    this.setValue();
     this.setOperator();
     this.calculation();
-    this.storeEntry();
   }
 }
 
@@ -105,6 +105,7 @@ Quiz.prototype.init = function() {
   this.marks = 0;
 
   this.loadAllQustion();
+  this.storeEntry();
   this.count.innerHTML = clickCount;
   this.bindEvent();
 }
@@ -123,9 +124,7 @@ Quiz.prototype.bindEvent = function() {
       obj.allQue.style.display = 'block';
     }
     else{
-      obj.setValue();
-      obj.setOperator();
-      obj.calculation();
+      obj.loadAllQustion();
       clickCount++;
       obj.count.innerHTML = clickCount;
     }
