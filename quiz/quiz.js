@@ -92,13 +92,13 @@ Quiz.prototype.init = function() {
   this.expectedAnswer = document.getElementById('expected_answer');
   this.testResult = document.getElementById('test_result');
   this.score = document.getElementById('score');
-  this.qusList = [];
-  this.marks = 0;
-  this.quizForm =  document.getElementById('form');
   this.allQue = document.getElementById('all_que');
   this.submit = document.getElementById('submit'); 
-  this.getQue = document.getElementById('get_que');
   this.count = document.getElementById('question_count');
+  
+  this.qusList = [];
+  this.marks = 0;
+  
   this.setValue();
   this.setOperator();
   this.calculation();
