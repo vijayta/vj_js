@@ -44,7 +44,6 @@ Quiz.prototype.result = function(){
     this.marks = this.marks + 10;
     this.score.innerHTML = this.marks;
     this.testResult.value = "Correct";
-    this.testResult.style.backgroundColor = '#00ff00';
   }
   else if(this.ans == "" || this.ans == null){
     this.testResult.value = "notAttempted";
@@ -53,7 +52,6 @@ Quiz.prototype.result = function(){
     this.marks = this.marks;
     this.score.innerHTML = this.marks;
     this.testResult.value = "wrong";
-    this.testResult.style.backgroundColor = '#ff0000';
   }
 }
 Quiz.prototype.storeEntry = function(){
@@ -98,7 +96,7 @@ Quiz.prototype.init = function() {
   
   this.qusList = [];
   this.marks = 0;
-  
+
   this.setValue();
   this.setOperator();
   this.calculation();
