@@ -1,6 +1,7 @@
 var clickCount = 1;
 var numberRegex = /^[-+]?[\d]*([\.][\d]*)?$/;
 function Quiz(){
+  this.init();
   this.submit = document.getElementById('submit'); 
   this.getQue = document.getElementById('get_que');
   this.Question = Question;
@@ -16,7 +17,7 @@ function Question(){
   this.qusList = [];
   this.marks = 0;
   this.quizForm =  document.getElementById('form');
-  this.allQue = document.getElementById('all_que');
+  // this.allQue = document.getElementById('all_que');
 }
 Question.prototype.setValue = function(){
   this.firstField.value = Math.floor((Math.random() * 20) + 1);
@@ -43,7 +44,7 @@ Question.prototype.calculation = function() {
     
     case('/'):
       this.ans = parseFloat(first) / parseFloat(sec);
-      return Math.round(this.ans);
+      return this.ans;
       break;
     
     default:
@@ -53,6 +54,7 @@ Question.prototype.calculation = function() {
 }
 
 Question.prototype.result = function(){
+  this.ans = Math.round(this.ans*100)/100;
   if(this.ans == this.reply.value){
     // alert('Correct Answer');
     this.marks = this.marks + 10;
@@ -77,15 +79,15 @@ Question.prototype.storeEntry = function(){
 }
 
 Question.prototype.QuestionFaced = function() { 
-  this.allQue = document.getElementById("all_que");
+  var allQue = document.getElementById("all_que");
+  var elem = document.createElement("li");
   for(var i = 1; i < this.qusList.length; i++){
     this.item = this.qusList[i];
-    this.elem = document.createElement("li");
-    this.elem.value = i;
-    this.elem.innerHTML=this.item["firstfield"] + " " + this.item["opt"] +  " " +  this.item["secondfield"]  + " = " +  this.item["reply"] + " <span class=" + this.item["testResult"]+ ">(" + this.item["testResult"] + ")</span>  <span class='correct_ans'>Ans: <span>" + this.item["correctAnswer"] + "</span></span>";
-  }   
-  var elem = this.elem;
-  this.allQue.appendChild(elem);
+    elem.value = i;
+    elem.innerHTML=this.item["firstfield"] + " " + this.item["opt"] +  " " +  this.item["secondfield"]  + " = " +  this.item["reply"] + " <span class=" + this.item["testResult"]+ ">(" + this.item["testResult"] + ")</span>  <span class='correct_ans'>Ans: <span>" + this.item["correctAnswer"] + "</span></span>";
+  } 
+  allQue.appendChild(elem);
+  
 }
 
 Quiz.prototype.init = function() {
@@ -94,6 +96,7 @@ Quiz.prototype.init = function() {
   question.setValue();
   question.setOperator();
   question.calculation();
+  document.getElementById('question_count').innerHTML = clickCount;
   this.submit.addEventListener('click', function(event) {
     event.preventDefault();
     question.result();
@@ -106,20 +109,22 @@ Quiz.prototype.init = function() {
       document.getElementById("all_que").style.display = 'block';
     }
     else{
-      clickCount++;
-      this_obj.submit.disabled = false; 
       document.getElementById('question_count').innerHTML = clickCount;
+      this_obj.submit.disabled = false; 
       question.setValue();
       question.setOperator();
       question.calculation();
       this.disabled = false;
-      
+      clickCount++;
     }
     document.getElementById('reply').value = "";
   });  
 }
+Quiz.prototype.bindEvent = function(){
+  
+}
+
 
 window.onload = function() {
   var quiz = new Quiz();
-  quiz.init();
 }

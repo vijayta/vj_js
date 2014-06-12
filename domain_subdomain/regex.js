@@ -7,7 +7,8 @@ function DomainSubdomain(){
 }
 
 DomainSubdomain.prototype.validateUrl = function(event) {
-  var result = this.url.trim && this.url.match(Regex.URL);  
+  var value = this.url.value;
+  var result = value.match(Regex.URL);
   if(!result) {
     alert('Please enter a valid url');
     event.preventDefault();
@@ -24,7 +25,7 @@ DomainSubdomain.prototype.extractDomain = function(){
 }
 
 DomainSubdomain.prototype.showDomainSubdomain = function(){
-  if(this.subDomain.length) {
+  if(this.subDomain.length == 0) {
     alert("Domain is = " + this.domain);  
   }
   else{
@@ -33,7 +34,7 @@ DomainSubdomain.prototype.showDomainSubdomain = function(){
 }
 
 DomainSubdomain.prototype.init = function() {
-  this.url = document.getElementById('user_input').value;
+  this.url = document.getElementById('user_input');
   this.submit = document.getElementById('submit');
   this.bindEvent();
 }
