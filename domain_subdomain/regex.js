@@ -2,6 +2,7 @@ function DomainSubdomain(){
   this.url = document.getElementById('user_input').value;
   this.regex = /^((https?|ftp):\/\/)?(www\.)?(([A-z0-9]+\.)*)([A-z0-9]+\.[A-z]{2,4})(\/(.)*)?$/;
   this.submit = document.getElementById('submit');
+  this.init();
 }
 
 DomainSubdomain.prototype.validateUrl = function(event) {
@@ -31,11 +32,14 @@ DomainSubdomain.prototype.showDomainSubdomain = function(){
   }
 }
 
-window.onload = function(){ 
+DomainSubdomain.prototype.init = function() {
   this.submit.addEventListener('click', function(event) {
     var url = new DomainSubdomain();
     url.validateUrl(event);
     url.extractDomain();
     url.showDomainSubdomain();
   });
+}
+window.onload = function(){ 
+  var url = new DomainSubdomain();
 }

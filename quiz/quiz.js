@@ -99,7 +99,6 @@ Quiz.prototype.init = function() {
     question.result();
     question.storeEntry();
     question.QuestionFaced();
-  
     if(clickCount == 20){
       alert('Quiz Completed')
       this.disabled = true;
