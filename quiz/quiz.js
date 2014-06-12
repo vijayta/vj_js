@@ -94,6 +94,7 @@ Quiz.prototype.init = function() {
   this.allQue = document.getElementById('all_que');
   this.submit = document.getElementById('submit'); 
   this.count = document.getElementById('question_count');
+  this.form = document.getElementById('form');
   
   this.qusList = [];
   this.marks = 0;
@@ -116,7 +117,7 @@ Quiz.prototype.bindEvent = function() {
   
     if(clickCount == 20){
       alert('Quiz Completed')
-      document.getElementById('form').style.display = 'none';
+      obj.form.style.display = 'none';
       obj.allQue.style.display = 'block';
     }
     else{
