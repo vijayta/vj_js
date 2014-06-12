@@ -8,7 +8,7 @@ function DomainSubdomain(){
 
 DomainSubdomain.prototype.validateUrl = function() {
   var value = this.url.value;
-  var result = value.match(Regex.URL);
+  var result = value.trim && value.match(Regex.URL);
   if(!result) {
     alert('Please enter a valid url');
   }
