@@ -38,7 +38,7 @@ Quiz.prototype.calculation = function() {
 }
 
 Quiz.prototype.result = function(){
-  this.ans = Math.round(this.ans*100)/100;
+  this.ans = Math.round(this.ans * 100) / 100;
   if(this.ans == this.reply.value){ //Correct Answer;
     this.marks = this.marks + 10;
     this.score.innerHTML = this.marks;
