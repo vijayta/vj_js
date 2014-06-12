@@ -25,11 +25,11 @@ DomainSubdomain.prototype.extractDomain = function(){
 }
 
 DomainSubdomain.prototype.showDomainSubdomain = function(){
-  if(this.subDomain.length == 0) {
-    alert("Domain is = " + this.domain);  
+  if(this.subDomain.length) {
+    alert("Domain is = " + this.domain + " Sub Domain is : " + this.subDomain); 
   }
   else{
-    alert("Domain is = " + this.domain + " Sub Domain is : " + this.subDomain); 
+    alert("Domain is = " + this.domain);  
   }
 }
 
