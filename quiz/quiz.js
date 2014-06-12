@@ -1,5 +1,4 @@
 var clickCount = 1;
-var numberRegex = /^[-+]?[\d]*([\.][\d]*)?$/;
 function Quiz(){
   this.init();
 }
