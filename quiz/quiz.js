@@ -22,17 +22,14 @@ Quiz.prototype.calculation = function() {
       this.ans = parseFloat(first) + parseFloat(sec);
       return this.ans;
       break;
-    
     case('-'):
       this.ans = parseFloat(first) - parseFloat(sec);
       return this.ans;
       break;
-    
     case('/'):
       this.ans = parseFloat(first) / parseFloat(sec);
       return Math.round(this.ans);
       break;
-    
     default:
       this.ans = parseFloat(first) * parseFloat(sec);
       return this.ans;
@@ -79,7 +76,6 @@ Quiz.prototype.QuestionFaced = function() {
                           this.item["testResult"] + ")</span>  <span class='correct_ans'>Ans: <span>" + 
                           this.item["correctAnswer"] + "</span></span>";
   }   
-  
   this.allQue.appendChild(this.elem);
 }
 
