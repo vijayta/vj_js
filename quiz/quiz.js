@@ -2,33 +2,18 @@ var clickCount = 1;
 var numberRegex = /^[-+]?[\d]*([\.][\d]*)?$/;
 function Quiz(){
   this.init();
-  this.submit = document.getElementById('submit'); 
-  this.getQue = document.getElementById('get_que');
-  this.Question = Question;
 }
-function Question(){
-  this.firstField = document.getElementById('value01');
-  this.secondField = document.getElementById('value02');
-  this.optField = document.getElementById('operator');
-  this.reply = document.getElementById('reply');  
-  this.expectedAnswer = document.getElementById('expected_answer');
-  this.testResult = document.getElementById('test_result');
-  this.score = document.getElementById('score');
-  this.qusList = [];
-  this.marks = 0;
-  this.quizForm =  document.getElementById('form');
-  // this.allQue = document.getElementById('all_que');
-}
-Question.prototype.setValue = function(){
+
+Quiz.prototype.setValue = function(){
   this.firstField.value = Math.floor((Math.random() * 20) + 1);
   this.secondField.value = Math.floor((Math.random() * 20) + 1);
 }
-Question.prototype.setOperator = function() {
+Quiz.prototype.setOperator = function() {
   var operators = ['+','-','*','/'];
   setOpt = operators[Math.floor(Math.random()*4)];
   this.optField.value = setOpt;
 }
-Question.prototype.calculation = function() {
+Quiz.prototype.calculation = function() {
   var first = this.firstField.value;
   var sec = this.secondField.value
   switch(this.optField.value){
@@ -44,7 +29,7 @@ Question.prototype.calculation = function() {
     
     case('/'):
       this.ans = parseFloat(first) / parseFloat(sec);
-      return this.ans;
+      return Math.round(this.ans);
       break;
     
     default:
@@ -53,10 +38,9 @@ Question.prototype.calculation = function() {
     }
 }
 
-Question.prototype.result = function(){
+Quiz.prototype.result = function(){
   this.ans = Math.round(this.ans*100)/100;
-  if(this.ans == this.reply.value){
-    // alert('Correct Answer');
+  if(this.ans == this.reply.value){ //Correct Answer;
     this.marks = this.marks + 10;
     this.score.innerHTML = this.marks;
     this.testResult.value = "Correct";
@@ -65,65 +49,87 @@ Question.prototype.result = function(){
   else if(this.ans == "" || this.ans == null){
     this.testResult.value = "notAttempted";
   }
-  else{
-    // alert('Sorry Wrong answer');
+  else{ // 'Sorry Wrong answer;
     this.marks = this.marks;
     this.score.innerHTML = this.marks;
     this.testResult.value = "wrong";
     this.testResult.style.backgroundColor = '#ff0000';
   }
 }
-Question.prototype.storeEntry = function(){
+Quiz.prototype.storeEntry = function(){
   this.expectedAnswer.value = this.ans;
-  this.qusList.push({ "firstfield": this.firstField.value , "opt" : this.optField.value, "secondfield": this.secondField.value , "reply": this.reply.value , "testResult": this.testResult.value, "correctAnswer" : this.expectedAnswer.value});
+  this.qusList.push({ "firstfield": this.firstField.value , 
+                      "opt" : this.optField.value, 
+                      "secondfield": this.secondField.value , 
+                      "reply": this.reply.value , 
+                      "testResult": this.testResult.value, 
+                      "correctAnswer" : this.expectedAnswer.value});
 }
 
-Question.prototype.QuestionFaced = function() { 
-  var allQue = document.getElementById("all_que");
-  var elem = document.createElement("li");
+Quiz.prototype.QuestionFaced = function() { 
+  this.allQue = document.getElementById("all_que");
+  this.elem = document.createElement("li");
   for(var i = 1; i < this.qusList.length; i++){
     this.item = this.qusList[i];
-    elem.value = i;
-    elem.innerHTML=this.item["firstfield"] + " " + this.item["opt"] +  " " +  this.item["secondfield"]  + " = " +  this.item["reply"] + " <span class=" + this.item["testResult"]+ ">(" + this.item["testResult"] + ")</span>  <span class='correct_ans'>Ans: <span>" + this.item["correctAnswer"] + "</span></span>";
-  } 
-  allQue.appendChild(elem);
+    this.elem.value = i;
+    this.elem.innerHTML = this.item["firstfield"] + " " + 
+                          this.item["opt"] +  " " +  
+                          this.item["secondfield"]  + " = " +  
+                          this.item["reply"] + " <span class=" + 
+                          this.item["testResult"]+ ">(" + 
+                          this.item["testResult"] + ")</span>  <span class='correct_ans'>Ans: <span>" + 
+                          this.item["correctAnswer"] + "</span></span>";
+  }   
   
+  this.allQue.appendChild(this.elem);
 }
 
 Quiz.prototype.init = function() {
-  var question = new Question();
-  var this_obj = this;
-  question.setValue();
-  question.setOperator();
-  question.calculation();
-  document.getElementById('question_count').innerHTML = clickCount;
+  this.firstField = document.getElementById('value01');
+  this.secondField = document.getElementById('value02');
+  this.optField = document.getElementById('operator');
+  this.reply = document.getElementById('reply');  
+  this.expectedAnswer = document.getElementById('expected_answer');
+  this.testResult = document.getElementById('test_result');
+  this.score = document.getElementById('score');
+  this.qusList = [];
+  this.marks = 0;
+  this.quizForm =  document.getElementById('form');
+  this.allQue = document.getElementById('all_que');
+  this.submit = document.getElementById('submit'); 
+  this.getQue = document.getElementById('get_que');
+  this.count = document.getElementById('question_count');
+  this.setValue();
+  this.setOperator();
+  this.calculation();
+  this.storeEntry();
+  this.count.innerHTML = clickCount;
+  this.bindEvent();
+}
+
+Quiz.prototype.bindEvent = function() {
+  var obj = this;
   this.submit.addEventListener('click', function(event) {
     event.preventDefault();
-    question.result();
-    question.storeEntry();
-    question.QuestionFaced();
+    obj.result();
+    obj.storeEntry();
+    obj.QuestionFaced();
+  
     if(clickCount == 20){
       alert('Quiz Completed')
-      this.disabled = true;
       document.getElementById('form').style.display = 'none';
       document.getElementById("all_que").style.display = 'block';
     }
     else{
-      document.getElementById('question_count').innerHTML = clickCount;
-      this_obj.submit.disabled = false; 
-      question.setValue();
-      question.setOperator();
-      question.calculation();
-      this.disabled = false;
+      obj.setValue();
+      obj.setOperator();
+      obj.calculation();
       clickCount++;
+      obj.count.innerHTML = clickCount;
     }
     document.getElementById('reply').value = "";
   });  
 }
-Quiz.prototype.bindEvent = function(){
-  
-}
-
 
 window.onload = function() {
   var quiz = new Quiz();
