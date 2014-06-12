@@ -24,7 +24,7 @@ DomainSubdomain.prototype.extractDomain = function(){
 }
 
 DomainSubdomain.prototype.showDomainSubdomain = function(){
-  if(this.subDomain.length == 0) {
+  if(this.subDomain.length) {
     alert("Domain is = " + this.domain);  
   }
   else{
