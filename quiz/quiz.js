@@ -123,7 +123,7 @@ Quiz.prototype.bindEvent = function() {
       clickCount++;
       obj.count.innerHTML = clickCount;
     }
-    document.getElementById('reply').value = "";
+    obj.reply.value = "";
   });  
 }
 
