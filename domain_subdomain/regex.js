@@ -6,12 +6,11 @@ function DomainSubdomain(){
   this.init();
 }
 
-DomainSubdomain.prototype.validateUrl = function(event) {
+DomainSubdomain.prototype.validateUrl = function() {
   var value = this.url.value;
   var result = value.match(Regex.URL);
   if(!result) {
     alert('Please enter a valid url');
-    event.preventDefault();
   }
   else{
     this.extractDomain();
@@ -40,8 +39,8 @@ DomainSubdomain.prototype.init = function() {
 }
 DomainSubdomain.prototype.bindEvent = function(){
   var obj = this; 
-  this.submit.addEventListener('click', function(event) {
-    obj.validateUrl(event);
+  this.submit.addEventListener('click', function() {
+    obj.validateUrl();
   });
 }
 
