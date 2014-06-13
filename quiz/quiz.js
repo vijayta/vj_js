@@ -1,4 +1,4 @@
-var clickCount = 1;
+var clickCount = 0;
 function NumberOfQuestions(){
   COUNT: 20;
 }
@@ -100,12 +100,12 @@ Quiz.prototype.loadAllQustion = function() {
   }  
 }
 
-Quiz.prototype.showQueToContestent = function() {
-  this.dataOne.value = this.item['dataOne'];
-  this.optField.value = this.item['opt'];
-  this.dataTwo.value = this.item['dataTwo'];
+Quiz.prototype.showQueToContestent = function(i) {
+  this.dataOne.value = this.qusList[i]['dataOne'];
+  this.optField.value = this.qusList[i]['opt'];
+  this.dataTwo.value = this.qusList[i]['dataTwo'];
+  i++;
 }
-
 
 Quiz.prototype.init = function() {
   this.dataOne = document.getElementById('value01');
@@ -125,6 +125,7 @@ Quiz.prototype.init = function() {
   this.marks = 0;
 
   this.loadAllQustion();
+  this.showQueToContestent(clickCount);
   // this.storeEntry();
   this.count.innerHTML = clickCount;
   this.bindEvent();
@@ -134,20 +135,20 @@ Quiz.prototype.bindEvent = function() {
   var obj = this;
   this.submit.addEventListener('click', function(event) {
     event.preventDefault();
-    obj.showQueToContestent();
+    // obj.showQueToContestent();
     obj.result();
     // obj.storeEntry();
     // obj.QuestionFaced();
   
-    if(clickCount == 20){
+    if(clickCount == 19){
       alert('Quiz Completed')
       obj.form.style.display = 'none';
       obj.allQue.style.display = 'block';
     }
     else{
-      // obj.loadAllQustion();
-      // clickCount++;
-      // obj.count.innerHTML = clickCount;
+      obj.showQueToContestent(clickCount+1);
+      clickCount++;
+      obj.count.innerHTML = clickCount;
     }
     obj.reply.value = "";
   });  
