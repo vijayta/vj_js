@@ -1,6 +1,7 @@
 var rowCounter = 1; 
 function Table(){
    this.Row = Row;
+   this.init();
   }
 function Row(){
   this.row = document.getElementById('contact');
@@ -43,8 +44,8 @@ Row.prototype.addRow = function(contact) {
   this.rowRow.setAttribute('id', 'row' + this.count); 
   var call0 = this.addCell(0, 'name');
   var call1 = this.addCell(1, 'email');
-  var cell2 = this.actionCell(2, 'save', this.saveRow);
-  var cell2 = this.actionCell(2, 'edit', this.editRow);
+  var cell2 = this.actionCell(2, 'save', this.cellAction);
+  var cell2 = this.actionCell(2, 'edit', this.cellAction);
   var cell4 = this.actionCell(4, 'delete', this.deleteRow);
   rowCounter++; 
 }
@@ -61,83 +62,83 @@ Row.prototype.deleteRow = function(e){
   }
 }
 
-Row.prototype.saveRow = function(e){
-var saveButton = e.getAttribute('data-button');
-this.rows = document.getElementsByTagName('tr');
-  for(var i = 0; i < this.rows.length; i++){
-    rows[i].addEventListener('click', function() {      
-      if(saveButton == this.id){
-        document.getElementById(this.id).getElementsByClassName('edit')[0].style.display = 'table-cell';
-        document.getElementById(this.id).getElementsByClassName('save')[0].style.display = 'none';
-        this.name = document.getElementById(this.id).getElementsByTagName('input');
-        this.text = document.getElementById(this.id).getElementsByTagName('span');
-        this.text[0].innerHTML = this.name[0].value;
-        this.name[0].style.display = "none";
-        this.text[0].style.display = "block"; 
-        this.text[1].innerHTML = this.name[1].value;
-        this.name[1].style.display = "none";
-        this.text[1].style.display = "block"; 
-      }
-    });
-  }
-}
-
-Row.prototype.editRow = function(e){
-var editButton = e.getAttribute('data-button');
-  for(var i = 0; i < this.rows.length; i++){
-    rows[i].addEventListener('click', function() {      
-      if(editButton == this.id){
-        this.text[0].innerHTML = this.name[0].value;
-        this.name[0].style.display = "block";
-        this.text[0].style.display = "none"; 
-        this.text[1].innerHTML = this.name[1].value;
-        this.name[1].style.display = "block";
-        this.text[1].style.display = "none"; 
-        document.getElementById(this.id).getElementsByClassName('edit')[0].style.display = 'none';    
-        document.getElementById(this.id).getElementsByClassName('save')[0].style.display = 'table-cell';
-      }
-    });
-  }
-}
-
-
-// Row.prototype.cellAction = function(e) {
-//   var button = e.getAttribute('data-button');
-//   var rows = document.getElementsByTagName('tr');
-//   var element = document.getElementsByTagName('a');
-//   this.action = document.getElementsByName(this.value);
-//   for(var i = 0; i < element.length; i++){
-//     element[i].addEventListener('click', function() {
-//       console.log(rows.id);
-
-//       // this.name = document.getElementById(this.id).getElementsByTagName('input');
-//       // this.text = document.getElementById(this.id).getElementsByTagName('span');
-//       // for(var i = 0; i < this.name.length; i++) {
-//       //   if(button == this.id) { 
-//       //     this.name[i].style.display = "block";
-//       //     this.text[i].style.display = "none";
-//       //   }
-//       //   else{
-//       //     this.name[i].style.display = "none";
-//       //     this.text[i].style.display = "block";
-//       //   }
-//       // }
-//       // if(button == this.id) { 
-//       //   if(this.action == 'save'){
-//       //     document.getElementById(this.id).getElementsByClassName('edit')[0].style.display = 'none';    
-//       //     document.getElementById(this.id).getElementsByClassName('save')[0].style.display = 'table-cell';  
-//       //   }
-//       //   else{
-//       //     document.getElementById(this.id).getElementsByClassName('edit')[0].style.display = 'table-cell';    
-//       //     document.getElementById(this.id).getElementsByClassName('save')[0].style.display = 'none';   
-//       //   }
-      
+// Row.prototype.saveRow = function(e){
+// var saveButton = e.getAttribute('data-button');
+// this.rows = document.getElementsByTagName('tr');
+//   for(var i = 0; i < this.rows.length; i++){
+//     rows[i].addEventListener('click', function() {      
+//       if(saveButton == this.id){
+//         document.getElementById(this.id).getElementsByClassName('edit')[0].style.display = 'table-cell';
+//         document.getElementById(this.id).getElementsByClassName('save')[0].style.display = 'none';
+//         this.name = document.getElementById(this.id).getElementsByTagName('input');
+//         this.text = document.getElementById(this.id).getElementsByTagName('span');
+//         this.text[0].innerHTML = this.name[0].value;
+//         this.name[0].style.display = "none";
+//         this.text[0].style.display = "block"; 
+//         this.text[1].innerHTML = this.name[1].value;
+//         this.name[1].style.display = "none";
+//         this.text[1].style.display = "block"; 
+//       }
 //     });
 //   }
 // }
 
+// Row.prototype.editRow = function(e){
+// var editButton = e.getAttribute('data-button');
+//   for(var i = 0; i < this.rows.length; i++){
+//     rows[i].addEventListener('click', function() {      
+//       if(editButton == this.id){
+//         this.text[0].innerHTML = this.name[0].value;
+//         this.name[0].style.display = "block";
+//         this.text[0].style.display = "none"; 
+//         this.text[1].innerHTML = this.name[1].value;
+//         this.name[1].style.display = "block";
+//         this.text[1].style.display = "none"; 
+//         document.getElementById(this.id).getElementsByClassName('edit')[0].style.display = 'none';    
+//         document.getElementById(this.id).getElementsByClassName('save')[0].style.display = 'table-cell';
+//       }
+//     });
+//   }
+// }
+
+
+Row.prototype.cellAction = function(e) {
+  var button = e.getAttribute('data-button');
+  var rows = document.getElementsByTagName('tr');
+  var element = document.getElementsByTagName('a');
+  this.action = document.getElementsByName(this.value);
+  for(var i = 0; i < element.length; i++){
+    element[i].addEventListener('click', function() {
+      console.log(this.id);
+
+      // this.name = document.getElementById(this.id).getElementsByTagName('input');
+      // this.text = document.getElementById(this.id).getElementsByTagName('span');
+      for(var i = 0; i < this.name.length; i++) {
+        if(button == this.id) { 
+          this.name[i].style.display = "block";
+          this.text[i].style.display = "none";
+        }
+        else{
+          this.name[i].style.display = "none";
+          this.text[i].style.display = "block";
+        }
+      }
+      // if(button == this.id) { 
+      //   if(this.action == 'save'){
+      //     document.getElementById(this.id).getElementsByClassName('edit')[0].style.display = 'none';    
+      //     document.getElementById(this.id).getElementsByClassName('save')[0].style.display = 'table-cell';  
+      //   }
+      //   else{
+      //     document.getElementById(this.id).getElementsByClassName('edit')[0].style.display = 'table-cell';    
+      //     document.getElementById(this.id).getElementsByClassName('save')[0].style.display = 'none';   
+      //   }
+      // }
+    });
+  }
+}
+
 Table.prototype.init = function() {
-    var addRow = document.getElementById('addRow');
+    var addRow = document.getElementById('add_row');
     addRow.addEventListener('click', function() {
       var row = new Row();
       row.addRow('contact');
@@ -145,6 +146,5 @@ Table.prototype.init = function() {
   }
 
 window.onload = function() {  
-    var table = new Table();
-    table.init();
+  var table = new Table();
 }
