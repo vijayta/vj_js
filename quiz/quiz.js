@@ -44,7 +44,10 @@ Quiz.prototype.storeEntry = function() {
   this.qusList.push({ "dataOne": this.first,
                       "opt" : this.opt, 
                       "dataTwo": this.sec, 
-                      "correctAnswer" : this.expectedAnswer.value});
+                      "correctAnswer" : this.expectedAnswer.value, 
+                      // "reply": this.reply.value,
+                      // "testResult": this.testResult.value
+                    });
 }
 
 Quiz.prototype.loadAllQustion = function() {
@@ -75,22 +78,21 @@ Quiz.prototype.showQueToContestent = function(i) {
 Quiz.prototype.QuestionFaced = function(i) { 
   this.allQue = document.getElementById("all_que");
   var elem = document.createElement("li");
-  this.qusList[i].push({ "reply": this.reply.value, 
-                         "testResult": this.testResult.value});        
-
-  // alert("this.ans = " + this.qusList[i]['correctAnswer'] + " my Reply = "+ this.userReply[i]["reply"]);
-  
+  var userEntry = [];
+  this.storeEntry();
+  userEntry.push({"reply": this.reply.value, "testResult": this.testResult.value});
   this.result();
   elem.value = i + 1;
 
   elem.innerHTML =  this.qusList[i]["dataOne"] + " " + 
                     this.qusList[i]["opt"] +  " " +  
                     this.qusList[i]["dataTwo"] + " = " +
-                    this.qusList[i]["reply"] + " (<span class='" + 
-                    this.qusList[i]['testResult'] + "'>" + 
-                    this.qusList[i]['testResult'] + "</span>)  <span class='correct_ans'>Ans: <span>" + 
+                    userEntry[i]["reply"] + " (<span class='" + 
+                    userEntry[i]['testResult'] + "'>" + 
+                    userEntry[i]['testResult'] + "</span>)  <span class='correct_ans'>Ans: <span>" + 
                     this.qusList[i]['correctAnswer'] + "</span></span>";
                     this.allQue.appendChild(elem);
+                    i++;
 }
 Quiz.prototype.result = function() {
   if(this.ans == this.reply.value) { //Correct Answer;
@@ -133,17 +135,14 @@ Quiz.prototype.bindEvent = function() {
   this.submit.addEventListener('click', function(event) {
     event.preventDefault();
     obj.showQueToContestent(clickCount+1);
-    
     obj.QuestionFaced(clickCount);
     clickCount++;
-    alert(clickCount);
     obj.count.innerHTML = clickCount+1;
     if(clickCount == 19){
       alert('Quiz Completed')
       obj.form.style.display = 'none';
       obj.allQue.style.display = 'block';
     }
-    
     obj.reply.value = "";
   });  
 }
