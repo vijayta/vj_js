@@ -75,22 +75,23 @@ Quiz.prototype.showQueToContestent = function(i) {
 Quiz.prototype.QuestionFaced = function(i) { 
   this.allQue = document.getElementById("all_que");
   var elem = document.createElement("li");
-  this.userReply = [];
-  this.userReply.push({ "reply": this.reply.value, 
-                   "testResult": this.testResult.value});
+  alert(this.testResult.value);
+  // this.userReply = [];
+  // this.userReply.push({ "reply": this.reply.value, 
+                   // "testResult": this.testResult.value});
 
   // alert("this.ans = " + this.qusList[i]['correctAnswer'] + " my Reply = "+ this.userReply[i]["reply"]);
   
   this.result();
   elem.value = i + 1;
 
-  elem.innerHTML =  this.qusList[i]["dataOne"] + " " + 
-                    this.qusList[i]["opt"] +  " " +  
-                    this.qusList[i]["dataTwo"] + " = " +
-                    this.userReply[i]["reply"] + " (<span class='" + 
-                    this.userReply[i]["testResult"] + "'>" + 
-                    this.userReply[i]["testResult"] + "</span>)  <span class='correct_ans'>Ans: <span>" + 
-                    this.qusList[i]['correctAnswer'] + "</span></span>";
+  elem.innerHTML =  this.item["dataOne"] + " " + 
+                    this.item["opt"] +  " " +  
+                    this.item["dataTwo"] + " = " +
+                    this.reply.value + " (<span class='" + 
+                    this.testResult.value + "'>" + 
+                    this.testResult.value + "</span>)  <span class='correct_ans'>Ans: <span>" + 
+                    this.item['correctAnswer'] + "</span></span>";
                     this.allQue.appendChild(elem);
 }
 Quiz.prototype.result = function() {
