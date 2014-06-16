@@ -75,23 +75,21 @@ Quiz.prototype.showQueToContestent = function(i) {
 Quiz.prototype.QuestionFaced = function(i) { 
   this.allQue = document.getElementById("all_que");
   var elem = document.createElement("li");
-  alert(this.testResult.value);
-  // this.userReply = [];
-  // this.userReply.push({ "reply": this.reply.value, 
-                   // "testResult": this.testResult.value});
+  this.qusList[i].push({ "reply": this.reply.value, 
+                         "testResult": this.testResult.value});        
 
   // alert("this.ans = " + this.qusList[i]['correctAnswer'] + " my Reply = "+ this.userReply[i]["reply"]);
   
   this.result();
   elem.value = i + 1;
 
-  elem.innerHTML =  this.item["dataOne"] + " " + 
-                    this.item["opt"] +  " " +  
-                    this.item["dataTwo"] + " = " +
-                    this.reply.value + " (<span class='" + 
-                    this.testResult.value + "'>" + 
-                    this.testResult.value + "</span>)  <span class='correct_ans'>Ans: <span>" + 
-                    this.item['correctAnswer'] + "</span></span>";
+  elem.innerHTML =  this.qusList[i]["dataOne"] + " " + 
+                    this.qusList[i]["opt"] +  " " +  
+                    this.qusList[i]["dataTwo"] + " = " +
+                    this.qusList[i]["reply"] + " (<span class='" + 
+                    this.qusList[i]['testResult'] + "'>" + 
+                    this.qusList[i]['testResult'] + "</span>)  <span class='correct_ans'>Ans: <span>" + 
+                    this.qusList[i]['correctAnswer'] + "</span></span>";
                     this.allQue.appendChild(elem);
 }
 Quiz.prototype.result = function() {
@@ -135,8 +133,9 @@ Quiz.prototype.bindEvent = function() {
   this.submit.addEventListener('click', function(event) {
     event.preventDefault();
     obj.showQueToContestent(clickCount+1);
-    clickCount++;
+    
     obj.QuestionFaced(clickCount);
+    clickCount++;
     alert(clickCount);
     obj.count.innerHTML = clickCount+1;
     if(clickCount == 19){
