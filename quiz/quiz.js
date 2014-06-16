@@ -1,5 +1,4 @@
 var clickCount = 0;
-var itr = 0;
 function NumberOfQuestions(){
   COUNT: 20;
 }
@@ -7,12 +6,12 @@ function Quiz(){
   this.init();
 }
 
-Quiz.prototype.setValue = function() {
+Quiz.prototype.setValueToQuestion = function() {
   this.queValue1 = Math.floor((Math.random() * 20) + 1);
   this.queValue2 = Math.floor((Math.random() * 20) + 1);
 }
 
-Quiz.prototype.setOperator = function() {
+Quiz.prototype.setOperatorToQuestion = function() {
   var operators = ['+','-','*','/'];
     this.opt = operators[Math.floor(Math.random()*4)];
 }
@@ -41,61 +40,52 @@ Quiz.prototype.storeEntry = function() {
   this.calculation();
   this.ans = Math.round(this.ans * 100) / 100;
   this.expectedAnswer.value = this.ans;
-  this.qusList.push({ "dataOne": this.first,
+  this.qiestionsListContestentFaced.push({ "dataOne": this.first,
                       "opt" : this.opt, 
                       "dataTwo": this.sec, 
                       "correctAnswer" : this.expectedAnswer.value, 
-                      // "reply": this.reply.value,
-                      // "testResult": this.testResult.value
                     });
 }
 
 Quiz.prototype.loadAllQustion = function() {
   for(var i = 0; i < 20; i++){
     var element = document.createElement("li");
-    this.setValue();
-    this.setOperator();
+    this.setValueToQuestion();
+    this.setOperatorToQuestion();
     this.first = this.queValue1;
     this.sec = this.queValue2;
     this.storeEntry();
-
-    this.item = this.qusList[i];
     element.value = i;
-    element.innerHTML = this.item["dataOne"] + " " + 
-                     this.item["opt"] +  " " +  
-                     this.item["dataTwo"]  + " <span class='correct_ans'>Ans: <span>" +  
-                     this.item["correctAnswer"] + "</span></span>";
-    this.queBank.appendChild(element);                 
+    // Below code is just for QA reference if we wanna check which Question will be in Quiz.
+    // element.innerHTML = this.item["dataOne"] + " " + 
+    //                  this.item["opt"] +  " " +  
+    //                  this.item["dataTwo"]  + " <span class='correct_ans'>Ans: <span>" +  
+    //                  this.item["correctAnswer"] + "</span></span>";
+    // this.queBank.appendChild(element);                 
   }  
 }
 
 Quiz.prototype.showQueToContestent = function(i) {
-  this.dataOne.value = this.qusList[i]['dataOne'];
-  this.optField.value = this.qusList[i]['opt'];
-  this.dataTwo.value = this.qusList[i]['dataTwo'];
+  this.dataOne.value = this.qiestionsListContestentFaced[i]['dataOne'];
+  this.optField.value = this.qiestionsListContestentFaced[i]['opt'];
+  this.dataTwo.value = this.qiestionsListContestentFaced[i]['dataTwo'];
 }
-
 Quiz.prototype.QuestionFaced = function(i) { 
-  this.allQue = document.getElementById("all_que");
+  this.allQuetsionContestetFaced = document.getElementById("all_que");
   var elem = document.createElement("li");
-  var userEntry = [];
-  this.storeEntry();
-  userEntry.push({"reply": this.reply.value, "testResult": this.testResult.value});
-  this.result();
+  this.result(i);
   elem.value = i + 1;
-
-  elem.innerHTML =  this.qusList[i]["dataOne"] + " " + 
-                    this.qusList[i]["opt"] +  " " +  
-                    this.qusList[i]["dataTwo"] + " = " +
-                    userEntry[i]["reply"] + " (<span class='" + 
-                    userEntry[i]['testResult'] + "'>" + 
-                    userEntry[i]['testResult'] + "</span>)  <span class='correct_ans'>Ans: <span>" + 
-                    this.qusList[i]['correctAnswer'] + "</span></span>";
-                    this.allQue.appendChild(elem);
-                    i++;
+  elem.innerHTML =  this.qiestionsListContestentFaced[i]["dataOne"] + " " + 
+                    this.qiestionsListContestentFaced[i]["opt"] +  " " +  
+                    this.qiestionsListContestentFaced[i]["dataTwo"] + " = " +
+                    this.reply.value + " (<span class='" + 
+                    this.testResult.value + "'>" + 
+                    this.testResult.value + "</span>)  <span class='correct_ans'>Ans: <span>" + 
+                    this.qiestionsListContestentFaced[i]['correctAnswer'] + "</span></span>";
+                    this.allQuetsionContestetFaced.appendChild(elem);
 }
-Quiz.prototype.result = function() {
-  if(this.ans == this.reply.value) { //Correct Answer;
+Quiz.prototype.result = function(i) {
+  if(this.qiestionsListContestentFaced[i]['correctAnswer'] == this.reply.value) { //Correct Answer;
     this.marks = this.marks + 10;
     this.score.innerHTML = this.marks;
     this.testResult.value = "Correct";
@@ -115,15 +105,13 @@ Quiz.prototype.init = function() {
   this.expectedAnswer = document.getElementById('expected_answer');
   this.testResult = document.getElementById('test_result');
   this.score = document.getElementById('score');
-  this.allQue = document.getElementById('all_que');
+  this.allQuetsionContestetFaced = document.getElementById('all_que');
   this.submit = document.getElementById('submit'); 
   this.count = document.getElementById('question_count');
   this.form = document.getElementById('form');
-  this.queBank = document.getElementById('question_bank');
-  
-  this.qusList = [];
+  this.questionBank = document.getElementById('question_bank'); //Just QA referrance
+  this.qiestionsListContestentFaced = [];
   this.marks = 0;
-
   this.loadAllQustion();
   this.count.innerHTML = clickCount;
   this.showQueToContestent(clickCount);
@@ -141,8 +129,9 @@ Quiz.prototype.bindEvent = function() {
     if(clickCount == 19){
       alert('Quiz Completed')
       obj.form.style.display = 'none';
-      obj.allQue.style.display = 'block';
+      obj.allQuetsionContestetFaced.style.display = 'block';
     }
+    
     obj.reply.value = "";
   });  
 }
