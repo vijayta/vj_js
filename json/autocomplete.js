@@ -1,60 +1,7 @@
 var counter = 0;
 var elem = [];
 function AutoComplete(){
-  this.jsonData = { "name" : 
-    [
-      "Luigi Damiano",
-      "Zenith Coboro",
-      "Zig Ziglar",
-      "Steve Costner",
-      "Bill Grazer",
-      "Timothy Frazer",
-      "Boris Becker",
-      "Glenn Gladwich",
-      "Jim Jackson",
-      "Aaron Kabin",
-      "Roy Goldwin",
-      "Jason Goldberg",
-      "Tim Ferris",
-      "Buck Singham",
-      "Malcom Gladwell",
-      "Joy Rabura",
-      "Vid Luther",
-      "Tom Glicken",
-      "Ray Baxter",
-      "Ari Kama",
-      "Kenichi Suzuki",
-      "Rick Olson"
-    ]
-  };
-  this.jsonData2 = { "name" : 
-    [
-      "Luigi Damiano",
-      "Zenith Coboro",
-      "Zig Ziglar",
-      "Steve Costner",
-      "Bill Grazer",
-      "Timothy Frazer",
-      "Boris Becker",
-      "Glenn Gladwich",
-      "Jim Jackson",
-      "Aaron Kabin",
-      "Roy Goldwin",
-      "Jason Goldberg",
-      "Tim Ferris",
-      "Buck Singham",
-      "Malcom Gladwell",
-      "Joy Rabura",
-      "Vid Luther",
-      "Tom Glicken",
-      "Ray Baxter",
-      "Ari Kama",
-      "Kenichi Suzuki",
-      "Rick Olson"
-    ]
-  };
-  this.init();
-  this.list = document.getElementById('list');
+  this.init();  
 }
 
 AutoComplete.prototype.complete = function(obj, keyevent) {
@@ -75,39 +22,90 @@ AutoComplete.prototype.complete = function(obj, keyevent) {
     var ini = obj.selectionStart;
   }
 
-  for (var i = 0; i < this.jsonData.name.length; i++) {
-    element = this.jsonData.name[i].toString();
-    if (element.toLowerCase().indexOf(userText.toLowerCase()) == 0) {
-      if(counter == 0){
-        obj.value += '<li>' + element.substring(userText.length, element.length) + '</li>';
-        // elem[counter] = element.substring(userText.length, element.length);
-      }else{
-      obj.value += '<li>' + element.substring(0, element.length) + '</li>';
-      // elem[counter] = element.substring(0, element.length);
-    }
-      elem[counter] = obj.value;
+  // for (var i = 0; i < this.suggetionList.name.length; i++) {
+  //   element = this.suggetionList.name[i].toString();
+  //   if (element.toLowerCase().indexOf(userText.toLowerCase()) == 0) {
+  //     obj.value += element.substring(userText.length, element.length);
+  //     break;
       
-      counter++;
+  //     if(counter == 0){
+  //       obj.value += element.substring(userText.length, element.length);
+  //     }
+  //     else{
+  //       obj.value += element.substring(0, element.length);
+  //       elem[counter] = element.substring(0, element.length);
+  //     }
+  //     elem[counter] = obj.value;
+  //     this.list.innerHTML =  '<li>' + obj.value + '</li>';  
+  //     counter++;
+  //   }
+    listValue = obj.val;
+    for (var i = 0; i < this.suggetionList.name.length; i++) {
+      element = this.suggetionList.name[i].toString();
+      if (element.toLowerCase().indexOf(userText.toLowerCase()) == 0) {
+        if(counter == 0){
+          obj.value += element.substring(userText.length, element.length);
+          listValue += '<li>' + element.substring(userText.length, element.length) + '</li>';
+        }
+        else{
+          listValue += '<li>' + element.substring(0, element.length) + '</li>';
+        }
+        this.list.innerHTML =  '<li>' + listValue + '</li>';  
+        counter++;
+      }
     }
-  }
-  this.list.innerHTML = '<li>' + obj.value + '</li>';
+    
+  
   if (obj.createTextRange) {
     range = obj.createTextRange();
     range.moveStart("character", ini);
     range.moveEnd("character", obj.value.length);
-    // range.select();
-    
+    range.select();
+
   }
-  // else if (obj.setSelectionRange) {
-  //   obj.setSelectionRange(ini, obj.value.length);
-  // }
+  else if (obj.setSelectionRange) {
+    obj.setSelectionRange(ini, obj.value.length);
+  }
 }
 
 AutoComplete.prototype.init = function() {
-  var name = document.getElementById('name');
-  name.addEventListener('keyup', function() {
-    var autoComplete = new AutoComplete();
-    autoComplete.complete(this, 'keydown');
+  this.suggetionList = { "name" : 
+    [ "Luigi Damiano",
+      "Zenith Coboro",
+      "Zig Ziglar",
+      "Steve Costner",
+      "Bill Grazer",
+      "Timothy Frazer",
+      "Boris Becker",
+      "Glenn Gladwich",
+      "Jim Jackson",
+      "Aaron Kabin",
+      "Roy Goldwin",
+      "Jason Goldberg",
+      "Tim Ferris",
+      "Buck Singham",
+      "Malcom Gladwell",
+      "Joy Rabura",
+      "Vid Luther",
+      "Tom Glicken",
+      "Ray Baxter",
+      "Ari Kama",
+      "Kenichi Suzuki",
+      "Rick Olson",
+      "Anvay",
+      "Anvita",
+      "Avinash",
+      "Catino",
+      "Devid",
+      "Elic",
+      "Former"
+    ]
+  };
+  this.list = document.getElementById('list');
+  var nameField = document.getElementById('nameField');
+  var obj = this;
+  nameField.addEventListener('keyup', function() {
+    obj.complete(this, 'keydown');
   });  
 }
 
