@@ -1,17 +1,27 @@
 var clickCount = 0;
-
-function Quiz(){
+function Quiz(dataOne, dataTwo, maxValueOperand, optField, reply, expectedAnswer, testResult, score, allQuetsionContestetFaced, submit, count, form){
+  this.dataOne = dataOne;
+  this.dataTwo = dataTwo;
+  this.optField = optField;
+  this.reply = reply;
+  this.expectedAnswer = expectedAnswer;
+  this.testResult = testResult;
+  this.score = score;
+  this.allQuetsionContestetFaced = allQuetsionContestetFaced;
+  this.submit = submit;
+  this.count = count;
+  this.form = form;
+  this.maxValueOperand = maxValueOperand;
+  this.operators = ['+','-','*','/'];
   this.init();
 }
 
-Quiz.prototype.setValueToQuestion = function() {
-  this.queValue1 = Math.floor((Math.random() * 20) + 1);
-  this.queValue2 = Math.floor((Math.random() * 20) + 1);
+Quiz.prototype.randomNumber = function (x) {
+  return Math.floor(Math.random() * x);
 }
 
 Quiz.prototype.setOperatorToQuestion = function() {
-  var operators = ['+','-','*','/'];
-    this.opt = operators[Math.floor(Math.random()*4)];
+    this.opt = this.operators[Math.floor(Math.random() * 4)];
 }
 
 Quiz.prototype.calculation = function() {
@@ -46,20 +56,15 @@ Quiz.prototype.storeEntry = function() {
 }
 
 Quiz.prototype.loadAllQustion = function() {
-  for(var i = 0; i < 20; i++){
+  for(var i = 0; i < this.maxValueOperand; i++){
     var element = document.createElement("li");
-    this.setValueToQuestion();
+    this.queValue1 = this.randomNumber(this.maxValueOperand + 1);
+    this.queValue2 = this.randomNumber(this.maxValueOperand + 1);
     this.setOperatorToQuestion();
     this.first = this.queValue1;
     this.sec = this.queValue2;
     this.storeEntry();
     element.value = i;
-    // Below code is just for QA reference if we wanna check which Question will be in Quiz.
-    // element.innerHTML = this.item["dataOne"] + " " + 
-    //                  this.item["opt"] +  " " +  
-    //                  this.item["dataTwo"]  + " <span class='correct_ans'>Ans: <span>" +  
-    //                  this.item["correctAnswer"] + "</span></span>";
-    // this.queBank.appendChild(element);                 
   }  
 }
 
@@ -96,22 +101,10 @@ Quiz.prototype.result = function(i) {
 }
 
 Quiz.prototype.init = function() {
-  this.dataOne = document.getElementById('value01');
-  this.dataTwo = document.getElementById('value02');
-  this.optField = document.getElementById('operator');
-  this.reply = document.getElementById('reply');  
-  this.expectedAnswer = document.getElementById('expected_answer');
-  this.testResult = document.getElementById('test_result');
-  this.score = document.getElementById('score');
-  this.allQuetsionContestetFaced = document.getElementById('all_que');
-  this.submit = document.getElementById('submit'); 
-  this.count = document.getElementById('question_count');
-  this.form = document.getElementById('form');
-  this.questionBank = document.getElementById('question_bank'); //Just QA referrance
   this.questionListContestentFaced = [];
   this.marks = 0;
   this.loadAllQustion();
-  this.count.innerHTML = clickCount;
+  this.count.innerHTML = clickCount+1;
   this.showQueToContestent(clickCount);
   this.bindEvent();
 }
@@ -120,20 +113,31 @@ Quiz.prototype.bindEvent = function() {
   var obj = this;
   this.submit.addEventListener('click', function(event) {
     event.preventDefault();
-    obj.showQueToContestent(clickCount+1);
+    obj.showQueToContestent(clickCount);
     obj.QuestionFaced(clickCount);
-    clickCount++;
+    
     obj.count.innerHTML = clickCount+1;
-    if(clickCount == 19){
+    clickCount++;
+    if(clickCount == 20) {
       alert('Quiz Completed')
       obj.form.style.display = 'none';
       obj.allQuetsionContestetFaced.style.display = 'block';
     }
-    
     obj.reply.value = "";
-  });  
+  });
 }
 
 window.onload = function() {
-  var quiz = new Quiz();
+  var dataOne = document.getElementById('value01');
+  var dataTwo = document.getElementById('value02');
+  var optField = document.getElementById('operator');
+  var reply = document.getElementById('reply');
+  var expectedAnswer = document.getElementById('expected_answer');
+  var testResult = document.getElementById('test_result');
+  var score = document.getElementById('score');
+  var allQuetsionContestetFaced = document.getElementById('all_que');
+  var submit = document.getElementById('submit');
+  var count = document.getElementById('question_count');
+  var form = document.getElementById('form');
+  new Quiz(dataOne, dataTwo, 20, optField, reply, expectedAnswer, testResult, score, allQuetsionContestetFaced, submit, count, form);
 }

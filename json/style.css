@@ -2,5 +2,5 @@ body{ font-family: arial; font-size: 14px; }
 input[type=text]{ width: 193px; font-family: arial; font-size: 14px; }
 ul#list{ box-shadow: 0px 0px 3px 0 #333333; margin: 0; padding: 0; width: 200px; }
 ul#list li{ list-style: none; padding: 5px 10px; }
-ul#list li:first-child{ display: none; }
+/*ul#list li:first-chi ld{ display: none; }*/
 ul#list li:hover{ background: #3875d7; color: #fff; }
