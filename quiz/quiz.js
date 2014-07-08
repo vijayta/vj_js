@@ -107,7 +107,7 @@ Quiz.prototype.bindEvent = function() {
     obj.showQueToContestent(clickCount);
     obj.QuestionFaced(clickCount);
     
-    obj.count.innerHTML = clickCount+1;
+    obj.count.innerHTML = clickCount + 1;
     clickCount++;
     if(clickCount == 20) {
       alert('Quiz Completed')
