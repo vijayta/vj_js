@@ -16,3 +16,5 @@ ol li{ padding: 10px 0 10px 0px; margin: 0 0 0 20px; font-size: 14px; color: #33
 .Correct{ color: #008309; }
 .wrong{color: #ca120d; }
 #all_que{ border: 1px solid #ccc; background: #f0f0f0; padding: 20px; }
+.block{ display: block; }
+.none{ display: none; }

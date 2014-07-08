@@ -1,8 +1,40 @@
 var clickCount = 0;
-function Quiz(dataOne, dataTwo, maxValueOperand, optField, reply, expectedAnswer, testResult, score, allQuetsionContestetFaced, submit, count, form){
+function Question(dataOne, dataTwo, optField, maxValueOperand){
   this.dataOne = dataOne;
   this.dataTwo = dataTwo;
   this.optField = optField;
+  this.operators = ['+','-','*','/'];
+  this.ans = this.calculation();
+}
+Question.prototype.randomNumber = function (x) {
+  return Math.floor(Math.random() * x);
+}
+Question.prototype.setOperatorToQuestion = function() {
+  this.opt = this.operators[Math.floor(Math.random() * 4)];
+}
+Question.prototype.calculation = function() {
+  switch(this.opt){
+    case('+'): 
+      return parseFloat(this.first) + parseFloat(this.sec);
+      break;
+    case('-'):
+      return parseFloat(this.first) - parseFloat(this.sec);
+      break;
+    case('/'):
+      return parseFloat(this.first) / parseFloat(this.sec);
+      break;
+    default:
+      return parseFloat(this.first) * parseFloat(this.sec);
+  }
+}
+function Quiz(dataOne, dataTwo, maxValueOperand, optField, reply, expectedAnswer, testResult, score, allQuetsionContestetFaced, submit, count, form) {
+  this.Que = new Question(dataOne, dataTwo, optField, maxValueOperand);
+  this.dataOne = dataOne;
+  this.dataTwo = dataTwo;
+  this.optField = optField;
+  this.maxValueOperand = maxValueOperand;
+  this.queValue1 = this.Que.randomNumber(this.maxValueOperand + 1);
+  this.queValue2 = this.Que.randomNumber(this.maxValueOperand + 1);
   this.reply = reply;
   this.expectedAnswer = expectedAnswer;
   this.testResult = testResult;
@@ -11,41 +43,21 @@ function Quiz(dataOne, dataTwo, maxValueOperand, optField, reply, expectedAnswer
   this.submit = submit;
   this.count = count;
   this.form = form;
-  this.maxValueOperand = maxValueOperand;
-  this.operators = ['+','-','*','/'];
   this.init();
 }
 
-Quiz.prototype.randomNumber = function (x) {
-  return Math.floor(Math.random() * x);
+Quiz.prototype.loadAllQustion = function() {
+  for(var i = 0; i < this.maxValueOperand; i++){
+    var element = document.createElement("li");
+    this.Que.setOperatorToQuestion();
+    this.first = this.queValue1;
+    this.sec = this.queValue2;
+    this.storeEntry();
+    element.value = i;
+  }  
 }
-
-Quiz.prototype.setOperatorToQuestion = function() {
-    this.opt = this.operators[Math.floor(Math.random() * 4)];
-}
-
-Quiz.prototype.calculation = function() {
-  switch(this.opt){
-    case('+'): 
-      this.ans = parseFloat(this.first) + parseFloat(this.sec);
-      return this.ans;
-      break;
-    case('-'):
-      this.ans = parseFloat(this.first) - parseFloat(this.sec);
-      return this.ans;
-      break;
-    case('/'):
-      this.ans = parseFloat(this.first) / parseFloat(this.sec);
-      return Math.round(this.ans);
-      break;
-    default:
-      this.ans = parseFloat(this.first) * parseFloat(this.sec);
-      return this.ans;
-    }
-}
-
 Quiz.prototype.storeEntry = function() {
-  this.calculation();
+  this.Que.calculation();
   this.ans = Math.round(this.ans * 100) / 100;
   this.expectedAnswer.value = this.ans;
   this.questionListContestentFaced.push({ "dataOne": this.first,
@@ -55,23 +67,11 @@ Quiz.prototype.storeEntry = function() {
                     });
 }
 
-Quiz.prototype.loadAllQustion = function() {
-  for(var i = 0; i < this.maxValueOperand; i++){
-    var element = document.createElement("li");
-    this.queValue1 = this.randomNumber(this.maxValueOperand + 1);
-    this.queValue2 = this.randomNumber(this.maxValueOperand + 1);
-    this.setOperatorToQuestion();
-    this.first = this.queValue1;
-    this.sec = this.queValue2;
-    this.storeEntry();
-    element.value = i;
-  }  
-}
-
 Quiz.prototype.showQueToContestent = function(i) {
-  this.dataOne.value = this.questionListContestentFaced[i]['dataOne'];
-  this.optField.value = this.questionListContestentFaced[i]['opt'];
-  this.dataTwo.value = this.questionListContestentFaced[i]['dataTwo'];
+  var que_faced = this.questionListContestentFaced[i];
+  this.Que.dataOne.value = this.questionListContestentFaced[i]['dataOne'];
+  this.Que.optField.value = this.questionListContestentFaced[i]['opt'];
+  this.Que.dataTwo.value = this.questionListContestentFaced[i]['dataTwo'];
 }
 Quiz.prototype.QuestionFaced = function(i) { 
   this.allQuetsionContestetFaced = document.getElementById("all_que");
@@ -115,13 +115,12 @@ Quiz.prototype.bindEvent = function() {
     event.preventDefault();
     obj.showQueToContestent(clickCount);
     obj.QuestionFaced(clickCount);
-    
     obj.count.innerHTML = clickCount+1;
     clickCount++;
     if(clickCount == 20) {
       alert('Quiz Completed')
-      obj.form.style.display = 'none';
-      obj.allQuetsionContestetFaced.style.display = 'block';
+      obj.form.setAttribute('class' , 'none')
+      obj.allQuetsionContestetFaced.setAttribute('class', 'block');
     }
     obj.reply.value = "";
   });
