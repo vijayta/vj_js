@@ -23,25 +23,25 @@ Quiz.prototype.randomNumber = function (x) {
 Quiz.prototype.calculation = function() {
   switch(this.opt){
     case('+'): 
-      return this.first + this.sec;
+      return this.queValue1 + this.queValue2;
       break;
     case('-'):
-      return this.first - this.sec;
+      return this.queValue1 - this.queValue2;
       break;
     case('/'):
-      var ans = this.first / this.sec;
+      var ans = this.queValue1 / this.queValue2;
       return Math.round(ans * 100) / 100;
       break;
     default:
-      return this.first * this.sec;
+      return this.queValue1 * this.queValue2;
     }
 }
 
 Quiz.prototype.storeEntry = function() {
   this.expectedAnswer.value = this.ans;
-  this.questionListContestentFaced.push({ "dataOne": this.first,
+  this.questionListContestentFaced.push({ "dataOne": this.queValue1,
                       "opt" : this.opt, 
-                      "dataTwo": this.sec, 
+                      "dataTwo": this.queValue2, 
                       "correctAnswer" : this.expectedAnswer.value, 
                     });
 }
@@ -53,8 +53,6 @@ Quiz.prototype.loadAllQustion = function() {
     this.queValue2 = this.randomNumber(this.maxValueOperand + 1);
     this.opt = this.operatorArray[this.randomNumber(this.operatorArray.length)];
     this.ans = this.calculation();
-    this.first = this.queValue1;
-    this.sec = this.queValue2;
     this.storeEntry();
     element.value = i;
   }  
