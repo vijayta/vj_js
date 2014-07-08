@@ -47,7 +47,7 @@ Quiz.prototype.storeEntry = function() {
 }
 
 Quiz.prototype.loadAllQustion = function() {
-  for(var i = 0; i < this.maxValueOperand; i++){
+  for(var i = 0; i < this.maxValueOperand; i++) {
     var element = document.createElement("li");
     this.queValue1 = this.randomNumber(this.maxValueOperand + 1);
     this.queValue2 = this.randomNumber(this.maxValueOperand + 1);
