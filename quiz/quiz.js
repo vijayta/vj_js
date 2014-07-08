@@ -106,7 +106,6 @@ Quiz.prototype.bindEvent = function() {
     event.preventDefault();
     obj.showQueToContestent(clickCount);
     obj.QuestionFaced(clickCount);
-    
     obj.count.innerHTML = clickCount + 1;
     clickCount++;
     if(clickCount == 20) {
