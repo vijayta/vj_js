@@ -95,7 +95,7 @@ Quiz.prototype.init = function() {
   this.questionListContestentFaced = [];
   this.marks = 0;
   this.loadAllQustion();
-  this.count.innerHTML = clickCount+1;
+  this.count.innerHTML = clickCount + 1;
   this.showQueToContestent(clickCount);
   this.bindEvent();
 }
