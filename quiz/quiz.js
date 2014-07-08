@@ -1,8 +1,5 @@
 var clickCount = 0;
-function Question(dataOne, dataTwo, optField, maxValueOperand){
-  this.dataOne = dataOne;
-  this.dataTwo = dataTwo;
-  this.optField = optField;
+function Question(maxValueOperand){
   this.operators = ['+','-','*','/'];
   this.ans = this.calculation();
 }
@@ -69,9 +66,9 @@ Quiz.prototype.storeEntry = function() {
 
 Quiz.prototype.showQueToContestent = function(i) {
   var que_faced = this.questionListContestentFaced[i];
-  this.Que.dataOne.value = this.questionListContestentFaced[i]['dataOne'];
-  this.Que.optField.value = this.questionListContestentFaced[i]['opt'];
-  this.Que.dataTwo.value = this.questionListContestentFaced[i]['dataTwo'];
+  this.dataOne.value = que_faced['dataOne'];
+  this.optField.value = que_faced['opt'];
+  this.dataTwo.value = que_faced['dataTwo'];
 }
 Quiz.prototype.QuestionFaced = function(i) { 
   this.allQuetsionContestetFaced = document.getElementById("all_que");
