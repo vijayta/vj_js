@@ -111,8 +111,8 @@ Quiz.prototype.bindEvent = function() {
     clickCount++;
     if(clickCount == 20) {
       alert('Quiz Completed')
-      obj.form.style.display = 'none';
-      obj.allQuetsionContestetFaced.style.display = 'block';
+      obj.form.setAttribute('class', 'none');
+      obj.allQuetsionContestetFaced.setAttribute('class' , 'block');
     }
     obj.reply.value = "";
   });
