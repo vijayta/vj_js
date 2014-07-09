@@ -67,7 +67,6 @@ Quiz.prototype.showQueToContestent = function(i) {
 Quiz.prototype.QuestionFaced = function(i) { 
   this.allQuetsionContestetFaced = document.getElementById("all_que");
   var elem = document.createElement("li");
-  this.result(i);
   elem.value = i + 1;
   elem.innerHTML =  this.JSONdata["dataOne"] + " " + 
                     this.JSONdata["opt"] +  " " +  
@@ -78,14 +77,14 @@ Quiz.prototype.QuestionFaced = function(i) {
                     this.JSONdata['correctAnswer'] + "</span></span>";
                     this.allQuetsionContestetFaced.appendChild(elem);
 }
-Quiz.prototype.result = function(i) {
+Quiz.prototype.result = function() {
   if(this.JSONdata['correctAnswer'] == this.reply.value) { //Correct Answer;
     this.marks = this.marks + 10;
     this.score.innerHTML = this.marks;
     this.testResult.value = "Correct";
   }
   else { // 'Sorry Wrong answer;
-    this.marks = this.marks;
+    // this.marks = this.marks;
     this.score.innerHTML = this.marks;
     this.testResult.value = "wrong";
   }
@@ -94,9 +93,10 @@ Quiz.prototype.result = function(i) {
 Quiz.prototype.init = function() {
   this.questionListContestentFaced = [];
   this.marks = 0;
-  this.loadAllQustion();
   this.count.innerHTML = clickCount + 1;
+  this.loadAllQustion();
   this.showQueToContestent(clickCount);
+  this.result();
   this.bindEvent();
 }
 
@@ -106,6 +106,7 @@ Quiz.prototype.bindEvent = function() {
     event.preventDefault();
     obj.showQueToContestent(clickCount);
     obj.QuestionFaced(clickCount);
+    obj.result();
     obj.count.innerHTML = clickCount + 1;
     clickCount++;
     if(clickCount == 20) {
@@ -113,6 +114,7 @@ Quiz.prototype.bindEvent = function() {
       obj.form.setAttribute('class', 'none');
       obj.allQuetsionContestetFaced.setAttribute('class' , 'block');
     }
+    
     obj.reply.value = "";
   });
 }
