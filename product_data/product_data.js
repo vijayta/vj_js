@@ -54,8 +54,8 @@ Store.prototype.init = function() {
   this.showProducts(this.productsList);
   var this_obj = this; 
   this.sortItems.onchange = function() {
-    current_item =  this.options[this.selectedIndex].getAttribute('id');
-    this_obj.sortProducts(current_item);
+    var currentItem =  this.options[this.selectedIndex].getAttribute('id');
+    this_obj.sortProducts(currentItem);
   }
 }
 
