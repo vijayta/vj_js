@@ -33,9 +33,9 @@ AutoComplete.prototype.showList = function(userArray) {
 }
 
 AutoComplete.prototype.init = function() {
-  var obj = this;
+  var this_obj = this;
   this.nameField.addEventListener('keyup', function() {
-    obj.completeText();
+    this_obj.completeText();
   });  
 }
 
