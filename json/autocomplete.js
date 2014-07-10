@@ -8,7 +8,7 @@ function AutoComplete(list, nameField, userForm){
 }
 
 AutoComplete.prototype.completeText = function() {
-  var this_obj = this;
+  var _this = this;
   var nameList = JSON.parse(suggetionList), nameValue = this.nameField.value, regex = new RegExp("^" + nameValue + "[a-z0-9\s]*","i");
     this.list.innerHTML = "";
     var userArray = [];
@@ -20,7 +20,7 @@ AutoComplete.prototype.completeText = function() {
       }
     }
     if (userArray.length > 0) {
-      this_obj.showList(userArray);
+      _this.showList(userArray);
     }
 }
 AutoComplete.prototype.showList = function(userArray) {
@@ -33,9 +33,9 @@ AutoComplete.prototype.showList = function(userArray) {
 }
 
 AutoComplete.prototype.init = function() {
-  var this_obj = this;
+  var _this = this;
   this.nameField.addEventListener('keyup', function() {
-    this_obj.completeText();
+    _this.completeText();
   });  
 }
 
