@@ -9,10 +9,10 @@ function AutoComplete(list, nameField, userForm){
 
 AutoComplete.prototype.completeText = function() {
   var this_obj = this;
-  var nameList = JSON.parse(suggetionList), stringToCompare = this.nameField.value, regex = new RegExp("^" + stringToCompare + "[a-z0-9\s]*","i");
+  var nameList = JSON.parse(suggetionList), nameValue = this.nameField.value, regex = new RegExp("^" + nameValue + "[a-z0-9\s]*","i");
     this.list.innerHTML = "";
     var userArray = [];
-    if (stringToCompare != "") {
+    if (nameValue != "") {
       for (i in nameList) {
         if (nameList[i].name.match(regex) !== null && nameList[i].name.match(regex).length > 0) {
           userArray.push(nameList[i]);
