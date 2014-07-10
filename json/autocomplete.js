@@ -1,87 +1,47 @@
-var counter = 0;
-function AutoComplete(){
+var suggetionList = '[{"name":"Luigi Damiano"}, {"name":"Zenith Coboro"}, {"name":"Zig Ziglar"}, {"name":"Steve Costner"}, {"name":"Bill Grazer"}, {"name":"Timothy Frazer"}, {"name":"Boris Becker"}, {"name":"Glenn Gladwich"}, {"name":"Jim Jackson"}, {"name":"Aaron Kabin"}, {"name":"Roy Goldwin"}, {"name":"Jason Goldberg"}, {"name":"Tim Ferris"}, {"name":"Buck Singham"}, {"name":"Malcom Gladwell"}, {"name":"Joy Rabura"}, {"name":"Vid Luther"}, {"name":"Tom Glicken"}, {"name":"Ray Baxter"}, {"name":"Ari Kama"}, {"name":"Kenichi Suzuki"}, {"name":"Rick Olson"}]';
+
+function AutoComplete(list, nameField, userForm){
+  this.list = list;
+  this.userForm = userForm;
+  this.nameField = nameField;
   this.init();  
 }
 
-AutoComplete.prototype.complete = function(obj, keyevent) {
-  var element = (obj.setSelectionRange) ? keyevent.which : keyevent.keyCode;
-  var userText = obj.value.replace(/;/gi, ",");
-  element = userText.split(",");
-  userText = element.pop();
-  userText = userText.replace(/^\s*/, "");
-
-  if (obj.createTextRange) {
-    var range = document.selection.createRange();
-    if (range.parentElement() == obj) {
-        element = range.text;
-        var ini = obj.value.lastIndexOf(element);
-    }
-  } 
-  else if (obj.setSelectionRange) {
-    var ini = obj.selectionStart;
-  }
-  var listValue = obj.value;
-  for (var i = 0; i < this.suggetionList.name.length; i++) {
-    element = this.suggetionList.name[i].toString();
-    if (element.toLowerCase().indexOf(userText.toLowerCase()) == 0) {
-      if(counter == 0){
-        obj.value += element.substring(userText.length, element.length);
+AutoComplete.prototype.completeText = function() {
+  var this_obj = this;
+  var nameList = JSON.parse(suggetionList), stringToCompare = this.nameField.value, regexToMatch = new RegExp("^" + stringToCompare + "[a-z0-9\s]*","i");
+    this.list.innerHTML = "";
+    var userArray = [];
+    if (stringToCompare != "") {
+      for (i in nameList) {
+        if (nameList[i].name.match(regexToMatch) !== null && nameList[i].name.match(regexToMatch).length > 0) {
+          userArray.push(nameList[i]);
+        }
       }
-      else{
-        var str = string.match(obj.value)
-        listValue += '<li>' + element.substring(0, element.length) + '</li>';
-      }
-      console.log(listValue);
-      this.list.innerHTML =  '<li>' + listValue + '</li>';  
-      counter++;
     }
-  }
-  if (obj.setSelectionRange) {
-    obj.setSelectionRange(ini, obj.value.length);
-  }
+    if (userArray.length > 0) {
+      this_obj.showList(userArray);
+    }
+}
+AutoComplete.prototype.showList = function(userArray) {
+  var userListFragment = document.createDocumentFragment();
+    for (var i in userArray) {
+      var newListElement = userListFragment.appendChild(document.createElement("li"));
+      newListElement.appendChild(document.createTextNode(userArray[i].name));
+    }
+    this.list.appendChild(userListFragment);
 }
 
 AutoComplete.prototype.init = function() {
-  this.suggetionList = { "name" : 
-    [ "Luigi Damiano",
-      "Zenith Coboro",
-      "Zig Ziglar",
-      "Steve Costner",
-      "Bill Grazer",
-      "Timothy Frazer",
-      "Boris Becker",
-      "Glenn Gladwich",
-      "Jim Jackson",
-      "Aaron Kabin",
-      "Roy Goldwin",
-      "Jason Goldberg",
-      "Tim Ferris",
-      "Buck Singham",
-      "Malcom Gladwell",
-      "Joy Rabura",
-      "Vid Luther",
-      "Tom Glicken",
-      "Ray Baxter",
-      "Ari Kama",
-      "Kenichi Suzuki",
-      "Rick Olson",
-      "Anvay",
-      "Anvita",
-      "Avinash",
-      "Catino",
-      "Devid",
-      "Elic",
-      "Former",
-    ]
-  };
-  this.list = document.getElementById('list');
-  var nameField = document.getElementById('nameField');
   var obj = this;
-  nameField.addEventListener('keyup', function() {
-    obj.complete(this, 'keydown');
+  this.nameField.addEventListener('keyup', function() {
+    obj.completeText();
   });  
 }
 
 window.onload = function() {
-  var autoComplete = new AutoComplete();
+  var list = document.getElementById('list');
+  var nameField = document.getElementById('nameField');
+  var userForm = document.getElementById('userForm');
+  var autoComplete = new AutoComplete(list, nameField, userForm);
 }
