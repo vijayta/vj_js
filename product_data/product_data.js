@@ -30,11 +30,11 @@ function Store(productsList, imagePath, sortItems){
   this.init();
 }
 
-Store.prototype.showProducts = function() {
+Store.prototype.showProducts = function(productDetail) {
   this.productsList.innerHTML = "";
-  for(var i in this.productDetail) {
+  for(var i in productDetail) {
     var productImage = this.productsList.appendChild(document.createElement("img"));
-    productImage.src = this.imagePath + this.productDetail[i].url;
+    productImage.src = this.imagePath + productDetail[i].url;
   }
 }
 
@@ -51,11 +51,11 @@ Store.prototype.sortProducts = function(attr) {
 
 Store.prototype.init = function() {
   this.productDetail = Items.DETAIL;
-  this.showProducts(this.productsList);
-  var this_obj = this; 
+  this.showProducts(this.productDetail);
+  var _this = this; 
   this.sortItems.onchange = function() {
-    var currentItem =  this.options[this.selectedIndex].getAttribute('id');
-    this_obj.sortProducts(currentItem);
+    var currentItem =  this.options[this.selectedIndex].getAttribute('value');
+    _this.sortProducts(currentItem);
   }
 }
 
