@@ -12,7 +12,6 @@ function Quiz(dataOne, dataTwo, maxValueOperand, optField, reply, expectedAnswer
   this.count = count;
   this.form = form;
   this.maxValueOperand = maxValueOperand;
-  this.operatorArray = ['+','-','*','/'];
   this.init();
 }
 
@@ -84,7 +83,6 @@ Quiz.prototype.result = function() {
     this.testResult.value = "Correct";
   }
   else { // 'Sorry Wrong answer;
-    // this.marks = this.marks;
     this.score.innerHTML = this.marks;
     this.testResult.value = "wrong";
   }
@@ -93,6 +91,7 @@ Quiz.prototype.result = function() {
 Quiz.prototype.init = function() {
   this.questionListContestentFaced = [];
   this.marks = 0;
+  this.operatorArray = ['+','-','*','/'];
   this.count.innerHTML = clickCount + 1;
   this.loadAllQustion();
   this.showQueToContestent(clickCount);
