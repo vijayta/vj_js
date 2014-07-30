@@ -1,4 +1,4 @@
-var JSONData = '[{"name":"Luigi Damiano"}, {"name":"Zenith Coboro"}, {"name":"Zig Ziglar"}, {"name":"Steve Costner"}, {"name":"Bill Grazer"}, {"name":"Timothy Frazer"}, {"name":"Boris Becker"}, {"name":"Glenn Gladwich"}, {"name":"Jim Jackson"}, {"name":"Aaron Kabin"}, {"name":"Roy Goldwin"}, {"name":"Jason Goldberg"}, {"name":"Tim Ferris"}, {"name":"Buck Singham"}, {"name":"Malcom Gladwell"}, {"name":"Joy Rabura"}, {"name":"Vid Luther"}, {"name":"Tom Glicken"}, {"name":"Ray Baxter"}, {"name":"Ari Kama"}, {"name":"Kenichi Suzuki"}, {"name":"Rick Olson"}]';
+var JSON = '[{"name":"Luigi Damiano"}, {"name":"Zenith Coboro"}, {"name":"Zig Ziglar"}, {"name":"Steve Costner"}, {"name":"Bill Grazer"}, {"name":"Timothy Frazer"}, {"name":"Boris Becker"}, {"name":"Glenn Gladwich"}, {"name":"Jim Jackson"}, {"name":"Aaron Kabin"}, {"name":"Roy Goldwin"}, {"name":"Jason Goldberg"}, {"name":"Tim Ferris"}, {"name":"Buck Singham"}, {"name":"Malcom Gladwell"}, {"name":"Joy Rabura"}, {"name":"Vid Luther"}, {"name":"Tom Glicken"}, {"name":"Ray Baxter"}, {"name":"Ari Kama"}, {"name":"Kenichi Suzuki"}, {"name":"Rick Olson"}]';
 
 function AutoComplete(list, nameField, userForm){
   this.list = list;
@@ -8,7 +8,7 @@ function AutoComplete(list, nameField, userForm){
 
 AutoComplete.prototype.completeText = function() {
   var _this = this;
-  var nameList = JSON.parse(JSONData), nameValue = this.nameField.value, regex = new RegExp("^" + nameValue + "[a-z0-9\s]*","i");
+  var nameList = JSON.parse(JSON), nameValue = this.nameField.value, regex = new RegExp("^" + nameValue + "[a-z0-9\s]*","i");
     this.list.innerHTML = "";
     var userArray = [];
     if (nameValue != "") {
