@@ -1,18 +1,6 @@
 var clickCount = 0;
 function Quiz(dataOne, dataTwo, maxValueOperand, optField, reply, expectedAnswer, testResult, score, allQuetsionContestetFaced, submit, count, form){
-  this.dataOne = dataOne;
-  this.dataTwo = dataTwo;
-  this.optField = optField;
-  this.reply = reply;
-  this.expectedAnswer = expectedAnswer;
-  this.testResult = testResult;
-  this.score = score;
-  this.allQuetsionContestetFaced = allQuetsionContestetFaced;
-  this.submit = submit;
-  this.count = count;
-  this.form = form;
-  this.maxValueOperand = maxValueOperand;
-  this.init();
+  this.init(dataOne, dataTwo, maxValueOperand, optField, reply, expectedAnswer, testResult, score, allQuetsionContestetFaced, submit, count, form);
 }
 
 Quiz.prototype.randomNumber = function (x) {
@@ -79,20 +67,32 @@ Quiz.prototype.QuestionFaced = function(i) {
 Quiz.prototype.result = function() {
   if(this.JSONdata['correctAnswer'] == this.reply.value) { //Correct Answer;
     this.marks = this.marks + 10;
-    this.score.innerHTML = this.marks;
+    this.score.textContent = this.marks;
     this.testResult.value = "Correct";
   }
   else { // 'Sorry Wrong answer;
-    this.score.innerHTML = this.marks;
+    this.score.textContent = this.marks;
     this.testResult.value = "wrong";
   }
 }
 
-Quiz.prototype.init = function() {
+Quiz.prototype.init = function(dataOne, dataTwo, maxValueOperand, optField, reply, expectedAnswer, testResult, score, allQuetsionContestetFaced, submit, count, form) {
+  this.dataOne = dataOne;
+  this.dataTwo = dataTwo;
+  this.optField = optField;
+  this.reply = reply;
+  this.expectedAnswer = expectedAnswer;
+  this.testResult = testResult;
+  this.score = score;
+  this.allQuetsionContestetFaced = allQuetsionContestetFaced;
+  this.submit = submit;
+  this.count = count;
+  this.form = form;
+  this.maxValueOperand = maxValueOperand;
   this.questionListContestentFaced = [];
   this.marks = 0;
   this.operatorArray = ['+','-','*','/'];
-  this.count.innerHTML = clickCount + 1;
+  this.count.textContent = clickCount + 1;
   this.loadAllQustion();
   this.showQueToContestent(clickCount);
   this.result();
@@ -106,7 +106,7 @@ Quiz.prototype.bindEvent = function() {
     obj.showQueToContestent(clickCount);
     obj.QuestionFaced(clickCount);
     obj.result();
-    obj.count.innerHTML = clickCount + 1;
+    obj.count.textContent = clickCount + 1;
     clickCount++;
     if(clickCount == 20) {
       alert('Quiz Completed')
