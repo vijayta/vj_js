@@ -1,0 +1,9 @@
+.wrapper{ width: 960px; margin: 0 auto; padding: 20px; font-family: arial; color: #333;}
+h1{ font-size: 20px; margin: 0; padding: 0; }
+h3{ font-size: 16px; margin: 10px 0 ; padding: 0; }
+.wrapper .content{ overflow: hidden; }
+.wrapper .content .leftbar{ width: 60%; float: left; padding: 20px 0; }
+.wrapper .content .leftbar form{ margin: 0; }
+.wrapper .content .leftbar input[type=text] { width: 50px; margin-right: 5px; }
+.wrapper .content .leftbar input[type=submit] { width: 50px; }
+.wrapper .content .rightbar { width: 30%; float: right; box-shadow: 0 0 5px rgba(33, 33, 33, 0.3) inset; padding: 10px 20px; border-radius: 5px; background: #f0f0f0; }
